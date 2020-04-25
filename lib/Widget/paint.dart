@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Style/conist.dart';
+import '../Style/style.dart';
 class PainterTop extends CustomPainter{
 
   Paint _paint;

@@ -5,17 +5,19 @@
 import 'package:flutter/material.dart';
 import 'package:work/Widget/searchText.dart';
 
-class MainAppBar extends StatelessWidget {
-  const MainAppBar({
+class TeacherMainAppBar extends StatelessWidget {
+  const TeacherMainAppBar({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return
+      AppBar(
       elevation: 5,
       backgroundColor: Color(0xffFAFAFA),
-      flexibleSpace: Container(
+      flexibleSpace:
+      Container(
         height: 100,
         width: MediaQuery.of(context).size.width,
         child: Padding(

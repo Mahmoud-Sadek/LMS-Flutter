@@ -4,8 +4,8 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import '../Provider/provider.dart';
 
-class appBar extends StatelessWidget {
-  const appBar({
+class TeacherAppBar extends StatelessWidget {
+  const TeacherAppBar({
     Key key,
   }) : super(key: key);
 

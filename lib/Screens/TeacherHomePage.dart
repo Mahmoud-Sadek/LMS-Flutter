@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/Style/conist.dart';
+import 'package:work/Style/style.dart';
 import 'package:work/Widget/complaintsWidget.dart';
 
 import 'package:provider/provider.dart';
-import 'package:work/Widget/mainAppBar.dart';
+import 'package:work/Widget/TeacherMainAppBar.dart';
 import 'package:work/Widget/sliverHeadre.dart';
-import '../Widget/AppBar.dart';
+import '../Widget/TeacherAppBar.dart';
 
-class HomePage extends StatelessWidget {
+class TeacherHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
-        child: MainAppBar(),
+        child: TeacherMainAppBar(),
       ),
       body: CustomScrollView(
         slivers: <Widget>[

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:work/Style/conist.dart';
+import 'package:work/Style/style.dart';
 import 'package:provider/provider.dart';
 import '../Provider/provider.dart';
 import '../Widget/paint.dart';

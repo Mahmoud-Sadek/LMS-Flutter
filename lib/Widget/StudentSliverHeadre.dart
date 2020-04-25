@@ -4,17 +4,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:work/Widget/TeacherAppBar.dart';
 
-class Bar implements SliverPersistentHeaderDelegate {
-  Bar({this.maxxExtent, this.minnExtent});
+import 'StudentPostsAppBar.dart';
+
+class StudentSliverHeadre implements SliverPersistentHeaderDelegate {
+  StudentSliverHeadre({this.maxxExtent, this.minnExtent,this.widget});
   final double minnExtent;
   final double maxxExtent;
+  final Widget widget;
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     // TODO: implement build
-    return TeacherAppBar();
+    return widget;
   }
 
   @override

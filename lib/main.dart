@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'Screens/home.dart';
+import 'Screens/TeacherHomePage.dart';
 import 'Provider/provider.dart';
 import 'Screens/splashScreen.dart';
 import 'Screens/walkthrough.dart';

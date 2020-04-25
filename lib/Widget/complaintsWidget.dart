@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Style/conist.dart';
+import '../Style/style.dart';
 import '../Provider/provider.dart';
 
 class ComplaintsWidget extends StatelessWidget {
