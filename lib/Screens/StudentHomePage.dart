@@ -24,7 +24,8 @@ class StudentHomePage extends StatelessWidget {
               BoxShadow(blurRadius: 20, color: mainColor.withOpacity(.1))
             ]),
              child: SafeArea(
-               child: GNav(
+               child:
+               GNav(
                  gap: 8,
                  color: Colors.white,
                  iconSize: 30,

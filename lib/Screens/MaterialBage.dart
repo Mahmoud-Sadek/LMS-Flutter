@@ -102,7 +102,7 @@ class MaterialPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Image(image: AssetImage("assets/pdf.svg")),
+                        child: Image(image: AssetImage("assets/pdf.jpg")),
                       ),
                     ),
                   ),

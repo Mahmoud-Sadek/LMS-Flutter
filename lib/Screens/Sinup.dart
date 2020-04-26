@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/Widget/ButtonWidget.dart';
+import 'package:work/Widget/MainTextFeild.dart';
 import 'package:work/Widget/SignUpBackGrounds.dart';
 
 class SignUp extends StatelessWidget {
@@ -82,7 +83,7 @@ class SecondSignUp extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream:
                     Provider.of<ProviderData>(context)
@@ -126,7 +127,7 @@ class SecondSignUp extends StatelessWidget {
                   ),
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream:
                     Provider.of<ProviderData>(context)
@@ -161,7 +162,7 @@ class SecondSignUp extends StatelessWidget {
                 ),
 
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream:
                     Provider.of<ProviderData>(context)
@@ -194,7 +195,7 @@ class SecondSignUp extends StatelessWidget {
                 ),
 
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream:
                     Provider.of<ProviderData>(context)
@@ -343,7 +344,7 @@ class FirstSignUp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream: Provider.of<ProviderData>(context).fullNameStream,
                 textChange: Provider.of<ProviderData>(context).fullNameChange,
@@ -354,7 +355,7 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream: Provider.of<ProviderData>(context).emailStream,
                 textChange: Provider.of<ProviderData>(context).emailChange,
@@ -365,7 +366,7 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream: Provider.of<ProviderData>(context).phoneStream,
                 textChange: Provider.of<ProviderData>(context).phoneChange,
@@ -376,7 +377,7 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: false,
                 textStream: Provider.of<ProviderData>(context).userNameStream,
                 textChange: Provider.of<ProviderData>(context).userNameChange,
@@ -387,7 +388,7 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: true,
                 textStream: Provider.of<ProviderData>(context).passwordStream,
                 textChange: Provider.of<ProviderData>(context).passwordChange,
@@ -398,7 +399,7 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              SignUpTextField(
+              MainTextField(
                 obscure: true,
                 textStream: Provider.of<ProviderData>(context).passwordStream,
                 textChange: Provider.of<ProviderData>(context).passwordChange,
@@ -444,52 +445,6 @@ class FirstSignUp extends StatelessWidget {
   }
 }
 
-class SignUpTextField extends StatelessWidget {
-  final Stream textStream;
-  final Function textChange;
-  final String hintText;
-  final TextInputType inputType;
-  final bool obscure;
-  final Widget widget;
-  const SignUpTextField(
-      {this.textStream,
-      this.textChange,
-      this.hintText,
-      this.inputType,
-      this.obscure = false,
-      this.widget});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width * .65,
-        child: StreamBuilder(
-          stream: textStream,
-          builder: (context, snapshot) {
-            return TextField(
-              onChanged: textChange,
-              style: TextStyle(color: Colors.white),
-              cursorColor: Colors.white,
-              autofocus: false,
-              keyboardType: inputType,
-              obscureText: obscure,
-              decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                hintText: "   $hintText",
-                hintStyle:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                suffixIcon: widget,
-              ),
-            );
-          },
-        ));
-  }
-}
 
 
 
