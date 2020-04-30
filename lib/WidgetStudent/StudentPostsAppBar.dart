@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/TeacherScreens/CreatePost.dart';
 import 'package:work/Widget/searchText.dart';
 
 class StudentPostsAppBar extends StatelessWidget {
@@ -71,20 +72,28 @@ class StudentPostsAppBar extends StatelessWidget {
                      ),
                     Spacer(flex: 1,),
 
-                    Container(
-                        height: 55,
-                        width: MediaQuery.of(context).size.width/3,
-                        decoration: BoxDecoration(
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return  CreatePost();
+                          }),);
+                      },
+                      child: Container(
+                          height: 55,
+                          width: MediaQuery.of(context).size.width/3,
+                          decoration: BoxDecoration(
 
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
-                          gradient: LinearGradient(colors: [
-                            Color(0xff1EB2A6),
-                            Color(0xff1B9288)
-                          ]),
-                        ),
-                        child: Center(child: Text("Add Post",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20)),
+                            gradient: LinearGradient(colors: [
+                              Color(0xff1EB2A6),
+                              Color(0xff1B9288)
+                            ]),
+                          ),
+                          child: Center(child: Text("Add Post",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+                      ),
                     ),
                     Spacer(flex: 1,),
 

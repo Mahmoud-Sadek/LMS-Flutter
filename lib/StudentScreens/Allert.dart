@@ -8,7 +8,7 @@ class Allert extends StatelessWidget{
       home: Container(color: Colors.white,
         child: Column(
           children: <Widget>[
-            Image(image: AssetImage("images/alert.jpg"),),
+            Image(image: AssetImage("assets/alert.jpg"),),
             Text("Important Allert !!",
               style: TextStyle(fontSize: 20,decoration: TextDecoration.none),
             ),

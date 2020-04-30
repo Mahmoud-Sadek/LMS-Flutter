@@ -22,8 +22,8 @@ class CreatePost extends StatelessWidget {
 
           ],
           title: Text('Create post'),
-          backgroundColorStart: Color(0xff1A9086),
-          backgroundColorEnd: Color(0xff0A3E3A),
+//          backgroundColorStart: Color(0xff1A9086),
+//          backgroundColorEnd: Color(0xff0A3E3A),
         ),
         body: Column(children: <Widget>[
           Container(margin: EdgeInsets.only(top:30,left: 10),
@@ -57,7 +57,7 @@ class CreatePost extends StatelessWidget {
           , Divider(
             color: Color(0xff1b557b),thickness: 2,
           ),
-          ListTile(title: Text("Photo/video",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("images/pic.png",height: 22,))),
+          ListTile(title: Text("Photo/video",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/pic.png",height: 22,))),
 
 
 
@@ -65,12 +65,12 @@ class CreatePost extends StatelessWidget {
           Divider(
             color: Color(0xff1b557b),thickness: 2,
           ),
-          ListTile(title: Text("Tag people",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("images/person.png",height: 21,))),
+          ListTile(title: Text("Tag people",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/person.png",height: 21,))),
 
           Divider(
             color: Color(0xff1b557b),thickness: 2,
           ),
-          ListTile(title: Text("Feeling/Activity",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("images/smile.png",height: 23,))),
+          ListTile(title: Text("Feeling/Activity",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/smile.png",height: 23,))),
 
           Divider(
             color: Color(0xff1b557b),thickness: 2,

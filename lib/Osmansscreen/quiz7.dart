@@ -4,13 +4,11 @@ import 'Drawer.dart';
 
 
 
- void main() => runApp(Drawerr());
 class Quiz7 extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
-      home: Container(margin: EdgeInsets.only(top: 50),color: Colors.white,
+    return SafeArea(child: Scaffold(
+      body: Container(margin: EdgeInsets.only(top: 50),color: Colors.white,
         child: ListView(children: <Widget>[
           ScoreCard(),
           ScoreCard(),
@@ -26,10 +24,11 @@ class Quiz7 extends StatelessWidget{
           ScoreCard(),
 
 
-    ],
+        ],
 
         ),
-      ));
+      ),
+    ));
   }
 }
 

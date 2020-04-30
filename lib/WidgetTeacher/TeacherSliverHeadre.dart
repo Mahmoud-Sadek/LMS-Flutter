@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:work/Widget/TeacherAppBar.dart';
+import 'package:work/WidgetTeacher/TeacherAppBar.dart';
 
-class Bar implements SliverPersistentHeaderDelegate {
-  Bar({this.maxxExtent, this.minnExtent});
+class TeacherSliverHeader implements SliverPersistentHeaderDelegate {
+  TeacherSliverHeader({this.maxxExtent, this.minnExtent});
   final double minnExtent;
   final double maxxExtent;
   @override

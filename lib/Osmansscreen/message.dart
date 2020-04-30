@@ -9,7 +9,9 @@ class Message extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
 
-           body: Container(margin: EdgeInsets.only(top: 50,left: 10,right: 10 ,bottom: 10)
+           body:
+
+           Container(margin: EdgeInsets.only(top: 50,left: 10,right: 10 ,bottom: 10)
 
              ,child: Column(children: <Widget>[
                Container(height: 45,

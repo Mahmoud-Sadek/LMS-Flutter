@@ -8,7 +8,7 @@ import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/Widget/ButtonWidget.dart';
 
-import 'Login.dart';
+import '../SignLoginSlashWalkThrough/Login.dart';
 
 class Profile extends StatelessWidget {
   @override

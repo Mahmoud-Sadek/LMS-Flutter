@@ -5,11 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/Widget/StudentMainAppBar.dart';
+import 'package:work/WidgetStudent/StudentMainAppBar.dart';
 import 'package:work/Widget/searchText.dart';
-import 'package:work/Widget/StudentSliverHeadre.dart';
+import 'package:work/WidgetStudent/StudentSliverHeadre.dart';
 
-import 'PostBuilder.dart';
+import '../Widget/PostBuilder.dart';
 import 'StudentPostsAppBar.dart';
 
 class StudentPosts extends StatelessWidget {
@@ -22,24 +22,6 @@ class StudentPosts extends StatelessWidget {
     
     return
       Scaffold(
-        appBar:       PreferredSize(
-          preferredSize: Size.fromHeight(70),
-
-          child: AppBar(
-            backgroundColor: mainColor,
-            leading: Container(),
-            flexibleSpace: StudentMainAppBar(widget: IconButton(
-                onPressed: () {
-                  Provider.of<ProviderData>(context).openProfile(context);
-                },
-                icon: Icon(
-                  Icons.format_align_left,
-                  color: Colors.white,
-                  size: 30,
-                )),)
-
-          ),
-        ),
 
         body: CustomScrollView(
            slivers: <Widget>[

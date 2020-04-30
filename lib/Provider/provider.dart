@@ -7,28 +7,28 @@ import 'package:work/Model/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Screens/ParentChildren.dart';
 import 'package:work/Screens/suggetstionParent.dart';
-import 'package:work/Screens/MaterialBage.dart';
-import 'package:work/Screens/MessagePage.dart';
+import 'package:work/StudentScreens/MaterialBage.dart';
+import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/Screens/News.dart';
 import 'package:work/Screens/ParentHomePage.dart';
-import 'package:work/Screens/Pdf.dart';
+import 'package:work/StudentScreens/Pdf.dart';
 import 'package:work/Screens/Profile.dart';
-import 'package:work/Screens/QuizPage.dart';
-import 'package:work/Screens/Sinup.dart';
-import 'package:work/Screens/StudentHomePage.dart';
-import 'package:work/Screens/TeacherHomePage.dart';
-import 'package:work/Widget/StudentPosts.dart';
-import 'package:work/Widget/approve.dart';
-import 'package:work/Widget/message.dart';
+import 'package:work/StudentScreens/QuizPage.dart';
+import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
+import 'package:work/StudentScreens/StudentHomePage.dart';
+import 'package:work/TeacherScreens/TeacherHomePage.dart';
+import 'package:work/WidgetStudent/StudentPosts.dart';
+import 'package:work/WidgetTeacher/TeacherApprove.dart';
+import 'package:work/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/Widget/posts.dart';
 import 'dart:collection';
 import '../Model/complaints.dart';
 import '../Style/style.dart';
 import '../Model/postModel.dart';
-import '../Screens/TeacherHomePage.dart';
+import '../TeacherScreens/TeacherHomePage.dart';
 import '../Model/message.dart';
 import '../Model/approve.dart';
-import '../Screens/walkthrough.dart';
+import '../SignLoginSlashWalkThrough/walkthrough.dart';
 class ProviderData extends ChangeNotifier{
 
   List<ComplaintsModel> _complaints =[
@@ -56,8 +56,11 @@ class ProviderData extends ChangeNotifier{
 
     int widgetIndex = 1;
     Widget widgetShow = postsShow();
-  List<Widget> widget  =[postsShow(), messageShow(), approveShow(),];
-colorChangePost( ){
+  List<Widget> widget  =[postsShow(), TeacherMessageShow(), TeacherApproveShow(),];
+  Widget showMessageButton = Container(height: 0,);
+  List<Widget> widgetShowMessageButton  =[Container(height: 0,), SendMessageButton(), Container(height: 0,),];
+
+  colorChangePost( ){
   post = true;
   message = false;
   approve = false;
@@ -67,6 +70,7 @@ colorChangePost( ){
     messageColor =defaultColor;
     approveColor = defaultColor;
     widgetShow =  widget[0];
+    showMessageButton = widgetShowMessageButton[0];
   } if(post = false){
     postColor = defaultColor;
   }
@@ -84,6 +88,8 @@ colorChangeMessage( ){
     postColor =defaultColor;
     approveColor = defaultColor;
     widgetShow =  widget[1];
+    showMessageButton = widgetShowMessageButton[1];
+
 
   } if(message = false){
     messageColor = defaultColor;
@@ -104,6 +110,7 @@ colorChangeApprove(){
     messageColor =defaultColor;
     postColor = defaultColor;
     widgetShow =  widget[2];
+    showMessageButton = widgetShowMessageButton[2];
 
   } if(approve = false){
     approveColor = defaultColor;

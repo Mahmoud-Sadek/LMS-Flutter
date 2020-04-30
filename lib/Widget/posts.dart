@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:work/TeacherScreens/CreatePost.dart';
 import 'PostBuilder.dart';
 class postsShow extends StatelessWidget {
   const postsShow({
@@ -48,20 +49,29 @@ class postsShow extends StatelessWidget {
 //              SearchText(width: MediaQuery.of(context).size.width / 1.7,text: "          Search", onPressed: (){},),
               Spacer(flex: 1,), 
 
-              Container(
-                height: 55,
-                width: MediaQuery.of(context).size.width/2,
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return  CreatePost();
+                    }),);
 
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
-                  gradient: LinearGradient(colors: [
-                    Color(0xff1EB2A6),
-                    Color(0xff1B9288)
-                  ]),
+                },
+                child: Container(
+                  height: 55,
+                  width: MediaQuery.of(context).size.width/2,
+                  decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
+                    gradient: LinearGradient(colors: [
+                      Color(0xff1EB2A6),
+                      Color(0xff1B9288)
+                    ]),
+                  ),
+                  child: Center(child: Text("Add Post",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
                 ),
-                child: Center(child: Text("Add Post",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
               ),
               Spacer(flex: 1,),
 

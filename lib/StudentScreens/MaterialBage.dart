@@ -10,67 +10,67 @@ import 'package:work/Widget/searchText.dart';
 class MaterialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return
       CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
-          pinned: true,
-          primary: true,
-          backgroundColor: mainColor,
-          expandedHeight: 100,
-          flexibleSpace: FlexibleSpaceBar(
-            background:
-            Container(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child:
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      IconButton(
-                          onPressed: () {
-                            Provider.of<ProviderData>(context).openProfile(context);
-                          },
-                          icon: Icon(
-                            Icons.format_align_left,
-                            color: Colors.white,
-                            size: 40,
-                          )),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      SearchText(onPressed: (){},text: "  Search",width: MediaQuery.of(context).size.width / 1.5,),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      IconButton(
-                          icon: Icon(
-                            Icons.notifications_active,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          onPressed: () {}),
-                      Spacer(
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-
-
-
-                ),
-              ),
-            ),
-
-
-          ),
-
-        ),
+//        SliverAppBar(
+//          leading: Container(),
+//          pinned: true,
+//          primary: true,
+//          backgroundColor: mainColor,
+//          expandedHeight: 100,
+//          flexibleSpace: FlexibleSpaceBar(
+//            background:
+//            Container(
+//              height: 100,
+//              width: MediaQuery.of(context).size.width,
+//              child: Padding(
+//                padding: const EdgeInsets.all(8.0),
+//                child: Container(
+//                  width: MediaQuery.of(context).size.width,
+//                  child:
+//                  Row(
+//                    crossAxisAlignment: CrossAxisAlignment.center,
+//                    mainAxisAlignment: MainAxisAlignment.start,
+//                    children: <Widget>[
+//                      IconButton(
+//
+//                          icon: Icon(
+//                            Icons.format_align_left,
+//                            color: Colors.white,
+//                            size: 40,
+//                          )),
+//                      Spacer(
+//                        flex: 1,
+//                      ),
+//                      SearchText(onPressed: (){},text: "  Search",width: MediaQuery.of(context).size.width / 1.5,),
+//                      Spacer(
+//                        flex: 1,
+//                      ),
+//                      IconButton(
+//                          icon: Icon(
+//                            Icons.notifications_active,
+//                            color: Colors.white,
+//                            size: 30,
+//                          ),
+//                          onPressed: () {}),
+//                      Spacer(
+//                        flex: 1,
+//                      ),
+//                    ],
+//                  ),
+//
+//
+//
+//                ),
+//              ),
+//            ),
+//
+//
+//          ),
+//
+//        ),
         SliverList(
           delegate: SliverChildListDelegate(<Widget>[
 

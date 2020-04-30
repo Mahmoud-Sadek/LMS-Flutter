@@ -3,10 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/Screens/Login.dart';
+import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'dart:async';
 import '../Style/style.dart';
-import '../Screens/walkthrough.dart';
+import 'walkthrough.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();

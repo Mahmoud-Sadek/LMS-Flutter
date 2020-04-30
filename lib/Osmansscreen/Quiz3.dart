@@ -6,7 +6,9 @@ class Quiz3 extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return MaterialApp(home:
-    Scaffold( body: Container(margin: EdgeInsets.all(15),
+    Scaffold( body:
+
+    Container(margin: EdgeInsets.all(15),
       child: Center(child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: <Widget>[
         Container(decoration: BoxDecoration(boxShadow: [
           BoxShadow(color: Colors.pink.withOpacity(.6)

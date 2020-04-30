@@ -1,80 +1,12 @@
 
 
-
-
-
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
 
-class messageShow extends StatelessWidget {
-  const messageShow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        messageBuilder(),
-      ],
-    );
-  }
-}
-
-
-
-
-
-
-
-
-class messageBuilder extends StatelessWidget {
-  const messageBuilder({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Consumer<ProviderData>(
-        builder: (context , messageList ,child){
-          return ListView.builder(
-              itemCount: messageList.messageListCount,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-
-              itemBuilder: (context ,index){
-                final list = messageList.messageList[index];
-
-
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: messageWidget(
-                    name: list.name,
-                    content: list.content,
-                    location: list.location,
-                    grade: list.grade,group: list.group,
-                    id: list.id,
-                  ),
-                );
-              }
-
-          );
-
-        },
-      ),
-    );
-  }
-}
-
-
-class messageWidget extends StatelessWidget {
+class MessageWidget extends StatelessWidget {
   final  String name;
   final  String grade;
   final String group;
@@ -82,7 +14,7 @@ class messageWidget extends StatelessWidget {
   final int id;
   final  String content;
 
-  messageWidget({this.id,this.group,this.content,this.location,this.grade,this.name});
+  MessageWidget({this.id,this.group,this.content,this.location,this.grade,this.name});
 
   @override
   Widget build(BuildContext context) {
