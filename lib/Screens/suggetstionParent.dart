@@ -80,7 +80,8 @@ class CustomContainer extends StatelessWidget {
               
               
               padding: EdgeInsets.fromLTRB(20, 90, 20,0 ),
-              child: FlatButton(onPressed: (){
+              child:
+              FlatButton(onPressed: (){
                 print(subject);
               }
               , child: Text("send",style: TextStyle(color: Colors.white),),

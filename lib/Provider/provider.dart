@@ -824,8 +824,9 @@ openParentHomePage(BuildContext context){
 
   List<Widget> widgetParentOptions = <Widget>[
     News(),
-    SuggestionParent(),
     ChildrenParent(),
+
+    SuggestionParent(),
   ];
 
 

@@ -72,8 +72,19 @@ class ParentAppBar extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Container(width: MediaQuery.of(context).size.width/1.5,height: 200,
-                child: Image(image: AssetImage("$imageUrl"),fit: BoxFit.contain,),
+              Container(width: MediaQuery.of(context).size.width,height: 200,
+                child:
+                Stack(
+                  children: <Widget>[
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      child: Container(
+                          width: MediaQuery.of(context).size.width/1.2,height: 200,
+                          child: Image(image: AssetImage("$imageUrl"),fit: BoxFit.contain,)),
+                    )
+                  ],
+                ),
               ),
 
             ],

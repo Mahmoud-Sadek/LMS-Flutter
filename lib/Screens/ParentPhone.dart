@@ -95,6 +95,7 @@ class ParentPhone extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width/1.2,
                   child: Row(
+
                     children: <Widget>[
                       Container(
                         width: MediaQuery.of(context).size.width/2.5,
