@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/Provider/provider.dart';
@@ -71,15 +72,15 @@ class CustomContainer extends StatelessWidget {
                 ),
                 controller: yourSuggest,
 
-                maxLines: 3,
+                maxLines: 6,
               ),
             ),
             Container(
-              height: 140,
+              height: 90,
               width: 300,
               
               
-              padding: EdgeInsets.fromLTRB(20, 90, 20,0 ),
+              padding: EdgeInsets.fromLTRB(20, 40, 20,0 ),
               child:
               FlatButton(onPressed: (){
                 print(subject);
@@ -187,46 +188,53 @@ class _MyBodyState extends State<MyBody> {
           Padding(
             padding: EdgeInsets.fromLTRB(30, 5, 30, 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  width: 140,
-                  height: 50,
-                  child: FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        isactive=true;
-                        print(isactive);
-                      });
 
-                    },
-                    child: Text(
-                      'Problem',
-                      style: TextStyle(color:isactive ? Colors.white: Colors.deepOrange),
+              children: <Widget>[
+                Expanded(
+                  flex:1,
+                  child: Container(
+
+                    height: 50,
+                    child: FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          isactive=true;
+                          print(isactive);
+                        });
+
+                      },
+                      child: Text(
+                        'Problem',
+                        style: TextStyle(color:isactive ? Colors.white: Colors.deepOrange),
+                      ),
+                      color: isactive?Colors.deepOrange :Colors.white ,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10))),
                     ),
-                    color: isactive?Colors.deepOrange :Colors.white ,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
-                Container(
-                  width: 140,
-                  height: 50,
-                  child: FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        isactive=false;
-                        print(isactive);
-                      });
+                SizedBox(width: 20,),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    
+                    height: 50,
+                    child: FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          isactive=false;
+                          print(isactive);
+                        });
 
-                    },
-                    child: Text(
-                      'Suggestion',
-                      style: TextStyle(color: isactive ? Colors.deepOrange: Colors.white),
+                      },
+                      child: Text(
+                        'Suggestion',
+                        style: TextStyle(color: isactive ? Colors.deepOrange: Colors.white),
+                      ),
+                      color: isactive?Colors.white:Colors.deepOrange,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))),
                     ),
-                    color: isactive?Colors.white:Colors.deepOrange,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
               ],

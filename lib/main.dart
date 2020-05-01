@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Screens/ParentPhone.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
+import 'package:work/StudentScreens/Pdf.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Screens/suggetstionParent.dart';
+import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'Osmansscreen/Quiz3.dart';
 import 'Osmansscreen/message.dart';
 import 'Osmansscreen/quiz7.dart';
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  ChangeNotifierProvider(create: (context)=>ProviderData(),
       child: MaterialApp(
-        home:TeacherHomePage(),
+        home:VisitorNavigationBar(),
     ),
     );
     //oo

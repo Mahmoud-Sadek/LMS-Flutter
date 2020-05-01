@@ -21,6 +21,7 @@ import 'package:work/WidgetStudent/StudentPosts.dart';
 import 'package:work/WidgetTeacher/TeacherApprove.dart';
 import 'package:work/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/Widget/posts.dart';
+import 'package:work/visitor/screens/ContactUs.dart';
 import 'dart:collection';
 import '../Model/complaints.dart';
 import '../Style/style.dart';
@@ -834,6 +835,12 @@ openParentHomePage(BuildContext context){
     ChildrenParent(),
 
     SuggestionParent(),
+  ];
+
+  List<Widget> visitorOptions = <Widget>[
+    News(),
+    MaterialPage(),
+    ContactUS()
   ];
 
 
