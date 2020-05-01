@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:work/Model/LiveModel.dart';
 import 'package:work/Model/NewsModel.dart';
 import 'package:work/Model/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
@@ -16,6 +17,7 @@ import 'package:work/Screens/Profile.dart';
 import 'package:work/StudentScreens/QuizPage.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
+import 'package:work/TeacherScreens/LiveVideo.dart';
 import 'package:work/TeacherScreens/TeacherHomePage.dart';
 import 'package:work/WidgetStudent/StudentPosts.dart';
 import 'package:work/WidgetTeacher/TeacherApprove.dart';
@@ -51,25 +53,29 @@ class ProviderData extends ChangeNotifier{
   Color messageColor = Color(0xffF9983D);
   Color defaultColor = Color(0xffF9983D);
   Color  approveColor = Color(0xffF9983D);
+  Color  liveColor = Color(0xffF9983D);
   bool post = true;
   bool message = false;
   bool approve = false;
+  bool liveVideo = false;
 
     int widgetIndex = 1;
     Widget widgetShow = postsShow();
-  List<Widget> widget  =[postsShow(), TeacherMessageShow(), TeacherApproveShow(),];
+  List<Widget> widget  =[postsShow(), TeacherMessageShow(), TeacherApproveShow(),LiveVideo()];
   Widget showMessageButton = Container(height: 0,);
-  List<Widget> widgetShowMessageButton  =[Container(height: 0,), SendMessageButton(), Container(height: 0,),];
+  List<Widget> widgetShowMessageButton  =[Container(height: 0,), SendMessageButton(), Container(height: 0,),StartLive()];
 
   colorChangePost( ){
   post = true;
   message = false;
   approve = false;
+  liveVideo = false;
   if(post = true){
     post = post;
     postColor = mainColor;
     messageColor =defaultColor;
     approveColor = defaultColor;
+    liveColor = defaultColor;
     widgetShow =  widget[0];
     showMessageButton = widgetShowMessageButton[0];
   } if(post = false){
@@ -83,11 +89,13 @@ colorChangeMessage( ){
   post = false;
   message = true;
   approve = false;
+  liveVideo = false;
 
   if(message = true){
     messageColor = mainColor;
     postColor =defaultColor;
     approveColor = defaultColor;
+    liveColor = defaultColor;
     widgetShow =  widget[1];
     showMessageButton = widgetShowMessageButton[1];
 
@@ -99,6 +107,27 @@ colorChangeMessage( ){
 
 }
 
+  colorChangeLive( ){
+    post = false;
+    message = false;
+    approve = false;
+    liveVideo = true;
+
+    if(liveVideo = true){
+      liveColor = mainColor;
+      postColor =defaultColor;
+      approveColor = defaultColor;
+      messageColor = defaultColor;
+      widgetShow =  widget[3];
+      showMessageButton = widgetShowMessageButton[3];
+
+
+    } if(liveVideo = false){
+      liveColor = defaultColor;
+    }
+    notifyListeners();
+
+  }
 
 
 colorChangeApprove(){
@@ -110,6 +139,7 @@ colorChangeApprove(){
     approveColor = mainColor;
     messageColor =defaultColor;
     postColor = defaultColor;
+    liveColor = defaultColor;
     widgetShow =  widget[2];
     showMessageButton = widgetShowMessageButton[2];
 
@@ -235,6 +265,32 @@ colorChangeApprove(){
 
 
 
+  List<LiveModel> _liveList=[
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+    LiveModel(name: "Gelogia 3 Live",image: "assets/me.jpg"),
+  ];
+
+  UnmodifiableListView<LiveModel> get liveList {
+    return UnmodifiableListView(_liveList);
+  }
+
+  int get liveListCount {
+    return _liveList.length;
+  }
 
 
 
@@ -388,6 +444,9 @@ next(BuildContext context){
   Color  studentMaterialColor = Color(0xffF9983D);
   Color  studentQuizColor = Color(0xffF9983D);
   bool studentPost = true;
+
+
+
   bool studentMessage = false;
   bool studentMaterial = false;
   bool studentQuiz = false;

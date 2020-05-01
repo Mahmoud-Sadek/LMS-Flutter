@@ -16,7 +16,7 @@ class TeacherAppBar extends StatelessWidget {
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          width: MediaQuery.of(context).size.width - 40,
+          width: MediaQuery.of(context).size.width - 30,
           height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -54,6 +54,32 @@ class TeacherAppBar extends StatelessWidget {
                   SizedBox(height: 5),
 
                   Text("Posts", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),)
+                ],
+              ),
+              Spacer(
+                flex: 2,
+              ),
+              Column(
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  MaterialButton(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(10),
+                      color: Provider.of<ProviderData>(context).liveColor,
+                      child:
+                      Icon(
+                        OMIcons.liveTv,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Provider.of<ProviderData>(context).colorChangeLive();
+
+
+                      }),
+                  SizedBox(height: 5),
+
+                  Text("Live Vedio", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),)
                 ],
               ),
               Spacer(
