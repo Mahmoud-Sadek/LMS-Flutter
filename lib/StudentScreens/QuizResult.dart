@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:work/Style/style.dart';
 
-import '../Osmansscreen/Drawer.dart';
 
 class QuizResult extends StatelessWidget {
   @override

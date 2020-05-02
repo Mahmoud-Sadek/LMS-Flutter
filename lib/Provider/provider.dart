@@ -7,23 +7,23 @@ import 'package:work/Model/NewsModel.dart';
 import 'package:work/Model/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentMessageModel.dart';
-import 'package:work/Screens/ParentChildren.dart';
-import 'package:work/Screens/suggetstionParent.dart';
+import 'package:work/ParentScreens/ParentChildren.dart';
+import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
-import 'package:work/Screens/News.dart';
-import 'package:work/Screens/ParentHomePage.dart';
+import 'package:work/SharedWidget/VisitorAndParent/News.dart';
+import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/StudentScreens/Pdf.dart';
-import 'package:work/Screens/Profile.dart';
+import 'package:work/SharedWidget/Profile.dart';
 import 'package:work/StudentScreens/QuizPage.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/TeacherScreens/LiveVideo.dart';
 import 'package:work/TeacherScreens/TeacherHomePage.dart';
-import 'package:work/WidgetStudent/StudentPosts.dart';
-import 'package:work/WidgetTeacher/TeacherApprove.dart';
-import 'package:work/WidgetTeacher/TeacherMessage.dart';
-import 'package:work/Widget/posts.dart';
+import 'package:work/StudentScreens/WidgetStudent/StudentPosts.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherApprove.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherMessage.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
 import 'package:work/visitor/screens/ContactUs.dart';
 import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'dart:collection';
@@ -62,8 +62,8 @@ class ProviderData extends ChangeNotifier{
   bool liveVideo = false;
 
     int widgetIndex = 1;
-    Widget widgetShow = postsShow();
-  List<Widget> widget  =[postsShow(), TeacherMessageShow(), TeacherApproveShow(),LiveVideo()];
+    Widget widgetShow = TeacherPostsShow();
+  List<Widget> widget  =[TeacherPostsShow(), TeacherMessageShow(), TeacherApproveShow(),LiveVideo()];
   Widget showMessageButton = Container(height: 0,);
   List<Widget> widgetShowMessageButton  =[Container(height: 0,), SendMessageButton(), Container(height: 0,),StartLive()];
 
@@ -178,7 +178,7 @@ colorChangeApprove(){
       print(post);
       print(message);
       print(approve);
-      return postsShow();
+      return TeacherPostsShow();
     } else if (message == true && post == false && approve == false) {
       print(post);
       print(message);
@@ -329,7 +329,7 @@ next(BuildContext context){
 }
 
 
-////////////////////////////////////////////////// student Provider Start /////////////////////////////
+////////////////////////////////////////////////// SignLogin Provider Start /////////////////////////////
 
 
   final email = BehaviorSubject<String>();
@@ -422,6 +422,13 @@ visitorOpen(BuildContext context){
 
 
 
+
+////////////////////////////////////////////////// SignLogin Provider end /////////////////////////////
+
+
+
+
+  ////////////////////////////////////////////////// Student Provider Start /////////////////////////////
 
 
   List<StudentMessageModel> _studentMessageList =[

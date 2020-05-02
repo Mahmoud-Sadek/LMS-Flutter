@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:work/Widget/MainTextFeild.dart';
-import 'package:work/Widget/ParentAppBar.dart';
+import 'package:work/SharedWidget/MainTextFeild.dart';
+import 'package:work/ParentScreens/ParentWidget/ParentAppBar.dart';
 
 class ContactUS extends StatelessWidget {
   TextEditingController nameController=TextEditingController();

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:work/Style/style.dart';
 
-class postsWidget extends StatelessWidget {
+class SharedPostsWidget extends StatelessWidget {
   final String name;
   final String imageUrl;
   final String grade;
@@ -17,7 +17,7 @@ class postsWidget extends StatelessWidget {
   final double time;
   final String content;
 
-  postsWidget(
+  SharedPostsWidget(
       {this.time,
         this.id,
         this.group,

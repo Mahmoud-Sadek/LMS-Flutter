@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work/Style/style.dart';
 
-import '../Widget/ParentAppBar.dart';
+import 'ParentWidget/ParentAppBar.dart';
 
 class ChildrenParent extends StatelessWidget {
   var myList = [

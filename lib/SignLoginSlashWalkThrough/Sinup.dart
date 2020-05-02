@@ -6,9 +6,9 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
-import 'package:work/Widget/ButtonWidget.dart';
-import 'package:work/Widget/MainTextFeild.dart';
-import 'package:work/Widget/SignUpBackGrounds.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/SharedWidget/MainTextFeild.dart';
+import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpBackGrounds.dart';
 
 class SignUp extends StatelessWidget {
   @override

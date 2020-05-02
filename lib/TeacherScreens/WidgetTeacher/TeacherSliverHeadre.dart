@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:work/WidgetTeacher/TeacherAppBar.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherAppBar.dart';
 
 class TeacherSliverHeader implements SliverPersistentHeaderDelegate {
   TeacherSliverHeader({this.maxxExtent, this.minnExtent});

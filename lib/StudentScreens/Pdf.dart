@@ -4,9 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
-import 'package:work/Widget/ButtonWidget.dart';
-import 'package:work/WidgetStudent/StudentMainAppBar.dart';
-import 'package:work/WidgetStudent/StudentSliverHeadre.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/StudentScreens/WidgetStudent/StudentMainAppBar.dart';
+import 'package:work/StudentScreens/WidgetStudent/StudentSliverHeadre.dart';
 
 class Pdf extends StatelessWidget {
   @override

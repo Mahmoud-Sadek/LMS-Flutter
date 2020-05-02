@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/WidgetTeacher/ApproveBuilder.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/ApproveBuilder.dart';
 
 class TeacherApproveShow extends StatelessWidget {
   const TeacherApproveShow({

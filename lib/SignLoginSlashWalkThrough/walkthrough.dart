@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:work/Style/style.dart';
 import 'package:provider/provider.dart';
 import '../Provider/provider.dart';
-import '../Widget/paint.dart';
+import '../SharedWidget/paint.dart';
 
 class WalkThrough extends StatefulWidget {
   @override

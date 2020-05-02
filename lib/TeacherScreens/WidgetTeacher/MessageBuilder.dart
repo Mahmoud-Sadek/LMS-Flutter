@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/WidgetTeacher/MessageWidget.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/MessageWidget.dart';
 
 class MessageBuilder extends StatelessWidget {
   const MessageBuilder({

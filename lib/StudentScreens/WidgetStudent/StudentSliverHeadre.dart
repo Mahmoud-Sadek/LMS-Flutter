@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'StudentPostsAppBar.dart';
+import '../../SharedWidget/TeacherAndStudent/SharedPostsAppBar.dart';
 
 class StudentSliverHeadre implements SliverPersistentHeaderDelegate {
   StudentSliverHeadre({this.maxxExtent, this.minnExtent,this.widget});

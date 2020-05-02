@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
-import 'package:work/Widget/ButtonWidget.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
 
 import '../SignLoginSlashWalkThrough/Login.dart';
 

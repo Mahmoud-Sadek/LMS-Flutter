@@ -13,6 +13,7 @@ class ParentHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
+
       backgroundColor: Colors.white,
        bottomNavigationBar:           Container(
          height: 70,
@@ -54,9 +55,9 @@ class ParentHomePage extends StatelessWidget {
          ),
        ),
       body:  SafeArea(
-    child: Provider.of<ProviderData>(context).widgetParentOptions.elementAt(Provider.of<ProviderData>(context).selectedIndexParent),
+        child: Provider.of<ProviderData>(context).widgetParentOptions.elementAt(Provider.of<ProviderData>(context).selectedIndexParent),
       )
 
-    ));
+    ),);
   }
 }

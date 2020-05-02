@@ -4,14 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:work/Osmansscreen/Drawer.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/Widget/AppDrawer.dart';
-import 'package:work/Widget/posts.dart';
+import 'package:work/SharedWidget/AppDrawer.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/Widget/searchText.dart';
-import 'package:work/WidgetStudent/StudentMainAppBar.dart';
+import 'package:work/SharedWidget/searchText.dart';
+import 'package:work/StudentScreens/WidgetStudent/StudentMainAppBar.dart';
 
 class StudentHomePage extends StatelessWidget {
 
@@ -45,7 +44,9 @@ class StudentHomePage extends StatelessWidget {
 
                ),
              ),
-            drawer: AppDrawer(),
+            drawer:
+
+            AppDrawer(),
 
             bottomNavigationBar:
             Container(

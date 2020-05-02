@@ -157,7 +157,7 @@ class DrawerPaint extends CustomPainter {
     Path ovalPath = Path();
     ovalPath.moveTo(0, 0);
     ovalPath.quadraticBezierTo(width *1.8, height *.001, width /2, height*1.1);
-    ovalPath.quadraticBezierTo(width*.6 , height, width/1.1 , height*4);
+    ovalPath.quadraticBezierTo(width*2 , height, width*2 , height*4);
     ovalPath.lineTo(0, height);
     ovalPath.close();
 

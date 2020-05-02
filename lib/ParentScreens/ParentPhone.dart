@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/Widget/ButtonWidget.dart';
-import 'package:work/Widget/MainTextFeild.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/SharedWidget/MainTextFeild.dart';
 
 
 

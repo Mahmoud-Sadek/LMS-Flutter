@@ -5,24 +5,35 @@ import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/TeacherScreens/SeeAll.dart';
 import 'package:work/TeacherScreens/sendmessage.dart';
-import 'package:work/Widget/AppDrawer.dart';
-import 'package:work/Widget/ButtonWidget.dart';
-import 'package:work/WidgetTeacher/complaintsWidget.dart';
+import 'package:work/SharedWidget/AppDrawer.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/complaintsWidget.dart';
 
 import 'package:provider/provider.dart';
-import 'package:work/WidgetTeacher/TeacherMainAppBar.dart';
-import 'package:work/WidgetTeacher/TeacherSliverHeadre.dart';
-import '../WidgetTeacher/TeacherAppBar.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherMainAppBar.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/TeacherSliverHeadre.dart';
+import 'WidgetTeacher/TeacherAppBar.dart';
 
-class TeacherHomePage extends StatelessWidget {
+class TeacherHomePage extends StatefulWidget {
+  @override
+  _TeacherHomePageState createState() => _TeacherHomePageState();
+}
+
+class _TeacherHomePageState extends State<TeacherHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+@override
+  void initState() {
+    // TODO: implement initState
 
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(
           child: AppDrawer(),
+
 
         ),
         key: _scaffoldKey,

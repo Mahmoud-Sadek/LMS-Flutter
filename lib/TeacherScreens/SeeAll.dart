@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/WidgetTeacher/complaintsWidget.dart';
+import 'package:work/TeacherScreens/WidgetTeacher/complaintsWidget.dart';
 
 class SeeAll extends StatelessWidget {
   @override

@@ -2,7 +2,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
-import '../Provider/provider.dart';
+import '../../Provider/provider.dart';
 
 class TeacherAppBar extends StatelessWidget {
   const TeacherAppBar({

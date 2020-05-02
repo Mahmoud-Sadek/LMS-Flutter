@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 
-import 'PostWidget.dart';
+import 'SharedPostWidget.dart';
 
-class postBuilder extends StatelessWidget {
-  const postBuilder({
+class SharedPostBuilder extends StatelessWidget {
+  const SharedPostBuilder({
     Key key,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class postBuilder extends StatelessWidget {
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: postsWidget(
+                  child: SharedPostsWidget(
                     imageUrl: list.imageUrl,
                     name: list.name,
                     content: list.content,

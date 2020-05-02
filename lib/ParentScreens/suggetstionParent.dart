@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:provider/provider.dart';
-import 'package:work/Widget/searchText.dart';
+import 'package:work/SharedWidget/searchText.dart';
 
 class SuggestionParent extends StatelessWidget {
   @override

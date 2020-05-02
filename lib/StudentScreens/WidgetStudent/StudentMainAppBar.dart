@@ -1,24 +1,15 @@
-
-
-
-
 import 'package:flutter/material.dart';
-import 'package:work/Widget/searchText.dart';
+import 'package:work/SharedWidget/searchText.dart';
 
-class TeacherMainAppBar extends StatelessWidget {
-  Function ontap;
-  TeacherMainAppBar({
-    this.ontap
+class StudentMainAppBar extends StatelessWidget {
+  final Widget widget;
+  const StudentMainAppBar({
+    this.widget
   });
 
   @override
   Widget build(BuildContext context) {
     return
-      AppBar(
-        leading: Container(),
-      elevation: 5,
-      backgroundColor: Color(0xffFAFAFA),
-      flexibleSpace:
       Container(
         height: 100,
         width: MediaQuery.of(context).size.width,
@@ -26,17 +17,12 @@ class TeacherMainAppBar extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            child: Row(
+            child:
+            Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                IconButton(
-                    onPressed: ontap,
-                    icon: Icon(
-                      Icons.format_align_left,
-                      color: Colors.black,
-                      size: 40,
-                    )),
+                widget,
                 Spacer(
                   flex: 1,
                 ),
@@ -47,7 +33,8 @@ class TeacherMainAppBar extends StatelessWidget {
                 IconButton(
                     icon: Icon(
                       Icons.notifications_active,
-                      color: Colors.black,
+                      color: Colors.white,
+                      size: 30,
                     ),
                     onPressed: () {}),
                 Spacer(
@@ -55,9 +42,11 @@ class TeacherMainAppBar extends StatelessWidget {
                 ),
               ],
             ),
+
+
+
           ),
         ),
-      ),
-    );
+      );
   }
 }
