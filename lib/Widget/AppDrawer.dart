@@ -16,127 +16,129 @@ class AppDrawer extends StatelessWidget {
         painter: DrawerPaint(),
         child: Container(
           margin: EdgeInsets.only(left: 0),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                  onPressed: null,
-                ),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: 50),
-                    Column(children: <Widget>[
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.red,
-                      ),
-                      Row(children: <Widget>[
-                        Text(
-                          "Osman ahmed ",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.mode_edit,
-                          size: 15,
-                        )
-                      ])
-                    ])
-                  ],
-                ),
-                SizedBox(height: 40),
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      CommunityMaterialIcons.newspaper,
-                      size: 35,
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
                       color: Colors.white,
+                      size: 40,
                     ),
-                    title: Text("news",
-                        style: TextStyle(color: Colors.white)),
+                    onPressed: null,
                   ),
-                ),
-                Divider(),
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.person,
-                      size: 35,
-                      color: Colors.white,
-                    ),
-                    title: Text("profile",style: TextStyle(color: Colors.white),),
-                  ),
-                ),
-                Divider(),
-
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      CommunityMaterialIcons.phone,
-                      color: Colors.white,
-
-                      size: 35,
-                    ),
-                    title: Text("Contact",style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-                Divider(),
-
-
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.report_problem,
-                      size: 35,
-                      color: Colors.white,
-                    ),
-                    title: Text("Issue",style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-                Divider(),
-
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.settings,
-                      size: 35,
-                      color: Colors.white,
-                    ),
-                    title: Text("news",style: TextStyle(color: Colors.white),),
-                  ),
-                ),
-                   Divider(),
-                Container(
-                  margin: EdgeInsets.only(left: 0),
-                  child: Column(
+                  Row(
                     children: <Widget>[
-                      ListTile(
-                          title: Text("language",style: TextStyle(color: Colors.white),),
-                          leading: Checkbox(value: true, onChanged: null,)),
-                      ListTile(
-                          title: Text("DarkMode",style: TextStyle(color: Colors.white),),
-                          leading: Checkbox(value: true, onChanged: null))
+                      SizedBox(width: 50),
+                      Column(children: <Widget>[
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.red,
+                        ),
+                        Row(children: <Widget>[
+                          Text(
+                            "Osman ahmed ",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.mode_edit,
+                            size: 15,
+                          )
+                        ])
+                      ])
                     ],
                   ),
-                ),
-                FlatButton(
-                  child: ListTile(
-                    leading: Icon(
-                      CommunityMaterialIcons.logout,
-                      size: 35,
-                      color: Colors.white,
+                  SizedBox(height: 40),
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        CommunityMaterialIcons.newspaper,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      title: Text("news",
+                          style: TextStyle(color: Colors.white)),
                     ),
-                    title: Text("Logout",style: TextStyle(color: Colors.white),),
                   ),
-                )
-              ]),
+                  Divider(),
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      title: Text("profile",style: TextStyle(color: Colors.white),),
+                    ),
+                  ),
+                  Divider(),
+
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        CommunityMaterialIcons.phone,
+                        color: Colors.white,
+
+                        size: 35,
+                      ),
+                      title: Text("Contact",style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  Divider(),
+
+
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.report_problem,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      title: Text("Issue",style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  Divider(),
+
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.settings,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      title: Text("news",style: TextStyle(color: Colors.white),),
+                    ),
+                  ),
+                     Divider(),
+                  Container(
+                    margin: EdgeInsets.only(left: 0),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                            title: Text("language",style: TextStyle(color: Colors.white),),
+                            leading: Checkbox(value: true, onChanged: null,)),
+                        ListTile(
+                            title: Text("DarkMode",style: TextStyle(color: Colors.white),),
+                            leading: Checkbox(value: true, onChanged: null))
+                      ],
+                    ),
+                  ),
+                  FlatButton(
+                    child: ListTile(
+                      leading: Icon(
+                        CommunityMaterialIcons.logout,
+                        size: 35,
+                        color: Colors.white,
+                      ),
+                      title: Text("Logout",style: TextStyle(color: Colors.white),),
+                    ),
+                  )
+                ]),
+          ),
         ),
       ),
     );
