@@ -48,7 +48,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                ),
              ),
             drawer: Drawer(
-                    child: AppDrawer(),
+              child: AppDrawer(),
             ),
             bottomNavigationBar:
             Container(

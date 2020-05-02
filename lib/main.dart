@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  ChangeNotifierProvider(create: (context)=>ProviderData(),
       child: MaterialApp(
-        home:TeacherHomePage(),
+        home:StudentHomePage(),
     ),
     );
     //oo
