@@ -18,7 +18,7 @@ class _WalkThroughState extends State<WalkThrough> {
 
       body:  SingleChildScrollView(
         child: Container(
-          height: 790,
+          height: MediaQuery.of(context).size.height-20,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: <Widget>[
