@@ -1,49 +1,130 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:work/Provider/provider.dart';
+import 'package:work/Style/style.dart';
+import 'package:work/Widget/complaintsWidget.dart';
 
 class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(margin: EdgeInsets.only(top: 50,left: 10,right: 10 ,bottom: 10)
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 5,),
+          StudentMessageBuilder(),
 
-      ,child: Column(children: <Widget>[
-        Container(height: 45,
-          margin: EdgeInsets.all(10),
-          child: new Row(
+
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+
+class MessageWidget extends StatelessWidget {
+  final String name;
+  final String image;
+  final String message;
+  final int count;
+  const MessageWidget({
+    this.count,this.message,this.name,this.image
+  }) ;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      width: MediaQuery.of(context).size.width,
+      height: 80,
+      child: Row(
+        children: <Widget>[
+          SizedBox(width: 10,),
+          CircleAvatar(
+            radius:35 ,
+            backgroundImage: AssetImage("$image"),
+          ),
+          SizedBox(width: 10,),
+          Container(
+            height: 80,
+            width: MediaQuery.of(context).size.width/1.6,
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,size: 30),onPressed: () {
-                  Navigator.pop(context);
-                } ),])
-
-
-          ,), Expanded(child:Container(margin:EdgeInsets.all(20),child: TextField(decoration: InputDecoration.collapsed(
-            hintText: "Send message",hintStyle: TextStyle(fontSize: 18,color: Color(0xff9775F6))),)))
-
-        ,Align(alignment: Alignment.bottomCenter
-            ,child:
-            Container(height: 44,width: 300,margin: EdgeInsets.only( top: 20,bottom: 30),
-              child:   Card(color: Color(0xff9775F6),
-
-                shape: RoundedRectangleBorder(
-
-                  borderRadius: new BorderRadius.all( Radius.circular(5) ),
-
-
-
+                SizedBox(height: 10,),
+                AutoSizeText(
+                  '$name',
+                  style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: mainColor),
+                  minFontSize: 10,
+                  stepGranularity: 10,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
+                SizedBox(height: 10,),
+
+                AutoSizeText(
+                  '$message',
+                  style: TextStyle(fontSize: 10,color: mainColor),
+                  minFontSize: 8,
+                  stepGranularity: 8,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 10,),
+
+              ],
+            ),
+          ),
+          SizedBox(width:10 ,),
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+               shape: BoxShape.circle,
+//              color: Provider.of<ProviderData>(context).studentCountColor,
+            color: mainColor
+            ),
+            child: Center(child: Text("$count",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
+class StudentMessageBuilder extends StatelessWidget {
+  const StudentMessageBuilder({
+    Key key,
+  }) : super(key: key);
 
-                child: FlatButton(     onPressed:() {
-                               },
-                    child: Text(" send message "
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Consumer<ProviderData>(
+        builder: (context, messageList, child) {
+          return ListView.builder(
+              itemCount: messageList.studentMessageListCount,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final list = messageList.studentMessageList[index];
 
-                      ,style: TextStyle(color:Colors.white,fontSize: 17)
+                return MessageWidget(
+                  image: list.image,name: list.name,
+                  count: list.count,
+                  message: list.message,
 
-                      ,)),),)
-
-
-        ),
-      ],) ,);
-
+                ) ;
+              });
+        },
+      ),
+    );
   }
 }

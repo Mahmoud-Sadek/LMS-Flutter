@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work/StudentScreens/QuizResult.dart';
 import 'package:work/StudentScreens/Allert.dart';
 
 class QuizPage extends StatelessWidget {
@@ -51,6 +52,11 @@ class QuizPage extends StatelessWidget {
                       borderRadius: new BorderRadius.all(Radius.circular(15)),
                     ),
                     child: FlatButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return QuizResult();
+                        }));
+                      },
                       child: Text(
                         "Old results",
                         style: TextStyle(

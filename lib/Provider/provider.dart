@@ -6,6 +6,7 @@ import 'package:work/Model/LiveModel.dart';
 import 'package:work/Model/NewsModel.dart';
 import 'package:work/Model/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
+import 'package:work/Model/StudentMessageModel.dart';
 import 'package:work/Screens/ParentChildren.dart';
 import 'package:work/Screens/suggetstionParent.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
@@ -416,25 +417,47 @@ next(BuildContext context){
 
 
 
-//
-//  List<postsModel> _postList =[
-//    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-//    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-//    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-//    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-//    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-//  ];
-//
-//
-//  UnmodifiableListView<postsModel> get postList {
-//    return UnmodifiableListView(_postList);
-//  }
-//
-//  int get postListCount {
-//    return _postList.length;
-//  }
+
+  List<StudentMessageModel> _studentMessageList =[
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 0,message: "السلام عليكم لو سمحت هو معاد الدرس اتغير يا مستر"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 3,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 5,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 0,message: "السلام عليكم لو سمحت هو معاد الدرس اتغير يا مستر"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 3,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 5,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 0,message: "السلام عليكم لو سمحت هو معاد الدرس اتغير يا مستر"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 3,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 5,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 0,message: "السلام عليكم لو سمحت هو معاد الدرس اتغير يا مستر"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 3,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 5,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 0,message: "السلام عليكم لو سمحت هو معاد الدرس اتغير يا مستر"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 3,message: "hi dear student english lesaon is on 2 pm"),
+    StudentMessageModel(image: "assets/me.jpg",name: "Mohamed khaled khira",count: 5,message: "hi dear student english lesaon is on 2 pm"),
+
+  ];
 
 
+  UnmodifiableListView<StudentMessageModel> get studentMessageList {
+    return UnmodifiableListView(_studentMessageList);
+  }
+
+  int get studentMessageListCount {
+    return _studentMessageList.length;
+  }
+  String studentCount = "";
+  Color studentCountColor = Colors.white;
+ isRead(){
+
+    if(StudentMessageModel().count == 0){
+      studentCountColor = Colors.white;
+
+    }else if (StudentMessageModel().count >= 1){
+      studentCountColor = mainColor;
+    }
+    notifyListeners();
+
+}
 
 
 
