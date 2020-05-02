@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:work/Widget/searchText.dart';
 
 class TeacherMainAppBar extends StatelessWidget {
-  const TeacherMainAppBar({
-    Key key,
-  }) : super(key: key);
+  Function ontap;
+  TeacherMainAppBar({
+    this.ontap
+  });
 
   @override
   Widget build(BuildContext context) {
     return
       AppBar(
+        leading: Container(),
       elevation: 5,
       backgroundColor: Color(0xffFAFAFA),
       flexibleSpace:
@@ -29,9 +31,9 @@ class TeacherMainAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 IconButton(
-                    onPressed: () {},
+                    onPressed: ontap,
                     icon: Icon(
-                      Icons.arrow_back,
+                      Icons.format_align_left,
                       color: Colors.black,
                       size: 40,
                     )),

@@ -33,7 +33,7 @@ class postsWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
           width: MediaQuery.of(context).size.width - 20,
-          height: 230,
+          height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -141,7 +141,7 @@ class postsWidget extends StatelessWidget {
                 left: 40,
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.25,
-                  height: 140,
+                  height: 150,
                   child: AutoSizeText(
                     '$content',
                     style: TextStyle(fontSize: 40),
@@ -152,53 +152,6 @@ class postsWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                top: 180,
-                left: 0,
-                child: Container(
-                    width: MediaQuery.of(context).size.width - 20,
-                    child: Divider(
-                      height: 3,
-                      color: Colors.grey,
-                    )),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 20,
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                          ),
-                          width: MediaQuery.of(context).size.width - 30,
-                          height: 47,
-                          child: Center(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: '               Comment ',
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    Icons.send,
-                                    color: mainColor,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              )
             ],
           )),
     );

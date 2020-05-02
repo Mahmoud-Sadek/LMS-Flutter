@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/Widget/complaintsWidget.dart';
+import 'package:work/WidgetTeacher/complaintsWidget.dart';
 
 class MessagePage extends StatelessWidget {
   @override

@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 80,
 
                     child: ButtonWidget( height: 50,color: Colors.white,text: "Take a journy",borderColor: mainColor,textColor: mainColor,onPressed: (){
-
+                          Provider.of<ProviderData>(context).visitorOpen(context);
                     },),
 
 

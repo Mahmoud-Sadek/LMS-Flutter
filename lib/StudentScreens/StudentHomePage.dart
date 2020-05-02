@@ -13,12 +13,8 @@ import 'package:work/Style/style.dart';
 import 'package:work/Widget/searchText.dart';
 import 'package:work/WidgetStudent/StudentMainAppBar.dart';
 
-class StudentHomePage extends StatefulWidget {
-  @override
-  _StudentHomePageState createState() => _StudentHomePageState();
-}
+class StudentHomePage extends StatelessWidget {
 
-class _StudentHomePageState extends State<StudentHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -27,7 +23,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
     return
          SafeArea(
            child: Scaffold(
-           key: _scaffoldKey,
+
+             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+             key: _scaffoldKey,
              
              appBar: PreferredSize(
                preferredSize: Size.fromHeight(80),
@@ -101,6 +99,21 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
 
 
+  }
+}
+
+class MessageFlotingButton extends StatelessWidget {
+  const MessageFlotingButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 30,
+      width: 30,
+      color: Colors.red,
+    );
   }
 }
 

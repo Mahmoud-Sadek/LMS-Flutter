@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:work/Osmansscreen/dropdown.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
+import 'package:work/TeacherScreens/SeeAll.dart';
 import 'package:work/TeacherScreens/sendmessage.dart';
+import 'package:work/Widget/AppDrawer.dart';
 import 'package:work/Widget/ButtonWidget.dart';
-import 'package:work/Widget/complaintsWidget.dart';
+import 'package:work/WidgetTeacher/complaintsWidget.dart';
 
 import 'package:provider/provider.dart';
 import 'package:work/WidgetTeacher/TeacherMainAppBar.dart';
@@ -13,20 +15,32 @@ import 'package:work/WidgetTeacher/TeacherSliverHeadre.dart';
 import '../WidgetTeacher/TeacherAppBar.dart';
 
 class TeacherHomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+          child: AppDrawer(),
+
+        ),
+        key: _scaffoldKey,
+
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Provider.of<ProviderData>(context).showMessageButton,
 //        bottomSheet: ,
         appBar: PreferredSize(
+
           preferredSize: Size.fromHeight(70),
-          child: TeacherMainAppBar(),
+          child: TeacherMainAppBar(
+            ontap: ()=>_scaffoldKey.currentState.openDrawer(),
+          ),
         ),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
+              leading: Container(),
               floating: false,
               backgroundColor: Color(0xffFAFAFA),
               expandedHeight: 230,
@@ -50,7 +64,11 @@ class TeacherHomePage extends StatelessWidget {
                         children: <Widget>[
                           Spacer(),
                           FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return SeeAll();
+                                }));
+                              },
                               child: Container(
                                   child: Column(
                                 children: <Widget>[

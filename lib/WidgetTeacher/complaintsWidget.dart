@@ -57,11 +57,12 @@ class ComplaintsWidget extends StatelessWidget {
                 left: 0,
                 child: Container(
                   width: MediaQuery.of(context).size.width/2.3,
-                  height: 75,
+                  height: 130,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: ListView(
+                        physics: NeverScrollableScrollPhysics(),
                         children: <Widget>[
                           Text("$complaints",style: TextStyle(fontSize: 10 ),),
                         ],
@@ -70,23 +71,6 @@ class ComplaintsWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: GestureDetector(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width/4,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20),bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20)),
-                      color: mainColor,
-                    ),
-                    child: Center(
-                      child: Text("Show",style: TextStyle(color: Colors.white,fontSize: 10,fontWeight: FontWeight.bold),),
-                    ),
-                  ),
-                ),
-              )
 
             ],
           ),
@@ -104,14 +88,16 @@ class complaintsListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderData>(builder: (context , complaints,child){
+    return Consumer<ProviderData>(
+        builder: (context , complaints,child){
       return ListView.builder(
 
         scrollDirection: Axis.horizontal,
         itemBuilder: (context , index){
           final list = complaints.complaints[index];
 
-          return ComplaintsWidget(
+          return
+            ComplaintsWidget(
             name: list.name,
             imageUrl: list.imageUrl,
             complaints: list.complaints,

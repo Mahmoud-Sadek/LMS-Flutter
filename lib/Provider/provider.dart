@@ -25,6 +25,7 @@ import 'package:work/WidgetTeacher/TeacherApprove.dart';
 import 'package:work/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/Widget/posts.dart';
 import 'package:work/visitor/screens/ContactUs.dart';
+import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'dart:collection';
 import '../Model/complaints.dart';
 import '../Style/style.dart';
@@ -331,9 +332,9 @@ next(BuildContext context){
 ////////////////////////////////////////////////// student Provider Start /////////////////////////////
 
 
-  final _email = BehaviorSubject<String>();
-  Stream<String> get emailStream => _email.stream;
-  Function(String) get emailChange => _email.sink.add;
+  final email = BehaviorSubject<String>();
+  Stream<String> get emailStream => email.stream;
+  Function(String) get emailChange => email.sink.add;
 
   final _password = BehaviorSubject<String>();
   Stream<String> get passwordStream => _password.stream;
@@ -383,36 +384,41 @@ next(BuildContext context){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   login(BuildContext context){
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => WalkThrough()));
+
+    if( email.value == "1"){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => ParentHomePage()));
+    }if(email.value == "2"){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => StudentHomePage()));
+
+    }
+    if( email.value == "3"){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
+    }if(email.value == "4"){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => WalkThrough()));
+
+    }
+    if(email.value == null){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
+
+    }
 
   }
 
 
 
+visitorOpen(BuildContext context){
 
+
+  Navigator.push(context,
+      MaterialPageRoute(builder: (BuildContext context) => VisitorNavigationBar()));
+
+}
 
 
 
@@ -483,7 +489,6 @@ next(BuildContext context){
     if(studentPost = true){
       studentPost = studentPost;
       studentPostColor = mainColor;
-
       studentWidgetShow =studentWidget[0];
       studentMessageColor =studentDefaultColor;
       studentMaterialColor = studentDefaultColor;
@@ -501,11 +506,11 @@ next(BuildContext context){
     studentMaterial = false;
     studentQuiz = false;
     studentWidgetShow =studentWidget[3];
+
     if(studentMessage = true){
       studentMessageColor = mainColor;
 
       studentWidgetShow =studentWidget[3];
-
       studentPostColor =studentDefaultColor;
       studentMaterialColor = studentDefaultColor;
       studentQuizColor = studentDefaultColor;
@@ -966,8 +971,8 @@ openParentHomePage(BuildContext context){
   @override
   void dispose() async{
     super.dispose();
-    await _email.drain();
-    _email.close();
+    await email.drain();
+    email.close();
     await _password.drain();
     _password.close();
     await _fullName.drain();

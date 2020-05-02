@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/TeacherScreens/CreatePost.dart';
+import 'package:work/Screens/CreatePost.dart';
 import 'package:work/Widget/searchText.dart';
 
 class StudentPostsAppBar extends StatelessWidget {
