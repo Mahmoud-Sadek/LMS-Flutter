@@ -45,9 +45,8 @@ class StudentHomePage extends StatelessWidget {
 
                ),
              ),
-            drawer: Drawer(
-              child: AppDrawer(),
-            ),
+            drawer: AppDrawer(),
+
             bottomNavigationBar:
             Container(
               height: 70,

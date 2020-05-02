@@ -15,6 +15,7 @@ class AppDrawer extends StatelessWidget {
       child: CustomPaint(
         painter: DrawerPaint(),
         child: Container(
+          width: MediaQuery.of(context).size.width/1.5,
           margin: EdgeInsets.only(left: 0),
           child: SingleChildScrollView(
             child: Column(
@@ -155,8 +156,8 @@ class DrawerPaint extends CustomPainter {
 
     Path ovalPath = Path();
     ovalPath.moveTo(0, 0);
-    ovalPath.quadraticBezierTo(width * 1.7, height * .01, width / 2.5, height);
-    ovalPath.quadraticBezierTo(width , height, width / 3, height);
+    ovalPath.quadraticBezierTo(width *1.8, height *.001, width /2, height*1.1);
+    ovalPath.quadraticBezierTo(width*.6 , height, width/1.1 , height*4);
     ovalPath.lineTo(0, height);
     ovalPath.close();
 
