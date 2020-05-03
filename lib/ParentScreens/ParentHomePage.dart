@@ -15,8 +15,7 @@ class ParentHomePage extends StatelessWidget {
     Scaffold(
 
       backgroundColor: Colors.white,
-       bottomNavigationBar:
-       Container(
+       bottomNavigationBar:           Container(
          height: 70,
          decoration: BoxDecoration(color: mainColor, boxShadow: [
            BoxShadow(blurRadius: 20, color: mainColor.withOpacity(.1))
