@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/MessageWidget.dart';
 
@@ -13,7 +14,7 @@ class MessageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child:
-      Consumer<ProviderData>(
+      Consumer<TeacherProvider>(
         builder: (context , messageList ,child){
 
           return ListView.builder(

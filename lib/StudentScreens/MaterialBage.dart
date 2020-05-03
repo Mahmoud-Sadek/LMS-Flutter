@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/searchText.dart';
@@ -35,7 +36,7 @@ class MaterialPage extends StatelessWidget {
                   Spacer(flex: 1,),
                   GestureDetector(
                     onTap: (){
-                      Provider.of<ProviderData>(context).openPdf(context);
+                      Provider.of<StudentProvider>(context).openPdf(context);
                     },
                     child: Material(
                       elevation: 5,
@@ -52,7 +53,10 @@ class MaterialPage extends StatelessWidget {
                   ),
                   Spacer(flex: 2,),
                   GestureDetector(
+                      onTap: (){
+                        Provider.of<StudentProvider>(context).openYoutube(context);
 
+                      },
                     child: Material(
                       elevation: 5,
                       borderRadius: BorderRadius.circular(20),

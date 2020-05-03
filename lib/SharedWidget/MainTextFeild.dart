@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:work/Style/style.dart';
 
 class MainTextField extends StatelessWidget {
   final Stream textStream;
@@ -27,21 +28,21 @@ class MainTextField extends StatelessWidget {
           builder: (context, snapshot) {
             return TextField(
               onChanged: textChange,
-              style: TextStyle(color: Colors.white),
-              cursorColor: Colors.white,
+              style: TextStyle(color: mainColor),
+              cursorColor: mainColor,
               autofocus: false,
               keyboardType: inputType,
               obscureText: obscure,
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: mainColor),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: mainColor),
                 ),
                 hintText: "   $hintText",
                 hintStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                TextStyle(color: mainColor, fontWeight: FontWeight.bold),
                 suffixIcon: widget,
               ),
             );

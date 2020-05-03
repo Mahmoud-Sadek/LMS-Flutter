@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work/Osmansscreen/dropdown.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/TeacherScreens/SeeAll.dart';
@@ -39,7 +40,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         key: _scaffoldKey,
 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Provider.of<ProviderData>(context).showMessageButton,
+        floatingActionButton: Provider.of<TeacherProvider>(context).showMessageButton,
 //        bottomSheet: ,
         appBar: PreferredSize(
 
@@ -120,7 +121,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Provider.of<ProviderData>(context).widgetShow,
+                  Provider.of<TeacherProvider>(context).widgetShow,
                   SizedBox(
                     height: 30,
                   ),

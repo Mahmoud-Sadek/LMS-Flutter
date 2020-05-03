@@ -2,6 +2,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import '../../Provider/provider.dart';
 
 class TeacherAppBar extends StatelessWidget {
@@ -39,7 +40,7 @@ class TeacherAppBar extends StatelessWidget {
                   MaterialButton(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10),
-                      color: Provider.of<ProviderData>(context).postColor,
+                      color: Provider.of<TeacherProvider>(context).postColor,
                       child:
                       Icon(
                         OMIcons.assignment,
@@ -47,7 +48,7 @@ class TeacherAppBar extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Provider.of<ProviderData>(context).colorChangePost();
+                        Provider.of<TeacherProvider>(context).colorChangePost();
 
 
                       }),
@@ -65,7 +66,7 @@ class TeacherAppBar extends StatelessWidget {
                   MaterialButton(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10),
-                      color: Provider.of<ProviderData>(context).liveColor,
+                      color: Provider.of<TeacherProvider>(context).liveColor,
                       child:
                       Icon(
                         OMIcons.liveTv,
@@ -73,7 +74,7 @@ class TeacherAppBar extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Provider.of<ProviderData>(context).colorChangeLive();
+                        Provider.of<TeacherProvider>(context).colorChangeLive();
 
 
                       }),
@@ -91,7 +92,7 @@ class TeacherAppBar extends StatelessWidget {
                   MaterialButton(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10),
-                      color: Provider.of<ProviderData>(context).messageColor,
+                      color: Provider.of<TeacherProvider>(context).messageColor,
 
                       child: Icon(
                         CommunityMaterialIcons.message_text,
@@ -100,7 +101,7 @@ class TeacherAppBar extends StatelessWidget {
                       ),
 
                       onPressed: () {
-                        Provider.of<ProviderData>(context).colorChangeMessage();
+                        Provider.of<TeacherProvider>(context).colorChangeMessage();
 
                       }),
                   SizedBox(height: 5),
@@ -118,7 +119,7 @@ class TeacherAppBar extends StatelessWidget {
                   MaterialButton(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10),
-                      color: Provider.of<ProviderData>(context).approveColor,
+                      color: Provider.of<TeacherProvider>(context).approveColor,
 
                       child: Icon(
                         OMIcons.assignmentTurnedIn,
@@ -126,7 +127,7 @@ class TeacherAppBar extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Provider.of<ProviderData>(context).colorChangeApprove();
+                        Provider.of<TeacherProvider>(context).colorChangeApprove();
                       }),
                   SizedBox(height: 5),
 

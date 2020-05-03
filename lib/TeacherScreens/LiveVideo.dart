@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/StudentScreens/Youtube.dart';
 import 'package:work/Style/style.dart';
@@ -121,7 +122,7 @@ class LiveBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Consumer<ProviderData>(
+      child: Consumer<TeacherProvider>(
         builder: (context, liveList, child) {
           return ListView.builder(
               itemCount: liveList.liveListCount,
@@ -158,6 +159,7 @@ class StartLive extends StatelessWidget {
           height: 60,
           color: mainColor,
           onPressed: (){
+            Provider.of<TeacherProvider>(context).openLiveVideoScreen(context);
 
           },
           textColor: Colors.white,

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import '../../Style/style.dart';
 import '../../Provider/provider.dart';
 
@@ -88,7 +89,7 @@ class complaintsListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderData>(
+    return Consumer<TeacherProvider>(
         builder: (context , complaints,child){
       return ListView.builder(
 

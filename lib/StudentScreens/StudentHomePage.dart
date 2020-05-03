@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/AppDrawer.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
@@ -83,15 +84,15 @@ class StudentHomePage extends StatelessWidget {
                      ),
                    ],
 
-                     selectedIndex: Provider.of<ProviderData>(context).selectedIndex,
+                     selectedIndex: Provider.of<StudentProvider>(context).selectedIndex,
                      onTabChange: (index) {
-                         Provider.of<ProviderData>(context).ChangeAppBar(index);
+                         Provider.of<StudentProvider>(context).ChangeAppBar(index);
                      }
                ),
                ),
             ),
             body: SafeArea(
-                child: Provider.of<ProviderData>(context).widgetOptions.elementAt(Provider.of<ProviderData>(context).selectedIndex),
+                child: Provider.of<StudentProvider>(context).widgetOptions.elementAt(Provider.of<StudentProvider>(context).selectedIndex),
 
             ),
         ),
