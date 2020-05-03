@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/SideBar.dart';
 import 'package:work/Style/style.dart';
 
 class VisitorNavigationBar extends StatelessWidget {
@@ -10,6 +11,7 @@ class VisitorNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
+      drawer: SideBarDrawer(),
         backgroundColor: Colors.white,
         bottomNavigationBar:           Container(
           height: 70,

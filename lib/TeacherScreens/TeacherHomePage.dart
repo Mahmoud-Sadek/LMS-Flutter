@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:work/Osmansscreen/dropdown.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/SideBar.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/TeacherScreens/SeeAll.dart';
 import 'package:work/TeacherScreens/sendmessage.dart';
@@ -32,11 +33,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-          child: AppDrawer(),
-
-
-        ),
+        drawer: SideBarDrawer(),
         key: _scaffoldKey,
 
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/AppDrawer.dart';
+import 'package:work/SharedWidget/SideBar.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:work/Style/style.dart';
@@ -47,7 +48,7 @@ class StudentHomePage extends StatelessWidget {
              ),
             drawer:
 
-            AppDrawer(),
+            SideBarDrawer(),
 
             bottomNavigationBar:
             Container(
