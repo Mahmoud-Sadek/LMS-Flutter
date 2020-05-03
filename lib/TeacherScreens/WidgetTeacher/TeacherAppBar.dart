@@ -17,7 +17,7 @@ class TeacherAppBar extends StatelessWidget {
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          width: MediaQuery.of(context).size.width - 30,
+          width: MediaQuery.of(context).size.width/1.1,
           height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
