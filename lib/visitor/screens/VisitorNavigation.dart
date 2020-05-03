@@ -4,14 +4,18 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/SideBar.dart';
+import 'package:work/SharedWidget/VisitorAndParent/SahredParentVisitorAppBar.dart';
 import 'package:work/Style/style.dart';
 
 class VisitorNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     return SafeArea(child:
     Scaffold(
-
+      key: _scaffoldKey,
+       appBar: PreferredSize(child: SahredParentVisitorAppBar(scaffoldKey: _scaffoldKey,), preferredSize: Size.fromHeight(80)),
       drawer: SideBarDrawer(),
         backgroundColor: Colors.white,
         bottomNavigationBar:           Container(

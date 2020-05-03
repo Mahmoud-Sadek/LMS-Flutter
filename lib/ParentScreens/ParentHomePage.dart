@@ -6,18 +6,30 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/SideBar.dart';
+import 'package:work/SharedWidget/VisitorAndParent/SahredParentVisitorAppBar.dart';
+import 'package:work/SharedWidget/searchText.dart';
 import 'package:work/Style/style.dart';
 
 
 class ParentHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     return SafeArea(child:
     Scaffold(
+      key: _scaffoldKey,
+      appBar:
+      PreferredSize(
+        preferredSize: Size.fromHeight(80),
+
+        child: SahredParentVisitorAppBar(scaffoldKey: _scaffoldKey),
+      ),
       drawer: SideBarDrawer(),
 
       backgroundColor: Colors.white,
-       bottomNavigationBar:           Container(
+       bottomNavigationBar:
+       Container(
          height: 70,
          decoration: BoxDecoration(color: mainColor, boxShadow: [
            BoxShadow(blurRadius: 20, color: mainColor.withOpacity(.1))
@@ -63,3 +75,4 @@ class ParentHomePage extends StatelessWidget {
     ),);
   }
 }
+

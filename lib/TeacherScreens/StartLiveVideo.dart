@@ -10,8 +10,16 @@ import 'package:work/SharedWidget/MainTextFeild.dart';
 import 'package:work/Style/style.dart';
 
 class StartLiveVideo extends StatelessWidget {
+  ScrollController controller;
+
+   ccccc(BuildContext context){
+    if (Provider.of<TeacherProvider>(context).isDropdownOpened) {
+      Provider.of<TeacherProvider>(context).floatingDropdown.remove();
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(child: Scaffold(
         appBar: AppBar(
           backgroundColor: mainColor,
@@ -19,6 +27,7 @@ class StartLiveVideo extends StatelessWidget {
         ),
 
       body: SingleChildScrollView(
+controller: controller,
         child: Container(
           height: MediaQuery.of(context).size.height-60,
           width: MediaQuery.of(context).size.width,

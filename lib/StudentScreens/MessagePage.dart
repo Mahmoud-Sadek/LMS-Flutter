@@ -40,7 +40,6 @@ class MessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: MediaQuery.of(context).size.width,
       height: 80,
       child: Row(
         children: <Widget>[
@@ -52,7 +51,7 @@ class MessageWidget extends StatelessWidget {
           SizedBox(width: 10,),
           Container(
             height: 80,
-            width: MediaQuery.of(context).size.width/1.6,
+            width: MediaQuery.of(context).size.width/1.8,
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,11 +116,14 @@ class StudentMessageBuilder extends StatelessWidget {
               itemBuilder: (context, index) {
                 final list = messageList.studentMessageList[index];
 
-                return MessageWidget(
-                  image: list.image,name: list.name,
-                  count: list.count,
-                  message: list.message,
+                return Padding(
+                  padding: const EdgeInsets.only(left:10.0,right: 10),
+                  child: MessageWidget(
+                    image: list.image,name: list.name,
+                    count: list.count,
+                    message: list.message,
 
+                  ),
                 ) ;
               });
         },
