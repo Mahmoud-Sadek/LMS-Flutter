@@ -6,6 +6,7 @@ class SideBarDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //z
       width: MediaQuery.of(context).size.width/1.5,
       child: Drawer(
 

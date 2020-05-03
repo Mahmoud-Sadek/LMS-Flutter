@@ -11,6 +11,7 @@ class VisitorNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
+
       drawer: SideBarDrawer(),
         backgroundColor: Colors.white,
         bottomNavigationBar:           Container(
