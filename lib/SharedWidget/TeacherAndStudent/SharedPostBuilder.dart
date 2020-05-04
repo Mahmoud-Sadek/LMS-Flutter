@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/TeacherAndStudent/PostWidget.dart';
 
-import 'SharedPostWidget.dart';
 
 class SharedPostBuilder extends StatelessWidget {
   const SharedPostBuilder({
@@ -23,7 +23,7 @@ class SharedPostBuilder extends StatelessWidget {
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SharedPostsWidget(
+                  child: SharedPostWidget(
                     imageUrl: list.imageUrl,
                     name: list.name,
                     content: list.content,
@@ -32,6 +32,9 @@ class SharedPostBuilder extends StatelessWidget {
                     group: list.group,
                     id: list.id,
                     time: list.time,
+                    openPost: (){
+                      Provider.of<ProviderData>(context).openPost(context, list.name, list.content, list.id, list.time, list.imageUrl, list.grade, list.group, list.location);
+                    },
                   ),
                 );
               });

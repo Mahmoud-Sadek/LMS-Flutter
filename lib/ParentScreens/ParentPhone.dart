@@ -38,7 +38,7 @@ class ParentPhone extends StatelessWidget {
                 width: MediaQuery.of(context).size.width/1.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff267972),
+
                 ),
                         child: Center(
                           child: MainTextField(
