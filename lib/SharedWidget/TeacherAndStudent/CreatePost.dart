@@ -55,7 +55,7 @@ class CreatePost extends StatelessWidget {
           ,       Expanded(child:Container(margin:EdgeInsets.all(10),child: TextField(decoration: InputDecoration.collapsed(hintText: "Whats in your mind ?",hintStyle: TextStyle(fontSize: 20)),)))
 
           , Divider(
-            color: Color(0xff1b557b),thickness: 2,
+            color: Color(0xff1b557b),height: 2,
           ),
           ListTile(title: Text("Photo/video",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/pic.png",height: 22,))),
 
@@ -63,17 +63,17 @@ class CreatePost extends StatelessWidget {
 
 
           Divider(
-            color: Color(0xff1b557b),thickness: 2,
+            color: Color(0xff1b557b),height: 2,
           ),
           ListTile(title: Text("Tag people",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/person.png",height: 21,))),
 
           Divider(
-            color: Color(0xff1b557b),thickness: 2,
+            color: Color(0xff1b557b),height: 2,
           ),
           ListTile(title: Text("Feeling/Activity",style: TextStyle(fontSize: 20,color: Color(0xff1b557b)),),leading: Tab(icon: new Image.asset("assets/smile.png",height: 23,))),
 
           Divider(
-            color: Color(0xff1b557b),thickness: 2,
+            color: Color(0xff1b557b),height: 2,
           ),
 
 
