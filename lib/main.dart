@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
+import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/StudentScreens/Pdf.dart';

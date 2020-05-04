@@ -8,7 +8,9 @@ import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
+import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
+import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/SharedWidget/VisitorAndParent/News.dart';
@@ -40,10 +42,10 @@ class ProviderData extends ChangeNotifier{
 
   List<postsModel> _postList =[
     postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
+    postsModel(name: "Mohamed khaled",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
+    postsModel(name: "Mohamed Aseem",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
+    postsModel(name: "Mohamed Amin",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
+    postsModel(name: "Mohamed Osman",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
      ];
 
 
@@ -55,6 +57,12 @@ class ProviderData extends ChangeNotifier{
     return _postList.length;
   }
 
+
+  openPost(BuildContext context ,String name ,String content ,int id , double time , String imgUrl,String grade ,String group , String location){
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return SharedPostScreen(name: name,imageUrl: imgUrl,content: content,time: time,id: id,group: group,grade: grade,location: location,);
+    }));
+  }
 
 
 
@@ -154,7 +162,7 @@ next(BuildContext context){
 
     if( email.value == "1"){
       Navigator.push(context,
-          MaterialPageRoute(builder: (BuildContext context) => ParentHomePage()));
+          MaterialPageRoute(builder: (BuildContext context) => ParentPhone()));
     }if(email.value == "2"){
       Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) => StudentHomePage()));
