@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work/Style/style.dart';
+
 
 
 class QuizResult extends StatelessWidget {
@@ -8,7 +8,7 @@ class QuizResult extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: mainColor,
+            backgroundColor: Color(0xff0E4A45)
         ),
         body: Container(
           color: Colors.white,
@@ -55,7 +55,7 @@ class ScoreCard extends StatelessWidget {
             spreadRadius: .1,
             blurRadius: 8),
       ]),
-      height: 90,
+      height: 80,
       child: Card(
         //margin: EdgeInsets.all(3)
         child: Row(
@@ -68,10 +68,10 @@ class ScoreCard extends StatelessWidget {
                 Container(
                     height: 30,
                     margin:
-                        EdgeInsets.only(top: 8, right: 5, left: 5, bottom: 5),
+                    EdgeInsets.only(top: 8, right: 5, left: 5, bottom: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: mainColor),
+                        color: Color(0xff0E4A45)),
                     child: FlatButton(
                       child: Text(
                         "show answer",
@@ -82,27 +82,27 @@ class ScoreCard extends StatelessWidget {
               ],
             ),
             Align(
-                alignment: Alignment.center,
+                alignment: Alignment.bottomCenter,
                 child: Text(
                   "12/2/1998",
                   style: TextStyle(color: Colors.black38, fontSize: 12),
                 )),
             Container(
-              margin: EdgeInsets.all(2),
+              margin: EdgeInsets.all(6),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: mainColor)),
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 3, top: 3),
+                  border: Border.all(color: Color(0xff0E4A45))),
+              padding: EdgeInsets.only( bottom: 5, top: 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text("20.0"),
                   Container(
-                    color: Colors.black,
-                    child: Divider(
-                      height: 2.2,
-                      color: Colors.black,
-                    ),
+                    color: Color(0xff0E4A45),
+                    height: 2,
+                    width: 55,
+
+
                   ),
                   Text("20.0")
                 ],
