@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/MainTextFeild.dart';
 import 'package:work/Style/style.dart';
 
 class SharedPostScreen extends StatelessWidget {
@@ -30,6 +33,49 @@ class SharedPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child:
     Scaffold(
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+          color: mainColor,
+        ),
+        height: 115,
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xffF1F1F1),
+
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width/1.5,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:20.0),
+                      child: Center(
+                        child: MainTextField(
+                          textChange: Provider.of<ProviderData>(context).commentChange,
+                          obscure: false,
+                          textStream: Provider.of<ProviderData>(context).commentStream,
+                          inputType: TextInputType.text,
+                          hintText: "Write Comment..",
+                          widget: Container(width: 0,height: 0,),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  FlatButton(child: Icon(Icons.send,size: 30,color: mainColor,), onPressed: (){},
+                  hoverColor: Color(0xffF1F1F1),)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: mainColor,
@@ -767,7 +813,7 @@ class SharedPostScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 20,),
+            SizedBox(height: 100,),
 
           ],
         ),
