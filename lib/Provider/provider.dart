@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/LiveModel.dart';
+import 'package:work/Model/MainCommentModel.dart';
 import 'package:work/Model/NewsModel.dart';
 import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
+import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
@@ -38,12 +40,76 @@ import '../Model/approve.dart';
 import '../SignLoginSlashWalkThrough/walkthrough.dart';
 class ProviderData extends ChangeNotifier{
 
-
+/////////////////////////////////// Comments start //////
 
   final _comment = BehaviorSubject<String>();
   Stream<String> get commentStream => _comment.stream;
   Function(String) get commentChange => _comment.sink.add;
 
+
+ static List<SupCommentModel> supCommentList1 =[
+    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
+  ];
+  UnmodifiableListView<SupCommentModel> get supCommentList11 {
+    return UnmodifiableListView(supCommentList1);
+  }
+
+  int get supCommentListCount1 {
+    return supCommentList1.length;
+  }
+
+
+  static List<SupCommentModel> supCommentList2 =[
+    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
+  ];
+  UnmodifiableListView<SupCommentModel> get supCommentList22 {
+    return UnmodifiableListView(supCommentList2);
+  }
+
+  int get supCommentListCount2 {
+    return supCommentList2.length;
+  }
+
+
+
+
+ static List<SupCommentModel> supCommentList3 =[
+    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
+    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
+  ];
+  UnmodifiableListView<SupCommentModel> get  supCommentList33 {
+    return UnmodifiableListView(supCommentList1);
+  }
+
+  int get supCommentListCount3 {
+    return supCommentList3.length;
+  }
+    List<MainCommentModel> _mainCommentList =[
+      MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",mainImage: "assets/me.jpg",name: "Mohamed Khlaed",supCommentMode:supCommentList1),
+      MainCommentModel(mainComment: "What we will have now hhhaah",mainImage: "assets/me.jpg",name: "Mohamed Khaled",supCommentMode: supCommentList2),
+      MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",mainImage: "assets/me.jpg",name: "Mohamed Khlaed",supCommentMode: supCommentList3),
+
+    ];
+
+
+
+  UnmodifiableListView<MainCommentModel> get mainCommentList {
+    return UnmodifiableListView(_mainCommentList);
+  }
+
+  int get mainCommentListCount {
+    return _mainCommentList.length;
+  }
+
+  //////////////////////////////////// comments end ///////////////////////
   List<postsModel> _postList =[
     postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
     postsModel(name: "Mohamed khaled",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),

@@ -11,7 +11,8 @@ class SharedPostBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+      Container(
       child: Consumer<ProviderData>(
         builder: (context, postsList, child) {
           return ListView.builder(
