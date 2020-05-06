@@ -1,9 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:work/Style/style.dart';
 
 import 'ParentWidget/ParentAppBar.dart';
+
 
 class ChildrenParent extends StatelessWidget {
   var myList = [
@@ -17,7 +16,7 @@ class ChildrenParent extends StatelessWidget {
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshumffffffffdsdf ghgfefg fghgf skjv hgljt,r",
+      "location": "ld]hk hgshum skjv hgljt,r",
       "grade": "20/20",
       "percent": "75%"
     },
@@ -138,19 +137,13 @@ class ChildCard extends StatelessWidget {
                           fontSize: 10,
                         ),
                       ),
-                      SizedBox(height: 5,),
-                      Container(
-                        width: MediaQuery.of(context).size.width/3.8,
-                        child: AutoSizeText(
-                          '$group',
-                          style: TextStyle(fontSize: 15,color: mainColor,fontWeight: FontWeight.bold),
-                          minFontSize: 12,
-                          stepGranularity: 12,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-
-                        ),
-                      )
+                      Text(
+                        group,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -161,21 +154,21 @@ class ChildCard extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         Icons.location_on,
-                        size: 20,
+                        size: 10,
                         color: Colors.grey,
                       ),
-                      SizedBox(height: 5,),
                       Container(
-                        width: MediaQuery.of(context).size.width/2.3,
-
-                          child: AutoSizeText(
-                            '$location',
-                            style: TextStyle(fontSize: 15,color: mainColor,fontWeight: FontWeight.bold),
-                            minFontSize: 12,
-                            stepGranularity: 12,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-
+                        height: 20,
+                        width: MediaQuery.of(context).size.width/2,
+                        child: AutoSizeText(
+                          location,
+                          maxLines: 2,
+                          maxFontSize: 10,
+                          minFontSize: 8,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
@@ -185,56 +178,46 @@ class ChildCard extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
-
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Last Quiz",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
+              child: Row(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Last Quiz",
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          grade,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Percentage of attendence",
-                          style: TextStyle(fontSize: 10),
-                        ),
-                        SizedBox(height: 10,),
-                        Text(
-                          percent,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      Text(
+                        grade,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Percentage of attendence",
+                        style: TextStyle(fontSize: 10),
+                      ),
+                      Text(
+                        percent,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -243,16 +226,12 @@ class ChildCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 120,
+                    width: 130,
                     child: FlatButton(
                       onPressed: () {},
-                      child: AutoSizeText(
-                        'Quizes',
-                        style: TextStyle(fontSize: 40,color: Colors.white,fontWeight: FontWeight.bold),
-                        minFontSize: 12,
-                        stepGranularity: 12,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      child: Text(
+                        'quzies',
+                        style: TextStyle(color: Colors.white),
                       ),
                       color: Color(0xff0E4A45),
                       shape: RoundedRectangleBorder(
@@ -260,16 +239,12 @@ class ChildCard extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    width: 120,
+                    width: 130,
                     child: FlatButton(
                       onPressed: () {},
-                      child: AutoSizeText(
-                        'Attendence',
-                        style: TextStyle(fontSize: 40,color: Colors.white,fontWeight: FontWeight.bold),
-                        minFontSize: 12,
-                        stepGranularity: 12,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      child: Text(
+                        'attendence',
+                        style: TextStyle(color: Colors.white),
                       ),
                       color: Color(0xff0E4A45),
                       shape: RoundedRectangleBorder(
