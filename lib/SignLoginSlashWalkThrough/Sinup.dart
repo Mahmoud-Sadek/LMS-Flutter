@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -53,12 +54,10 @@ class SignUp extends StatelessWidget {
 }
 
 class SecondSignUp extends StatelessWidget {
-  const SecondSignUp({
-    Key key,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,151 +82,22 @@ class SecondSignUp extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              MainTextField(
-                obscure: false,
-                textStream:
-                    Provider.of<ProviderData>(context)
-                        .countryStream,
-                textChange:
-                    Provider.of<ProviderData>(context)
-                        .countryChange,
-                inputType: TextInputType.text,
-                hintText: "Country",
-                widget:
-                GestureDetector(
-                  key: Provider.of<ProviderData>(context)
-                      .actionKeyCountry,
-                  onTap: () {
-                    if (Provider.of<ProviderData>(context)
-                        .isDropdownOpened) {
-                      Provider.of<ProviderData>(context)
-                          .floatingDropdown
-                          .remove();
-                    } else {
-                      Provider.of<ProviderData>(context)
-                              .floatingDropdown =
-                          Provider.of<ProviderData>(context)
-                              .createFloatingDropdownCountry();
-                      Overlay.of(context).insert(
-                          Provider.of<ProviderData>(context)
-                              .floatingDropdown);
-                      Provider.of<ProviderData>(context)
-                          .findDropdownDataCountry();
-                    }
-                    Provider.of<ProviderData>(context)
-                        .changeDropdownOpenedState();
-                  },
-                  child: Container(
-                    width: 20,
-                    child: Icon(
-                      OMIcons.arrowDropDown,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ),
-              ),
-              MainTextField(
-                obscure: false,
-                textStream:
-                    Provider.of<ProviderData>(context)
-                        .cityStream,
-                textChange:
-                    Provider.of<ProviderData>(context)
-                        .cityChange,
-                inputType: TextInputType.text,
-                hintText: "City",
-                widget: GestureDetector(
-                  key: Provider.of<ProviderData>(context).actionKeyCity,
-                  onTap: () {
-                    if (Provider.of<ProviderData>(context).isDropdownOpened) {
-                      Provider.of<ProviderData>(context).floatingDropdown.remove();
-                    } else {
-                      Provider.of<ProviderData>(context).floatingDropdown = Provider.of<ProviderData>(context).createFloatingDropdownCity();
-                      Overlay.of(context).insert(Provider.of<ProviderData>(context).floatingDropdown);
-                      Provider.of<ProviderData>(context).findDropdownDataCity();
-                    }
-                    Provider.of<ProviderData>(context).changeDropdownOpenedState();
-                  },
+               DropdownButton<String>(
 
+                 items: Provider.of<TeacherProvider>(context).countries.map((String value){
+                   return DropdownMenuItem<String>(
+                     value: value,
+                     child: Text(value),
 
-                  child: Container(
-                    width: 20,
-                    child: Icon(
-                      OMIcons.arrowDropDown,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ),
+                   );
+                 }).toList(),
+                 onChanged: (String value){
+                   Provider.of<TeacherProvider>(context).changeCountry(value);
+                 },
+                 value: Provider.of<TeacherProvider>(context).selectedCountry,
+                 elevation: 4,
+               ),
 
-              ),
-              MainTextField(
-                obscure: false,
-                textStream:
-                    Provider.of<ProviderData>(context)
-                        .gradeStream,
-                textChange:
-                    Provider.of<ProviderData>(context)
-                        .gradeChange,
-                inputType: TextInputType.text,
-                hintText: "Grade",
-                widget: GestureDetector(
-                  key: Provider.of<ProviderData>(context).actionKeyGrade,
-                  onTap: () {
-                    if (Provider.of<ProviderData>(context).isDropdownOpened) {
-                      Provider.of<ProviderData>(context).floatingDropdown.remove();
-                    } else {
-                      Provider.of<ProviderData>(context).floatingDropdown = Provider.of<ProviderData>(context).createFloatingDropdownGrade();
-                      Overlay.of(context).insert(Provider.of<ProviderData>(context).floatingDropdown);
-                      Provider.of<ProviderData>(context).findDropdownDataGrade();
-                    }
-                    Provider.of<ProviderData>(context).changeDropdownOpenedState();
-                  },
-                  child: Container(
-                    width: 20,
-                    child: Icon(
-                      OMIcons.arrowDropDown,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ),
-
-              ),
-              MainTextField(
-                obscure: false,
-                textStream:
-                    Provider.of<ProviderData>(context)
-                        .groupStream,
-                textChange:
-                    Provider.of<ProviderData>(context)
-                        .groupChange,
-                inputType: TextInputType.text,
-                hintText: "Group",
-                widget: GestureDetector(
-                  key: Provider.of<ProviderData>(context).actionKeyGroup,
-                  onTap: () {
-                    if (Provider.of<ProviderData>(context).isDropdownOpened) {
-                      Provider.of<ProviderData>(context).floatingDropdown.remove();
-                    } else {
-                      Provider.of<ProviderData>(context).floatingDropdown = Provider.of<ProviderData>(context).createFloatingDropdownGroup();
-                      Overlay.of(context).insert(Provider.of<ProviderData>(context).floatingDropdown);
-                      Provider.of<ProviderData>(context).findDropdownDataGroup();
-                    }
-                    Provider.of<ProviderData>(context).changeDropdownOpenedState();
-                  },
-                  child: Container(
-                    width: 20,
-                    child: Icon(
-                      OMIcons.arrowDropDown,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ),
-
-              ),
             ],
           ),
         ),
@@ -239,7 +109,7 @@ class SecondSignUp extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
 
           child: Container(
-            height: 250,
+            height: 150,
             width: MediaQuery.of(context).size.width * .70,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -262,8 +132,7 @@ class SecondSignUp extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 20,),
-
+             Spacer(flex: 1,),
         Container(
           width: MediaQuery.of(context).size.width * .70,
 
@@ -284,9 +153,11 @@ class SecondSignUp extends StatelessWidget {
 
                   },)),
               SizedBox(width: 10,),
+
             ],
           ),
         ),
+        Spacer(flex: 1,),
 
       ],
     );
@@ -419,7 +290,23 @@ class FirstSignUp extends StatelessWidget {
         Row(
           children: <Widget>[
             Spacer(
-              flex: 6,
+              flex: 1,
+            ),
+            Container(
+              width: 100,
+              child: ButtonWidget(
+                color: mainColor,
+                height: 40,
+                onPressed: () {
+
+                },
+                textColor: Colors.white,
+                borderColor: mainColor,
+                text: "Back",
+              ),
+            ),
+            Spacer(
+              flex: 2,
             ),
             Container(
               width: 100,

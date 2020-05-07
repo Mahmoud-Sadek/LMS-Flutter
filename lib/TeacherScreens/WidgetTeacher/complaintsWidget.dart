@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
 import '../../Style/style.dart';
 import '../../Provider/provider.dart';
 
@@ -9,12 +10,13 @@ class ComplaintsWidget extends StatelessWidget {
   final String name;
   final String imageUrl;
   final String complaints;
+  final Function show;
 
-  ComplaintsWidget({this.complaints,this.imageUrl,this.name});
+  ComplaintsWidget({this.complaints,this.imageUrl,this.name,this.show});
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8,right: 8,bottom: 8),
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20),bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
@@ -57,8 +59,9 @@ class ComplaintsWidget extends StatelessWidget {
                 top: 50,
                 left: 0,
                 child: Container(
+
                   width: MediaQuery.of(context).size.width/2.3,
-                  height: 130,
+                  height: 80,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
@@ -72,6 +75,14 @@ class ComplaintsWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              Positioned(
+                bottom: 0,
+                right: 10,
+                child: Container(
+                  width: MediaQuery.of(context).size.width/5,
+                  child: ButtonWidget(color: mainColor,height: 20,onPressed: show,textColor: Colors.white,borderColor: mainColor,text: "Show",),
+                ),
+              )
 
             ],
           ),
@@ -102,6 +113,9 @@ class complaintsListViewBuilder extends StatelessWidget {
             name: list.name,
             imageUrl: list.imageUrl,
             complaints: list.complaints,
+              show: (){
+              Provider.of<TeacherProvider>(context).openShowComplainList(context, list.name, list.imageUrl, list.complaints);
+              },
           );
 
         },

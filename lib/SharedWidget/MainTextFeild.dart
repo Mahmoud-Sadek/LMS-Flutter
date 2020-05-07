@@ -33,6 +33,7 @@ class MainTextField extends StatelessWidget {
               autofocus: false,
               keyboardType: inputType,
               obscureText: obscure,
+
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: mainColor),

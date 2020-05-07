@@ -11,6 +11,7 @@ import 'package:work/Style/style.dart';
 import 'package:work/TeacherScreens/LiveVideo.dart';
 import 'package:work/TeacherScreens/StartLiveVideo.dart';
 import 'package:work/TeacherScreens/TeacherHomePage.dart';
+import 'package:work/TeacherScreens/TeacherShowComplainList.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherApprove.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
@@ -27,7 +28,20 @@ class TeacherProvider extends ChangeNotifier{
 
 
 
+  openShowComplainList(BuildContext context,String name,String image ,String complain){
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return ShowComplainList(name: name,image: image,complain: complain,);
+    }));
+  }
 
+  updateShowComplainList(String name,String image ,String complain){
+     ShowComplainList(name: name,image: image,complain: complain,);
+     notifyListeners();
+  }
+
+  final _complainReply = BehaviorSubject<String>();
+  Stream<String> get replyStream => _complainReply.stream;
+  Function(String) get replyChange => _complainReply.sink.add;
 
 
 
@@ -35,6 +49,14 @@ class TeacherProvider extends ChangeNotifier{
   List<ComplaintsModel> _complaints =[
     ComplaintsModel(imageUrl: "assets/me.jpg",name: "Ahmed Ali",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
     ComplaintsModel(imageUrl: "assets/me.jpg",name: "Mohamed Khira",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Ahmed Ali",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Mohamed Khira",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Assem Khalifa",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Ahmed Ali",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Mohamed Khira",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+    ComplaintsModel(imageUrl: "assets/me.jpg",name: "Assem Khalifa",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
+
     ComplaintsModel(imageUrl: "assets/me.jpg",name: "Assem Khalifa",complaints: "Lorem ispum is simply dummy text of printing and typesting indutry Lorem ispum"),
   ];
 
@@ -287,6 +309,43 @@ class TeacherProvider extends ChangeNotifier{
   }
 
 
+
+
+  /////////////////////////////
+
+
+  List<String> countries = ['Egypt', 'Usa' , ' Libia'];
+   String selectedCountry = "Egypt";
+   changeCountry(String value){
+     selectedCountry = value;
+     notifyListeners();
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   GlobalKey actionKeyYear = LabeledGlobalKey("Year");
   GlobalKey actionKeyGroup= LabeledGlobalKey("Group");
   bool isDropdownOpened = false;
@@ -370,6 +429,7 @@ class TeacherProvider extends ChangeNotifier{
   void dispose() {
     // TODO: implement dispose
     _liveVideoSubject.close();
+    _complainReply.close();
     super.dispose();
   }
 

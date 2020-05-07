@@ -12,12 +12,26 @@ class SeeAll extends StatelessWidget {
     return SafeArea(child: Scaffold(
       appBar: AppBar(backgroundColor: mainColor,),
 
-      body: Consumer<TeacherProvider>(
+      body: SingleChildScrollView(child: ComplainGridView()),
+    ));
+  }
+}
+
+class ComplainGridView extends StatelessWidget {
+  const ComplainGridView({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      Consumer<TeacherProvider>(
 
         builder: (context,complaints,child){
           return         GridView.builder(
               itemCount: complaints.complaintsCount,
-
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 4.0, mainAxisSpacing: 4.0),
               itemBuilder: (context,index){
                 final list = complaints.complaints[index];
@@ -26,12 +40,15 @@ class SeeAll extends StatelessWidget {
                   name: list.name,
                   imageUrl: list.imageUrl,
                   complaints: list.complaints,
+                  show: (){
+                    Provider.of<TeacherProvider>(context).updateShowComplainList(list.name, list.imageUrl, list.complaints);
+                  },
                 );
 
               });
 
         },
-      ),
-    ));
+      )
+    ;
   }
 }

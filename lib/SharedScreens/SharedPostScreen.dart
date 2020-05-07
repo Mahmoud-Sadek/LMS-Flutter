@@ -32,413 +32,408 @@ class SharedPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: mainColor,
-        ),
-        height: 115,
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              color: Color(0xffF1F1F1),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: 60,
-                    width: MediaQuery.of(context).size.width / 1.5,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Center(
-                        child: MainTextField(
-                          textChange:
-                              Provider.of<ProviderData>(context).commentChange,
-                          obscure: false,
-                          textStream:
-                              Provider.of<ProviderData>(context).commentStream,
-                          inputType: TextInputType.text,
-                          hintText: "Write Comment..",
-                          widget: Container(
-                            width: 0,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  FlatButton(
-                    child: Icon(
-                      Icons.send,
-                      size: 30,
-                      color: mainColor,
-                    ),
-                    onPressed: () {},
-                    hoverColor: Color(0xffF1F1F1),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: mainColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Material(
-              elevation: 5,
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20)),
-              child: Container(
-                decoration: BoxDecoration(
+      body:  Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Material(
+                  elevation: 5,
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(20),
                       bottomLeft: Radius.circular(20)),
-                ),
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20)),
                     ),
-                    Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
                               children: <Widget>[
                                 SizedBox(
-                                  width: 10,
+                                  height: 5,
                                 ),
-                                CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage: AssetImage("$imageUrl"),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                Row(
                                   children: <Widget>[
                                     SizedBox(
-                                      height: 5,
+                                      width: 10,
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.7,
-                                      child: AutoSizeText(
-                                        '$name',
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            color: mainColor,
-                                            fontWeight: FontWeight.bold),
-                                        minFontSize: 13,
-                                        stepGranularity: 13,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                    CircleAvatar(
+                                      radius: 35,
+                                      backgroundImage: AssetImage("$imageUrl"),
                                     ),
                                     SizedBox(
-                                      height: 5,
+                                      width: 10,
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.6,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "$time Am",
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context).size.width /
+                                              1.7,
+                                          child: AutoSizeText(
+                                            '$name',
                                             style: TextStyle(
-                                                color: mainColor, fontSize: 9),
+                                                fontSize: 30,
+                                                color: mainColor,
+                                                fontWeight: FontWeight.bold),
+                                            minFontSize: 13,
+                                            stepGranularity: 13,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          SizedBox(
-                                            width: 5,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context).size.width /
+                                              1.6,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Text(
+                                                "$time Am",
+                                                style: TextStyle(
+                                                    color: mainColor, fontSize: 9),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Spacer(
+                                                flex: 1,
+                                              ),
+                                              Icon(
+                                                Icons.location_on,
+                                                size: 15,
+                                                color: mainColor,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "$location",
+                                                style: TextStyle(fontSize: 10),
+                                              ),
+                                              Spacer(
+                                                flex: 1,
+                                              ),
+                                              Spacer(
+                                                flex: 1,
+                                              ),
+                                              Icon(
+                                                FontAwesomeIcons.idCard,
+                                                size: 15,
+                                                color: mainColor,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "$id",
+                                                style: TextStyle(fontSize: 10),
+                                              ),
+                                              Spacer(
+                                                flex: 1,
+                                              ),
+                                            ],
                                           ),
-                                          Spacer(
-                                            flex: 1,
-                                          ),
-                                          Icon(
-                                            Icons.location_on,
-                                            size: 15,
-                                            color: mainColor,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            "$location",
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                          Spacer(
-                                            flex: 1,
-                                          ),
-                                          Spacer(
-                                            flex: 1,
-                                          ),
-                                          Icon(
-                                            FontAwesomeIcons.idCard,
-                                            size: 15,
-                                            color: mainColor,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            "$id",
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                          Spacer(
-                                            flex: 1,
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 5,
+                                ),
                               ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                          ],
-                        )),
-                    Divider(),
-                    Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 25,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    FontAwesomeIcons.graduationCap,
-                                    size: 20,
-                                    color: mainColor,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.5,
-                                    child: AutoSizeText(
-                                      ' $grade ',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: mainColor,
-                                          fontWeight: FontWeight.bold),
-                                      minFontSize: 10,
-                                      stepGranularity: 10,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    CommunityMaterialIcons.account_group,
-                                    size: 20,
-                                    color: mainColor,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    child: AutoSizeText(
-                                      ' $group ',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: mainColor,
-                                          fontWeight: FontWeight.bold),
-                                      minFontSize: 10,
-                                      stepGranularity: 10,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )),
-                    Divider(),
-                    Container(
-                        margin: EdgeInsets.only(
-                            left: 10, right: 10, bottom: 5, top: 5),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(children: <Widget>[
-                          Flexible(
-                            child: new Text(
-                              "$content",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          )
-                        ])),
-                    Divider(),
-                    Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
+                            )),
+                        Divider(),
+                        Container(
                             width: MediaQuery.of(context).size.width,
-                            height: 20,
                             child: Row(
                               children: <Widget>[
                                 SizedBox(
-                                  width: 10,
+                                  width: 25,
                                 ),
-                                Text("254 "),
-                                Text(
-                                  "Like",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: mainColor),
-                                ),
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                Text("254 "),
-                                Text(
-                                  "Comment",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: mainColor),
-                                ),
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                Text("254 "),
-                                Text(
-                                  "Share",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: mainColor),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 60,
-                            child: Row(
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.favorite,
-                                    size: 30,
-                                    color: Colors.pinkAccent,
-                                  ),
-                                  highlightColor: Colors.pinkAccent,
-                                ),
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                FlatButton(
-                                  onPressed: () {},
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2,
                                   child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Text(
-                                        "     Comment",
-                                        style: TextStyle(
-                                            color: mainColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 11),
-                                      ),
                                       Icon(
-                                        CommunityMaterialIcons.comment_outline,
+                                        FontAwesomeIcons.graduationCap,
+                                        size: 20,
                                         color: mainColor,
-                                      )
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        width:
+                                        MediaQuery.of(context).size.width / 2.5,
+                                        child: AutoSizeText(
+                                          ' $grade ',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: mainColor,
+                                              fontWeight: FontWeight.bold),
+                                          minFontSize: 10,
+                                          stepGranularity: 10,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                FlatButton(
-                                    onPressed: () {},
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          " Share",
-                                          style: TextStyle(
-                                              color: mainColor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 11),
-                                        ),
-                                        Icon(
-                                          CommunityMaterialIcons.share_outline,
-                                          color: mainColor,
-                                        )
-                                      ],
-                                    )),
                                 SizedBox(
-                                  width: 2,
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2.5,
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        CommunityMaterialIcons.account_group,
+                                        size: 20,
+                                        color: mainColor,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        width:
+                                        MediaQuery.of(context).size.width / 3,
+                                        child: AutoSizeText(
+                                          ' $group ',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: mainColor,
+                                              fontWeight: FontWeight.bold),
+                                          minFontSize: 10,
+                                          stepGranularity: 10,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
+                            )),
+                        Divider(),
+                        Container(
+                            margin: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 5),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(children: <Widget>[
+                              Flexible(
+                                child: new Text(
+                                  "$content",
+                                  style: TextStyle(fontSize: 17),
+                                ),
+                              )
+                            ])),
+                        Divider(),
+                        Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 20,
+                                child: Row(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("254 "),
+                                    Text(
+                                      "Like",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor),
+                                    ),
+                                    Spacer(
+                                      flex: 2,
+                                    ),
+                                    Text("254 "),
+                                    Text(
+                                      "Comment",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor),
+                                    ),
+                                    Spacer(
+                                      flex: 2,
+                                    ),
+                                    Text("254 "),
+                                    Text(
+                                      "Share",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 60,
+                                child: Row(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.favorite,
+                                        size: 30,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                      highlightColor: Colors.pinkAccent,
+                                    ),
+                                    Spacer(
+                                      flex: 2,
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        children: <Widget>[
+                                          Text(
+                                            "     Comment",
+                                            style: TextStyle(
+                                                color: mainColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 11),
+                                          ),
+                                          Icon(
+                                            CommunityMaterialIcons.comment_outline,
+                                            color: mainColor,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Spacer(
+                                      flex: 2,
+                                    ),
+                                    FlatButton(
+                                        onPressed: () {},
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              " Share",
+                                              style: TextStyle(
+                                                  color: mainColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 11),
+                                            ),
+                                            Icon(
+                                              CommunityMaterialIcons.share_outline,
+                                              color: mainColor,
+                                            )
+                                          ],
+                                        )),
+                                    SizedBox(
+                                      width: 2,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ////////////////////////////////////////////////////////////// Main Comment ///////////////
+                MainCommentBuilder(),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 150,
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+              left: 0,
+              child:             Container(
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xffF1F1F1),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Center(
+                          child: MainTextField(
+                            textChange:
+                            Provider.of<ProviderData>(context).commentChange,
+                            obscure: false,
+                            textStream:
+                            Provider.of<ProviderData>(context).commentStream,
+                            inputType: TextInputType.text,
+                            hintText: "Write Comment..",
+                            widget: Container(
+                              width: 0,
+                              height: 0,
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    FlatButton(
+                      child: Icon(
+                        Icons.send,
+                        size: 30,
+                        color: mainColor,
+                      ),
+                      onPressed: () {},
+                      hoverColor: Color(0xffF1F1F1),
                     )
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ////////////////////////////////////////////////////////////// Main Comment ///////////////
-            MainCommentBuilder(),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 150,
-            )
-          ],
-        ),
-      ),
+
+          )
+
+        ],
+      )
     ));
   }
 }
