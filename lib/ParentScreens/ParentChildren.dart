@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/Style/style.dart';
 
+import 'ParentPhone.dart';
 import 'ParentWidget/ParentAppBar.dart';
 
 
@@ -34,6 +37,21 @@ class ChildrenParent extends StatelessWidget {
       slivers: <Widget>[
         ParentAppBar(
           imageUrl: "assets/childern.png",
+          widget: Container(
+            width: MediaQuery.of(context).size.width/3,height: 40,
+            child: ButtonWidget(
+              color: mainColor,
+              height: 40,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return ParentPhone();
+                }));
+              },
+              textColor: Colors.white,
+              borderColor: Colors.white,
+              text: "Edit Phone",
+            ),
+          ),
         ),
         SliverList(
 

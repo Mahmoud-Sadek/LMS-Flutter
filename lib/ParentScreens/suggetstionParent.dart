@@ -117,6 +117,7 @@ class _MyBodyState extends State<MyBody> {
                 Expanded(
                   child: Image(
                     image: AssetImage("assets/suggest.png"),
+
                     fit: BoxFit.contain,
                   ),
                 ),
