@@ -96,7 +96,7 @@ class VideoWidget extends StatelessWidget {
                 child: IconButton(
                     icon:
                     Icon(
-                  Icons.delete,color: Colors.black,
+                  Icons.play_circle_outline,color: Colors.black,
                       size: 30,
 
                 ), onPressed: (){

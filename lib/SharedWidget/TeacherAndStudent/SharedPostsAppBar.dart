@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/SharedDropDown.dart';
 import 'package:work/SharedWidget/TeacherAndStudent/CreatePost.dart';
 import 'package:work/SharedWidget/searchText.dart';
+import 'package:work/Style/style.dart';
 
 class SharedPostsAppBar extends StatelessWidget {
   const SharedPostsAppBar({
@@ -35,20 +37,21 @@ class SharedPostsAppBar extends StatelessWidget {
                       Spacer(flex: 1,),
 
                       GestureDetector(
-                        key: Provider.of<ProviderData>(context).actionKeySearch,
-                        onTap: () {
-                          if (Provider.of<ProviderData>(context).isDropdownOpened) {
-                            Provider.of<ProviderData>(context).floatingDropdown.remove();
-                          } else {
-                            Provider.of<ProviderData>(context).floatingDropdown = Provider.of<ProviderData>(context).createFloatingDropdownSearch();
-                            Overlay.of(context).insert(Provider.of<ProviderData>(context).floatingDropdown);
-                            Provider.of<ProviderData>(context).findDropdownDataSearch();
-                          }
-                          Provider.of<ProviderData>(context).changeDropdownOpenedState();
-                        },
+//                        key: Provider.of<ProviderData>(context).actionKeySearch,
+//                        onTap: () {
+//                          if (Provider.of<ProviderData>(context).isDropdownOpened) {
+//                            Provider.of<ProviderData>(context).floatingDropdown.remove();
+//                          } else {
+//                            Provider.of<ProviderData>(context).floatingDropdown = Provider.of<ProviderData>(context).createFloatingDropdownSearch();
+//                            Overlay.of(context).insert(Provider.of<ProviderData>(context).floatingDropdown);
+//                            Provider.of<ProviderData>(context).findDropdownDataSearch();
+//                          }
+//                          Provider.of<ProviderData>(context).changeDropdownOpenedState();
+//                        },
 
 
                         child: Container(
+                          margin: EdgeInsets.only(left: 5,right: 5),
                           width: 120,
                           height: 50,
                           decoration: BoxDecoration(
@@ -58,16 +61,28 @@ class SharedPostsAppBar extends StatelessWidget {
                             gradient: LinearGradient(
                                 colors: [Color(0xff1EB2A6), Color(0xff1B9288)]),
                           ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("Filter",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
-                              SizedBox(width: 5,),
-                              Icon(Icons.arrow_drop_down,size: 30,color: Colors.white,)
+                          child:Center(
+                            child: SharedDropDown(
+underline: Container(width: 0,height: 0,),
+                              onChange: (String value) {
+                                Provider.of<ProviderData>(context).changeFilter(value);
+                              },
+                              dropMenuItem: Provider.of<ProviderData>(context)
+                                  .filter
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                );
+                              }).toList(),
+                              selectedValue:
+                              Provider.of<ProviderData>(context).selectedFilter,
 
-                            ],
-                          ),
+                            ),
+                          )
                         ),
                       ),
                       Spacer(flex: 1,),

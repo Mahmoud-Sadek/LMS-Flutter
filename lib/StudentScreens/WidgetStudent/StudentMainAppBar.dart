@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/searchText.dart';
 
 class StudentMainAppBar extends StatelessWidget {
@@ -36,7 +38,9 @@ class StudentMainAppBar extends StatelessWidget {
                       color: Colors.white,
                       size: 30,
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      Provider.of<ProviderData>(context).openNotification(context);
+                    }),
                 Spacer(
                   flex: 1,
                 ),

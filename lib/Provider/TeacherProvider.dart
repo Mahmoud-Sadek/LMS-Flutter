@@ -314,17 +314,6 @@ class TeacherProvider extends ChangeNotifier{
   /////////////////////////////
 
 
-  List<String> countries = ['Egypt', 'Usa' , ' Libia'];
-   String selectedCountry = "Egypt";
-   changeCountry(String value){
-     selectedCountry = value;
-     notifyListeners();
-   }
-
-
-
-
-
 
 
 

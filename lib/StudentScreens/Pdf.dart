@@ -33,20 +33,9 @@ class Pdf extends StatelessWidget {
           ),
         ),
       ),
-      body: CustomScrollView(
+      body:
+      CustomScrollView(
         slivers: <Widget>[
-//          SliverAppBar(
-//
-//            leading: new Container(),
-//            backgroundColor: mainColor,
-//            expandedHeight: 80,
-//            flexibleSpace: FlexibleSpaceBar(
-//              background:
-//
-//
-//            ),
-//
-//          ),
           SliverPersistentHeader(
               pinned: false,
               floating: true,
