@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:work/StudentScreens/MaterialBage.dart';
+import 'package:work/StudentScreens/QuizResult.dart';
 
 import 'ParentWidget/ParentAppBar.dart';
 
@@ -9,21 +11,21 @@ class ChildrenParent extends StatelessWidget {
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hgshum skjvh",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hg",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hgshum skjv",
       "grade": "20/20",
       "percent": "75%"
     },
@@ -147,24 +149,24 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: 30,
+                    width:MediaQuery.of(context).size.width/5 ,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Icon(
                         Icons.location_on,
-                        size: 10,
+                        size: 12,
                         color: Colors.grey,
                       ),
                       Container(
                         height: 20,
-                        width: MediaQuery.of(context).size.width/2,
+                        width: MediaQuery.of(context).size.width/3,
                         child: AutoSizeText(
                           location,
-                          maxLines: 2,
-                          maxFontSize: 10,
-                          minFontSize: 8,
+                          maxLines: 3,
+                          maxFontSize: 14,
+                          minFontSize: 10,
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.black,
@@ -199,7 +201,7 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: 50,
+                    width: MediaQuery.of(context).size.width/4,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,30 +227,39 @@ class ChildCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    width: 130,
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Text(
-                        'quzies',
-                        style: TextStyle(color: Colors.white),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> QuizResult()));
+                        },
+                        child: Text(
+                          'quzies',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Color(0xff0E4A45),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      color: Color(0xff0E4A45),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
-                  Container(
-                    width: 130,
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Text(
-                        'attendence',
-                        style: TextStyle(color: Colors.white),
+                  SizedBox(width: MediaQuery.of(context).size.width/10,),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                          'attendence',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Color(0xff0E4A45),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      color: Color(0xff0E4A45),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                 ],
