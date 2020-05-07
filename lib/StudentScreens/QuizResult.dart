@@ -55,7 +55,7 @@ class ScoreCard extends StatelessWidget {
             spreadRadius: .1,
             blurRadius: 8),
       ]),
-      height: 80,
+      height: 100,
       child: Card(
         //margin: EdgeInsets.all(3)
         child: Row(
@@ -82,7 +82,7 @@ class ScoreCard extends StatelessWidget {
               ],
             ),
             Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 child: Text(
                   "12/2/1998",
                   style: TextStyle(color: Colors.black38, fontSize: 12),
