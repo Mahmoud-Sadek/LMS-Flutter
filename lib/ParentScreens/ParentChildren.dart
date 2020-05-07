@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:work/ParentScreens/ParentQuizResult.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/Style/style.dart';
 
@@ -31,6 +32,7 @@ class ChildrenParent extends StatelessWidget {
       "percent": "75%"
     },
   ];
+  //
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -246,7 +248,11 @@ class ChildCard extends StatelessWidget {
                   Container(
                     width: 130,
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return ParentQuizResult();
+                        }));
+                      },
                       child: Text(
                         'quzies',
                         style: TextStyle(color: Colors.white),

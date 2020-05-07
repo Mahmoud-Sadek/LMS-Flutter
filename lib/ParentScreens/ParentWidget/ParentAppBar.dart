@@ -22,7 +22,7 @@ class ParentAppBar extends StatelessWidget {
       pinned: false,
       floating: false,
       backgroundColor: mainColor,
-      expandedHeight: 280,
+      expandedHeight: 240,
       flexibleSpace: FlexibleSpaceBar(
           background:
           Column(
