@@ -12,21 +12,21 @@ class ChildrenParent extends StatelessWidget {
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hgshum skjv ",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hgs",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv hgljt,r",
+      "location": "ld]hk hgs",
       "grade": "20/20",
       "percent": "75%"
     },
@@ -165,26 +165,26 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: 30,
+                    width: MediaQuery.of(context).size.width/8,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Icon(
                         Icons.location_on,
-                        size: 10,
+                        size: 14,
                         color: Colors.grey,
                       ),
                       Container(
-                        height: 20,
-                        width: MediaQuery.of(context).size.width/2,
+
+                        width: MediaQuery.of(context).size.width/3,
                         child: AutoSizeText(
                           location,
                           maxLines: 2,
-                          maxFontSize: 10,
-                          minFontSize: 8,
+                          maxFontSize: 14,
+                          minFontSize: 10,
                           style: TextStyle(
-                              fontSize: 14,
+
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
@@ -217,7 +217,7 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: 50,
+                    width: MediaQuery.of(context).size.width/6
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,30 +243,37 @@ class ChildCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    width: 130,
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Text(
-                        'quzies',
-                        style: TextStyle(color: Colors.white),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                          'quzies',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Color(0xff0E4A45),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      color: Color(0xff0E4A45),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
-                  Container(
-                    width: 130,
-                    child: FlatButton(
-                      onPressed: () {},
-                      child: Text(
-                        'attendence',
-                        style: TextStyle(color: Colors.white),
+                  SizedBox(width: MediaQuery.of(context).size.width/10,),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                          'attendence',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Color(0xff0E4A45),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      color: Color(0xff0E4A45),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                 ],
