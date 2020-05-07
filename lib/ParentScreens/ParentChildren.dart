@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:work/StudentScreens/MaterialBage.dart';
-import 'package:work/StudentScreens/QuizResult.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/Style/style.dart';
 
+import 'ParentPhone.dart';
 import 'ParentWidget/ParentAppBar.dart';
 
 
@@ -11,21 +12,21 @@ class ChildrenParent extends StatelessWidget {
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjvh",
+      "location": "ld]hk hgshum skjv hgljt,r",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hg",
+      "location": "ld]hk hgshum skjv hgljt,r",
       "grade": "20/20",
       "percent": "75%"
     },
     {
       "name": "ahmed",
       "group": "group one",
-      "location": "ld]hk hgshum skjv",
+      "location": "ld]hk hgshum skjv hgljt,r",
       "grade": "20/20",
       "percent": "75%"
     },
@@ -36,6 +37,21 @@ class ChildrenParent extends StatelessWidget {
       slivers: <Widget>[
         ParentAppBar(
           imageUrl: "assets/childern.png",
+          widget: Container(
+            width: MediaQuery.of(context).size.width/3,height: 40,
+            child: ButtonWidget(
+              color: mainColor,
+              height: 40,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return ParentPhone();
+                }));
+              },
+              textColor: Colors.white,
+              borderColor: Colors.white,
+              text: "Edit Phone",
+            ),
+          ),
         ),
         SliverList(
 
@@ -149,24 +165,24 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width:MediaQuery.of(context).size.width/5 ,
+                    width: 30,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Icon(
                         Icons.location_on,
-                        size: 12,
+                        size: 10,
                         color: Colors.grey,
                       ),
                       Container(
                         height: 20,
-                        width: MediaQuery.of(context).size.width/3,
+                        width: MediaQuery.of(context).size.width/2,
                         child: AutoSizeText(
                           location,
-                          maxLines: 3,
-                          maxFontSize: 14,
-                          minFontSize: 10,
+                          maxLines: 2,
+                          maxFontSize: 10,
+                          minFontSize: 8,
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.black,
@@ -201,7 +217,7 @@ class ChildCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width/4,
+                    width: 50,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,39 +243,30 @@ class ChildCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> QuizResult()));
-                        },
-                        child: Text(
-                          'quzies',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Color(0xff0E4A45),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                  Container(
+                    width: 130,
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: Text(
+                        'quzies',
+                        style: TextStyle(color: Colors.white),
                       ),
+                      color: Color(0xff0E4A45),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width/10,),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Text(
-                          'attendence',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Color(0xff0E4A45),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                  Container(
+                    width: 130,
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: Text(
+                        'attendence',
+                        style: TextStyle(color: Colors.white),
                       ),
+                      color: Color(0xff0E4A45),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                 ],

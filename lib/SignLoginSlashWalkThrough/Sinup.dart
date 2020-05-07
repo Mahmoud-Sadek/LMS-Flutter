@@ -6,10 +6,12 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
-import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SharedWidget/MainTextFeild.dart';
+import 'package:work/SharedWidget/SharedDropDown.dart';
+import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpBackGrounds.dart';
+import 'package:work/Style/style.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -54,10 +56,8 @@ class SignUp extends StatelessWidget {
 }
 
 class SecondSignUp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -68,9 +68,7 @@ class SecondSignUp extends StatelessWidget {
         Text(
           "SignUP",
           style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 22),
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
         ),
         SizedBox(
           height: 20,
@@ -79,24 +77,59 @@ class SecondSignUp extends StatelessWidget {
           height: 250,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-               DropdownButton<String>(
-
-                 items: Provider.of<TeacherProvider>(context).countries.map((String value){
-                   return DropdownMenuItem<String>(
-                     value: value,
-                     child: Text(value),
-
-                   );
-                 }).toList(),
-                 onChanged: (String value){
-                   Provider.of<TeacherProvider>(context).changeCountry(value);
-                 },
-                 value: Provider.of<TeacherProvider>(context).selectedCountry,
-                 elevation: 4,
-               ),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                child: SharedDropDown(
+                  underline:  Container(
+    height: 1.5,
+    color: mainColor,
+    ),
+                  onChange: (String value) {
+                    Provider.of<ProviderData>(context).changeCountry(value);
+                  },
+                  dropMenuItem: Provider.of<ProviderData>(context)
+                      .countries
+                      .map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: mainColor),
+                      ),
+                    );
+                  }).toList(),
+                  selectedValue:
+                      Provider.of<ProviderData>(context).selectedCountry,
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                child: SharedDropDown(
+                  underline:  Container(
+    height: 1.5,
+    color: mainColor,
+    ),
+                  onChange: (String value) {
+                    Provider.of<ProviderData>(context).changeCity(value);
+                  },
+                  dropMenuItem: Provider.of<ProviderData>(context)
+                      .cites
+                      .map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: mainColor),
+                      ),
+                    );
+                  }).toList(),
+                  selectedValue:
+                      Provider.of<ProviderData>(context).selectedCites,
+                ),
+              ),
+               Provider.of<ProviderData>(context).selectedSignUpDropButton,
 
             ],
           ),
@@ -107,62 +140,178 @@ class SecondSignUp extends StatelessWidget {
         Material(
           elevation: 5,
           borderRadius: BorderRadius.all(Radius.circular(20)),
-
           child: Container(
             height: 150,
             width: MediaQuery.of(context).size.width * .70,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Color(0xff94D1CC)
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Color(0xff94D1CC)),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text("Details About The Group",style: TextStyle(color: Colors.white,fontSize: 12),),
+                      Text(
+                        "Details About The Group",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
                       Spacer(),
-                      Icon(Icons.location_on,color: mainColor,)
+                      Icon(
+                        Icons.location_on,
+                        color: mainColor,
+                      )
                     ],
                   ),
                 ],
-
               ),
             ),
           ),
         ),
-             Spacer(flex: 1,),
+        Spacer(
+          flex: 1,
+        ),
         Container(
           width: MediaQuery.of(context).size.width * .70,
-
           child: Row(
             children: <Widget>[
-              SizedBox(width: 10,),
-              Container(
-                width: 100,
-                  child: ButtonWidget(color: mainColor,height: 50,text: "Back",borderColor: mainColor,textColor: Colors.white,onPressed: (){
-                    Provider.of<ProviderData>(context).signUpBack(context);
-
-                  },)),
-             Spacer(flex: 1,),
+              SizedBox(
+                width: 10,
+              ),
+               Provider.of<ProviderData>(context).signUpBackWidget,
+              Spacer(
+                flex: 1,
+              ),
               Container(
                   width: 100,
-                  child: ButtonWidget(color: mainColor,height: 50,text: "Supmit",borderColor: mainColor,textColor: Colors.white,onPressed: (){
-                    Provider.of<ProviderData>(context).login(context);
-
-                  },)),
-              SizedBox(width: 10,),
-
+                  child: ButtonWidget(
+                    color: mainColor,
+                    height: 50,
+                    text: "Supmit",
+                    borderColor: mainColor,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Provider.of<ProviderData>(context).login(context);
+                    },
+                  )),
+              SizedBox(
+                width: 10,
+              ),
             ],
           ),
         ),
-        Spacer(flex: 1,),
-
+        Spacer(
+          flex: 1,
+        ),
       ],
     );
   }
 }
+
+class ParentJop extends StatelessWidget {
+  const ParentJop({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
+      child: SharedDropDown(
+        underline:  Container(
+          height: 1.5,
+          color: mainColor,
+        ),
+        onChange: (String value) {
+          Provider.of<ProviderData>(context).changeJop(value);
+        },
+        dropMenuItem: Provider.of<ProviderData>(context)
+            .jop
+            .map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: TextStyle(color: mainColor),
+            ),
+          );
+        }).toList(),
+        selectedValue:
+        Provider.of<ProviderData>(context).selectedJop,
+      ),
+    );
+  }
+}
+
+class StudentGradeGroupWidget extends StatelessWidget {
+  const StudentGradeGroupWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: SharedDropDown(
+              underline:  Container(
+                height: 1.5,
+                color: mainColor,
+              ),
+              onChange: (String value) {
+                Provider.of<ProviderData>(context).changeGrade(value);
+              },
+              dropMenuItem: Provider.of<ProviderData>(context)
+                  .grade
+                  .map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(color: mainColor),
+                  ),
+                );
+              }).toList(),
+              selectedValue:
+              Provider.of<ProviderData>(context).selectedGrade,
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: SharedDropDown(underline:  Container(
+    height: 1.5,
+    color: mainColor,
+    ),
+              onChange: (String value) {
+                Provider.of<ProviderData>(context).changeGroup(value);
+              },
+              dropMenuItem: Provider.of<ProviderData>(context)
+                  .group
+                  .map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(color: mainColor),
+                  ),
+                );
+              }).toList(),
+              selectedValue:
+              Provider.of<ProviderData>(context).selectedGroup,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 class FirstSignUp extends StatelessWidget {
   const FirstSignUp({
@@ -298,7 +447,7 @@ class FirstSignUp extends StatelessWidget {
                 color: mainColor,
                 height: 40,
                 onPressed: () {
-
+                  Provider.of<ProviderData>(context).openLogin(context);
                 },
                 textColor: Colors.white,
                 borderColor: mainColor,
@@ -315,7 +464,6 @@ class FirstSignUp extends StatelessWidget {
                 height: 40,
                 onPressed: () {
                   Provider.of<ProviderData>(context).signUpNext(context);
-
                 },
                 textColor: Colors.white,
                 borderColor: mainColor,
@@ -332,18 +480,6 @@ class FirstSignUp extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 class CountryDropdownMenu extends StatelessWidget {
   final itemHeight;
 
@@ -354,6 +490,7 @@ class CountryDropdownMenu extends StatelessWidget {
     return DropDownMenu();
   }
 }
+
 class CityDropdownMenu extends StatelessWidget {
   final itemHeight;
 
@@ -364,6 +501,7 @@ class CityDropdownMenu extends StatelessWidget {
     return DropDownMenu();
   }
 }
+
 class GradeDropdownMenu extends StatelessWidget {
   final itemHeight;
 
@@ -374,6 +512,7 @@ class GradeDropdownMenu extends StatelessWidget {
     return DropDownMenu();
   }
 }
+
 class GroupDropdownMenu extends StatelessWidget {
   final itemHeight;
 
@@ -385,7 +524,6 @@ class GroupDropdownMenu extends StatelessWidget {
   }
 }
 
-
 class SearchDropdownMenu extends StatelessWidget {
   final itemHeight;
 
@@ -396,6 +534,49 @@ class SearchDropdownMenu extends StatelessWidget {
     return DropDownMenu();
   }
 }
+
+
+
+class SignUpBackParent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: 100,
+        child: ButtonWidget(
+          color: mainColor,
+          height: 50,
+          text: "Back",
+          borderColor: mainColor,
+          textColor: Colors.white,
+          onPressed: () {
+            Provider.of<ProviderData>(context).openLogin(context);
+
+          },
+        ));
+  }
+}
+class SignUpBackStudent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: 100,
+        child: ButtonWidget(
+          color: mainColor,
+          height: 50,
+          text: "Back",
+          borderColor: mainColor,
+          textColor: Colors.white,
+          onPressed: () {
+            Provider.of<ProviderData>(context).signUpBack(context);
+
+          },
+        ));
+  }
+}
+
+
+
+
 class DropDownMenu extends StatelessWidget {
   const DropDownMenu({
     Key key,
@@ -431,62 +612,90 @@ class DropDownMenu extends StatelessWidget {
                   color: Colors.white),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5,right: 5,bottom: 5,top: 5),
+                  padding: const EdgeInsets.only(
+                      left: 5, right: 5, bottom: 5, top: 5),
                   child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     children: <Widget>[
-
-                      DropdownItems(text: "Egypet",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-                      DropdownItems(text: "America",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-
-                      DropdownItems(text: "France",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-                      DropdownItems(text: "Engeland",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-                      DropdownItems(text: "Emarats",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-                      DropdownItems(text: "Tunisia",onPressed: (){
-                        if(Provider.of<ProviderData>(context).isDropdownOpened){
-                          Provider.of<ProviderData>(context).floatingDropdown.remove();
-                        }
-                        Provider.of<ProviderData>(context).changeDropdownOpenedState();
-
-
-                      },),
-
+                      DropdownItems(
+                        text: "Egypet",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
+                      DropdownItems(
+                        text: "America",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
+                      DropdownItems(
+                        text: "France",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
+                      DropdownItems(
+                        text: "Engeland",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
+                      DropdownItems(
+                        text: "Emarats",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
+                      DropdownItems(
+                        text: "Tunisia",
+                        onPressed: () {
+                          if (Provider.of<ProviderData>(context)
+                              .isDropdownOpened) {
+                            Provider.of<ProviderData>(context)
+                                .floatingDropdown
+                                .remove();
+                          }
+                          Provider.of<ProviderData>(context)
+                              .changeDropdownOpenedState();
+                        },
+                      ),
                     ],
                   ),
                 ),

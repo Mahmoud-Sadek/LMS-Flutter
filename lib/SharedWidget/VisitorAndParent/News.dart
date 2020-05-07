@@ -10,7 +10,8 @@ class News extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        ParentAppBar(imageUrl: "assets/news.png",),
+        ParentAppBar(imageUrl: "assets/news.png",
+        widget: Container(width: 0,height: 0,),),
 
         SliverList(
 

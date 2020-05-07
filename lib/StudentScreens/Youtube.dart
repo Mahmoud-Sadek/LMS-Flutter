@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/StudentScreens/Pdf.dart';
 import 'package:work/Style/style.dart';
 
@@ -34,7 +35,14 @@ class Youtube extends StatelessWidget {
         ),
         body:
         CustomScrollView(
+
           slivers: <Widget>[
+            SliverPersistentHeader(
+                pinned: false,
+                floating: true,
+                delegate: StudentSliverHeadre(
+                    maxxExtent: 101, minnExtent: 100, widget: YoutubeBar())),
+
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
                 YoutubeBuilder(),],),
@@ -49,6 +57,97 @@ class Youtube extends StatelessWidget {
 
 
 
+class YoutubeBar extends StatelessWidget {
+  const YoutubeBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        height: 80,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width - 20,
+                color: Colors.white,
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      left: 15,
+                      top: 0,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/1.15,
+                        height: 60,
+                        child: Row(
+                          children: <Widget>[
+
+                            Container(
+                              width: MediaQuery.of(context).size.width/2.3,
+                              child: ButtonWidget(
+                                color: Colors.teal,
+                                height: 50,
+                                onPressed: (){},
+                                textColor: Colors.white,
+                                borderColor: Colors.teal,
+                                text: "First term  ",
+                              ),
+                            ),
+
+
+                            Container(
+                              width: MediaQuery.of(context).size.width/2.3,
+                              child: ButtonWidget(
+                                color: mainColor,
+                                height: 50,
+                                onPressed: (){},
+                                textColor: Colors.white,
+                                borderColor: mainColor,
+                                text: "   Second term",
+                              ),
+
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 15,
+                      child:
+                      Container(
+                        width: MediaQuery.of(context).size.width/1.15,
+
+                        child: Center(
+                          child: CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.white,
+                            child: Text(
+                              "OR",
+                              style: TextStyle(
+                                  color: Colors.black, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 
 

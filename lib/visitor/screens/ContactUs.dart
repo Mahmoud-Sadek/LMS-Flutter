@@ -13,7 +13,8 @@ class ContactUS extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        ParentAppBar(imageUrl:  "assets/contactus.png",),
+        ParentAppBar(imageUrl:  "assets/contactus.png",
+        widget: Container(width: 0,height: 0,),),
         SliverList(
             delegate: SliverChildListDelegate(<Widget>
             [

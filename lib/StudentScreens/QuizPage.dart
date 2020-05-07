@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work/StudentScreens/QuizResult.dart';
 import 'package:work/StudentScreens/Allert.dart';
+import 'package:work/Style/style.dart';
 
 class QuizPage extends StatelessWidget {
   @override
@@ -12,13 +13,9 @@ class QuizPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
               Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                        color: Colors.pink.withOpacity(.6),
-                        blurRadius: 15,
-                        spreadRadius: .1)
-                  ]),
+
                   child: Card(
+                    elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.all(Radius.circular(15)),
                     ),
@@ -32,7 +29,7 @@ class QuizPage extends StatelessWidget {
                       child: Text(
                         " New Quiz  ",
                         style: TextStyle(
-                          color: Colors.pinkAccent,
+                          color: mainColor,
                           fontSize: 15,
                         ),
                       ),
@@ -41,13 +38,9 @@ class QuizPage extends StatelessWidget {
                     ),
                   )),
               Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                        color: Colors.pink.withOpacity(.6),
-                        blurRadius: 15,
-                        spreadRadius: .1)
-                  ]),
+
                   child: Card(
+                    elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.all(Radius.circular(15)),
                     ),
@@ -60,7 +53,7 @@ class QuizPage extends StatelessWidget {
                       child: Text(
                         "Old results",
                         style: TextStyle(
-                          color: Colors.pinkAccent,
+                          color: mainColor,
                           fontSize: 15,
                         ),
                       ),

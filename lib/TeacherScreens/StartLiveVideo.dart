@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
+import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SharedWidget/MainTextFeild.dart';
+import 'package:work/SharedWidget/SharedDropDown.dart';
 import 'package:work/Style/style.dart';
 
 class StartLiveVideo extends StatelessWidget {
@@ -71,90 +73,74 @@ controller: controller,
                       height: 80,
                   child: Row(
                     children: <Widget>[
-                      GestureDetector(
-                        key: Provider.of<TeacherProvider>(context).actionKeyYear,
-                          onTap: (){
-
-                            if (Provider.of<TeacherProvider>(context).isDropdownOpened) {
-                              Provider.of<TeacherProvider>(context).floatingDropdown.remove();
-                            } else {
-                              Provider.of<TeacherProvider>(context).floatingDropdown = Provider.of<TeacherProvider>(context).createFloatingDropdownYear();
-                              Overlay.of(context).insert(Provider.of<TeacherProvider>(context).floatingDropdown);
-                              Provider.of<TeacherProvider>(context).findDropdownYear();
-                            }
-                            Provider.of<TeacherProvider>(context).changeDropdownOpenedState();
-                          },
-                        child: Material(
+                      Material(
                           elevation: 4,
                           borderRadius: BorderRadius.circular(15),
-                           child: Container(
-                             width: MediaQuery.of(context).size.width/2.3,
-                             height: 70,
-                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(15),
-                               color: mainColor
-                             ),
-                             child:
-                             Row(
-                               children: <Widget>[
-                                 Spacer(flex: 1,),
-                                 AutoSizeText(
-                                   '1ST Secondary Year',
-                                   style: TextStyle(fontSize: 9,fontWeight: FontWeight.bold,color: Colors.white),
-                                   minFontSize: 9,
-                                   stepGranularity: 9,
-                                   maxLines: 1,
-                                   overflow: TextOverflow.ellipsis,
+                           child:
+                           Container(
+                             margin: EdgeInsets.only(left: 10,right: 10),
+                             height: 60,
+                             width: MediaQuery.of(context).size.width / 2.5,
+                             child: Center(
+                               child: SharedDropDown(
+                                 underline:  Container(
+                                   height:0,
+                                   color: mainColor,
                                  ),
-                                 SizedBox(width: 20,),
-                                 Icon(Icons.arrow_drop_down,size: 30,color: Colors.white,),
-                                 Spacer(flex: 1,),                             ],
+                                 onChange: (String value) {
+                                   Provider.of<ProviderData>(context).changeGrade(value);
+                                 },
+                                 dropMenuItem: Provider.of<ProviderData>(context)
+                                     .grade
+                                     .map((String value) {
+                                   return DropdownMenuItem<String>(
+                                     value: value,
+                                     child: Text(
+                                       value,
+                                       style: TextStyle(color: mainColor),
+                                     ),
+                                   );
+                                 }).toList(),
+                                 selectedValue:
+                                 Provider.of<ProviderData>(context).selectedGrade,
+                               ),
                              ),
-                           ),
                         ),
                       ),
                       Spacer(),
-                      GestureDetector(
-                        key: Provider.of<TeacherProvider>(context).actionKeyGroup,
-                       onTap: (){
-                      if (Provider.of<TeacherProvider>(context).isDropdownOpened) {
-                      Provider.of<TeacherProvider>(context).floatingDropdown.remove();
-                      } else {
-                      Provider.of<TeacherProvider>(context).floatingDropdown = Provider.of<TeacherProvider>(context).createFloatingDropdownGroup();
-                      Overlay.of(context).insert(Provider.of<TeacherProvider>(context).floatingDropdown);
-                      Provider.of<TeacherProvider>(context).findDropdownGroup();
-                      }
-                      Provider.of<TeacherProvider>(context).changeDropdownOpenedState();
-                       },
-                        child: Material(
+                 Material(
                           elevation: 4,
                           borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/2.3,
-                            height: 70,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: mainColor
+                          child:           Container(
+                            margin: EdgeInsets.only(left: 10,right: 10),
+                            height: 60,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            child: Center(
+                              child: SharedDropDown(underline:  Container(
+                                height: 0,
+                                color: mainColor,
+                              ),
+                                onChange: (String value) {
+                                  Provider.of<ProviderData>(context).changeGroup(value);
+                                },
+                                dropMenuItem: Provider.of<ProviderData>(context)
+                                    .group
+                                    .map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(color: mainColor),
+                                    ),
+                                  );
+                                }).toList(),
+                                selectedValue:
+                                Provider.of<ProviderData>(context).selectedGroup,
+                              ),
                             ),
-                            child:                            Row(
-                              children: <Widget>[
-                                Spacer(flex: 1,),
-                                AutoSizeText(
-                                  'Groups',
-                                  style: TextStyle(fontSize: 9,fontWeight: FontWeight.bold,color: Colors.white),
-                                  minFontSize: 9,
-                                  stepGranularity: 9,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(width: 55,),
-                                Icon(Icons.arrow_drop_down,size: 30,color: Colors.white,),
-                                Spacer(flex: 1,),                             ],
-                            ),
-
                           ),
-                        ),
-                      )
+
+                 ),
 
                     ],
                   ),

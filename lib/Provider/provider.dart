@@ -12,7 +12,11 @@ import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
+import 'package:work/SharedScreens/Notificatin.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/SignLoginSlashWalkThrough/Login.dart';
+import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpDialog.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/SharedWidget/VisitorAndParent/News.dart';
@@ -282,21 +286,55 @@ visitorOpen(BuildContext context){
   List<Widget> signUpWidget  =[FirstSignUp(),SecondSignUp()];
 
   signUpShow(BuildContext context){
+
+     showDialog(context: context,
+       builder: (context){
+       return Dialog(
+         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+         elevation: 4,
+         backgroundColor: Colors.transparent,
+          child:
+          SignUpDialog(),
+       );
+       }
+     );
+
+  }
+
+    Widget selectedSignUpDropButton = StudentGradeGroupWidget();
+    List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(),ParentJop()];
+    List<Widget> signUpBackWidgetList = [SignUpBackParent(),SignUpBackStudent()
+    ];
+     Widget signUpBackWidget = SignUpBackParent();
+  openStudentSignUp(BuildContext context){
+    signUp = FirstSignUp();
+
+    signUpBackWidget = signUpBackWidgetList[1];
+       selectedSignUpDropButton = signUpDropDwonList[0];
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => SignUp()));
     notifyListeners();
 
   }
+  openParentSignUp(BuildContext context){
+    signUp = SecondSignUp();
+    signUpBackWidget =signUpBackWidgetList[0];
+    selectedSignUpDropButton = signUpDropDwonList[1];
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
+    notifyListeners();
+  }
+
+openLogin(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context){
+    return Login();
+  }));
+  notifyListeners();
+}
   signUpNext(BuildContext context){
     signUp = SecondSignUp();
     notifyListeners();
-    if (isDropdownOpened) {
-      floatingDropdown
-          .remove();
-      isDropdownOpened = false;
 
-    }
-    notifyListeners();
   }
   signUpBack(BuildContext context){
     signUp = FirstSignUp();
@@ -306,6 +344,70 @@ visitorOpen(BuildContext context){
           .remove();
       isDropdownOpened = false;
     }
+    notifyListeners();
+  }
+
+///////////////////////////////////////////
+
+openNotification(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context){
+    return NotificationScreen();
+  }));
+  notifyListeners();
+}
+//////////////
+
+
+
+  List<String> filter = ['Filter','Id', 'Name' , ' Group','Grade'];
+  String selectedFilter = "Filter";
+  changeFilter(String value){
+    selectedFilter = value;
+    notifyListeners();
+  }
+
+
+
+
+
+
+  List<String> countries = ['Egypt', 'Usa' , ' Libia'];
+  String selectedCountry = "Egypt";
+  changeCountry(String value){
+    selectedCountry = value;
+    notifyListeners();
+  }
+
+
+
+
+  List<String> cites = ['Menof', 'Elbagour' , ' Sirs',"Shipin"];
+  String selectedCites = "Menof";
+  changeCity(String value){
+    selectedCites = value;
+    notifyListeners();
+  }
+
+  List<String> grade = ['1ST Secondary', '2ST Secondary' , '3ST Secondary',"1ST primary"];
+  String selectedGrade = "1ST Secondary";
+  changeGrade(String value){
+    selectedGrade = value;
+    notifyListeners();
+  }
+
+  List<String> group = ['Group One', 'Group Two' , ' Group Three',"Group Four"];
+  String selectedGroup = "Group One";
+  changeGroup(String value){
+    selectedGroup = value;
+    notifyListeners();
+  }
+
+
+
+  List<String> jop = ['Dont Work', 'Teacher' , ' Doctor',"Engineer"];
+  String selectedJop = "Dont Work";
+  changeJop(String value){
+    selectedJop = value;
     notifyListeners();
   }
 
@@ -405,6 +507,7 @@ visitorOpen(BuildContext context){
 
 
   }
+
 
 
 
