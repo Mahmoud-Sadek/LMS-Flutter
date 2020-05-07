@@ -102,7 +102,8 @@ class _MyBodyState extends State<MyBody> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
+    return
+      Container(
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
       color: mainColor,
