@@ -47,12 +47,15 @@ class ScoreCard extends StatelessWidget {
                     ))
               ],
             ),
-            Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "12/2/1998",
-                  style: TextStyle(color: Colors.black38, fontSize: 12),
-                )),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15),
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "12/2/1998",
+                    style: TextStyle(color: Colors.black38, fontSize: 12),
+                  )),
+            ),
             Container(
               margin: EdgeInsets.all(6),
               decoration: BoxDecoration(

@@ -27,7 +27,7 @@ class _QuistionState extends State<Quistion>{
                   style: TextStyle(fontSize: 25
                   ,fontWeight: FontWeight.bold,
                   ),),
-                Divider(thickness: 1,endIndent: 30, indent: 30,color: Colors.black26,)
+                Divider(height: 1,indent: 30,color: Colors.black26,)
                 ,Text("What is your name?" ,style: TextStyle(fontSize: 25
               ,fontWeight: FontWeight.bold,
             ),),
