@@ -1,9 +1,11 @@
+import 'package:async_loader/async_loader.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/response/country_response.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -12,6 +14,7 @@ import 'package:work/SharedWidget/SharedDropDown.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpBackGrounds.dart';
 import 'package:work/Style/style.dart';
+import 'package:work/services/countries_api.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -55,9 +58,25 @@ class SignUp extends StatelessWidget {
   }
 }
 
-class SecondSignUp extends StatelessWidget {
+class SecondSignUp extends StatefulWidget {
+
+  @override
+  _SecondSignUpState createState() => _SecondSignUpState();
+}
+
+class _SecondSignUpState extends State<SecondSignUp> {
   @override
   Widget build(BuildContext context) {
+
+
+    var _asyncLoader = new AsyncLoader(
+      key: asyncLoaderState,
+      initState: () async => await getCountries(),
+      renderLoad: () => Center(child: new CircularProgressIndicator()),
+      renderError: ([error]) => getNoConnectionWidget(),
+      renderSuccess: ({data}) => getWidgetData(data, context),
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -79,31 +98,8 @@ class SecondSignUp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                child: SharedDropDown(
-                  underline:  Container(
-    height: 1.5,
-    color: mainColor,
-    ),
-                  onChange: (String value) {
-                    Provider.of<ProviderData>(context).changeCountry(value);
-                  },
-                  dropMenuItem: Provider.of<ProviderData>(context)
-                      .countries
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: TextStyle(color: mainColor),
-                      ),
-                    );
-                  }).toList(),
-                  selectedValue:
-                      Provider.of<ProviderData>(context).selectedCountry,
-                ),
-              ),
+              _asyncLoader,
+
               Container(
                 width: MediaQuery.of(context).size.width / 1.5,
                 child: SharedDropDown(
@@ -206,7 +202,74 @@ class SecondSignUp extends StatelessWidget {
       ],
     );
   }
+
+  CountryResponse _currentCountry = null;
+
+  List<CountryResponse>_Countrys = [];
+
+  void changedDropDownItem(CountryResponse selectedCountry) {
+    setState(() {
+      _currentCountry = selectedCountry;
+    });
+  }
+
+  final GlobalKey<AsyncLoaderState> asyncLoaderState =
+  new GlobalKey<AsyncLoaderState>();
+  getWidgetData(List<CountryResponse> data, context) {
+    _Countrys.clear();
+    _Countrys.addAll(data);
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
+      child:
+      DropdownButton(
+        hint: Text(
+            'Select Country'),
+        value: _currentCountry,
+        items: getDropDownMenuItems(),
+        onChanged: changedDropDownItem,
+      ),
+
+    );
+  }
+
+  List<DropdownMenuItem<CountryResponse>> getDropDownMenuItems() {
+    List<DropdownMenuItem<CountryResponse>> items = new List();
+    for (CountryResponse mCountry in _Countrys) {
+      items.add(new DropdownMenuItem(value: mCountry, child: new Text(mCountry.name)));
+    }
+    return items;
+  }
+
+  Widget getNoConnectionWidget() {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          height: 60.0,
+          child: new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/images/no_wifi.png'),
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ),
+        new Text("No Internet Connection"),
+        new FlatButton(
+            color: Colors.red,
+            child: new Text(
+              "Retry",
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () => asyncLoaderState.currentState.reloadState())
+      ],
+    );
+  }
+
 }
+
 
 class ParentJop extends StatelessWidget {
   const ParentJop({
