@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
@@ -45,6 +46,11 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
           create: (context)=>TeacherProvider(),
+
+        ),
+
+        ChangeNotifierProvider(
+          create: (context)=>SignUpProvider(),
 
         ),
       ],

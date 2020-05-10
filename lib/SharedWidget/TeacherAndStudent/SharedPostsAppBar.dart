@@ -61,28 +61,28 @@ class SharedPostsAppBar extends StatelessWidget {
                             gradient: LinearGradient(
                                 colors: [Color(0xff1EB2A6), Color(0xff1B9288)]),
                           ),
-                          child:Center(
-                            child: SharedDropDown(
-underline: Container(width: 0,height: 0,),
-                              onChange: (String value) {
-                                Provider.of<ProviderData>(context).changeFilter(value);
-                              },
-                              dropMenuItem: Provider.of<ProviderData>(context)
-                                  .filter
-                                  .map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                );
-                              }).toList(),
-                              selectedValue:
-                              Provider.of<ProviderData>(context).selectedFilter,
-
-                            ),
-                          )
+//                          child:Center(
+//                            child: SharedDropDown(
+//underline: Container(width: 0,height: 0,),
+//                              onChange: (String value) {
+//                                Provider.of<ProviderData>(context).changeFilter(value);
+//                              },
+//                              dropMenuItem: Provider.of<ProviderData>(context)
+//                                  .filter
+//                                  .map((String value) {
+//                                return DropdownMenuItem<String>(
+//                                  value: value,
+//                                  child: Text(
+//                                    value,
+//                                    style: TextStyle(color: Colors.white),
+//                                  ),
+//                                );
+//                              }).toList(),
+//                              selectedValue:
+//                              Provider.of<ProviderData>(context).selectedFilter,
+//
+//                            ),
+//                          )
                         ),
                       ),
                       Spacer(flex: 1,),

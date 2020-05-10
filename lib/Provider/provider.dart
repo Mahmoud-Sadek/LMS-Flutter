@@ -9,7 +9,6 @@ import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
 import 'package:work/Model/SupCommentModel.dart';
-import 'package:work/Model/response/country_response.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
@@ -17,7 +16,7 @@ import 'package:work/SharedScreens/Notificatin.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
-import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpDialog.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/SharedWidget/VisitorAndParent/News.dart';
@@ -236,23 +235,23 @@ next(BuildContext context){
   login(BuildContext context){
 
     if( email.value == "1"){
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => ParentPhone()));
     }if(email.value == "2"){
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => StudentHomePage()));
 
     }
     if( email.value == "3"){
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
     }if(email.value == "4"){
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => WalkThrough()));
 
     }
     if(email.value == null){
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
 
     }
@@ -357,21 +356,6 @@ openNotification(BuildContext context){
   notifyListeners();
 }
 //////////////
-
-
-
-  List<String> filter = ['Filter','Id', 'Name' , ' Group','Grade'];
-  String selectedFilter = "Filter";
-  changeFilter(String value){
-    selectedFilter = value;
-    notifyListeners();
-  }
-
-
-
-
-
-
   List<String> countries = ['Egypt', 'Usa' , ' Libia'];
   String selectedCountry = "Egypt";
   changeCountry(String value){
@@ -411,6 +395,7 @@ openNotification(BuildContext context){
     selectedJop = value;
     notifyListeners();
   }
+
 
 
 

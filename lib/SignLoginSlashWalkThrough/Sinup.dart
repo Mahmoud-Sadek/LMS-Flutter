@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:work/Model/response/country_response.dart';
+import 'package:work/Model/SignUPModel/CountryModel.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SharedWidget/MainTextFeild.dart';
 import 'package:work/SharedWidget/SharedDropDown.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
-import 'package:work/SignLoginSlashWalkThrough/Widget/SignUpBackGrounds.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpBackGrounds.dart';
 import 'package:work/Style/style.dart';
-import 'package:work/services/countries_api.dart';
+import 'package:work/services/SignUpService/CountryApi.dart';
+
+import 'SignUpWidget/GradeWidget.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -69,13 +72,7 @@ class _SecondSignUpState extends State<SecondSignUp> {
   Widget build(BuildContext context) {
 
 
-    var _asyncLoader = new AsyncLoader(
-      key: asyncLoaderState,
-      initState: () async => await getCountries(),
-      renderLoad: () => Center(child: new CircularProgressIndicator()),
-      renderError: ([error]) => getNoConnectionWidget(),
-      renderSuccess: ({data}) => getWidgetData(data, context),
-    );
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,34 +95,15 @@ class _SecondSignUpState extends State<SecondSignUp> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              _asyncLoader,
+              Provider.of<SignUpProvider>(context).asyncLoaderCountry,
 
               Container(
                 width: MediaQuery.of(context).size.width / 1.5,
-                child: SharedDropDown(
-                  underline:  Container(
-    height: 1.5,
-    color: mainColor,
-    ),
-                  onChange: (String value) {
-                    Provider.of<ProviderData>(context).changeCity(value);
-                  },
-                  dropMenuItem: Provider.of<ProviderData>(context)
-                      .cites
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: TextStyle(color: mainColor),
-                      ),
-                    );
-                  }).toList(),
-                  selectedValue:
-                      Provider.of<ProviderData>(context).selectedCites,
-                ),
-              ),
-               Provider.of<ProviderData>(context).selectedSignUpDropButton,
+                child:  Provider.of<SignUpProvider>(context).currentCountry == null ? Container() :     Provider.of<SignUpProvider>(context).asyncLoaderCity,
+
+           ),
+            Provider.of<ProviderData>(context).selectedSignUpDropButton
+
 
             ],
           ),
@@ -203,70 +181,9 @@ class _SecondSignUpState extends State<SecondSignUp> {
     );
   }
 
-  CountryResponse _currentCountry = null;
 
-  List<CountryResponse>_Countrys = [];
 
-  void changedDropDownItem(CountryResponse selectedCountry) {
-    setState(() {
-      _currentCountry = selectedCountry;
-    });
-  }
 
-  final GlobalKey<AsyncLoaderState> asyncLoaderState =
-  new GlobalKey<AsyncLoaderState>();
-  getWidgetData(List<CountryResponse> data, context) {
-    _Countrys.clear();
-    _Countrys.addAll(data);
-    return Container(
-      width: MediaQuery.of(context).size.width / 1.5,
-      child:
-      DropdownButton(
-        hint: Text(
-            'Select Country'),
-        value: _currentCountry,
-        items: getDropDownMenuItems(),
-        onChanged: changedDropDownItem,
-      ),
-
-    );
-  }
-
-  List<DropdownMenuItem<CountryResponse>> getDropDownMenuItems() {
-    List<DropdownMenuItem<CountryResponse>> items = new List();
-    for (CountryResponse mCountry in _Countrys) {
-      items.add(new DropdownMenuItem(value: mCountry, child: new Text(mCountry.name)));
-    }
-    return items;
-  }
-
-  Widget getNoConnectionWidget() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-          height: 60.0,
-          child: new Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage('assets/images/no_wifi.png'),
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        ),
-        new Text("No Internet Connection"),
-        new FlatButton(
-            color: Colors.red,
-            child: new Text(
-              "Retry",
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => asyncLoaderState.currentState.reloadState())
-      ],
-    );
-  }
 
 }
 
@@ -278,30 +195,12 @@ class ParentJop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+      Container(
       width: MediaQuery.of(context).size.width / 1.5,
-      child: SharedDropDown(
-        underline:  Container(
-          height: 1.5,
-          color: mainColor,
-        ),
-        onChange: (String value) {
-          Provider.of<ProviderData>(context).changeJop(value);
-        },
-        dropMenuItem: Provider.of<ProviderData>(context)
-            .jop
-            .map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              style: TextStyle(color: mainColor),
-            ),
-          );
-        }).toList(),
-        selectedValue:
-        Provider.of<ProviderData>(context).selectedJop,
-      ),
+        height: 100,
+        color: Colors.red,
+
     );
   }
 }
@@ -322,52 +221,7 @@ class StudentGradeGroupWidget extends StatelessWidget {
         children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width / 1.5,
-            child: SharedDropDown(
-              underline:  Container(
-                height: 1.5,
-                color: mainColor,
-              ),
-              onChange: (String value) {
-                Provider.of<ProviderData>(context).changeGrade(value);
-              },
-              dropMenuItem: Provider.of<ProviderData>(context)
-                  .grade
-                  .map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(color: mainColor),
-                  ),
-                );
-              }).toList(),
-              selectedValue:
-              Provider.of<ProviderData>(context).selectedGrade,
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width / 1.5,
-            child: SharedDropDown(underline:  Container(
-    height: 1.5,
-    color: mainColor,
-    ),
-              onChange: (String value) {
-                Provider.of<ProviderData>(context).changeGroup(value);
-              },
-              dropMenuItem: Provider.of<ProviderData>(context)
-                  .group
-                  .map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(color: mainColor),
-                  ),
-                );
-              }).toList(),
-              selectedValue:
-              Provider.of<ProviderData>(context).selectedGroup,
-            ),
+              child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
           ),
         ],
       ),
@@ -510,7 +364,7 @@ class FirstSignUp extends StatelessWidget {
                 color: mainColor,
                 height: 40,
                 onPressed: () {
-                  Provider.of<ProviderData>(context).openLogin(context);
+                  Navigator.pop(context);
                 },
                 textColor: Colors.white,
                 borderColor: mainColor,
@@ -612,7 +466,8 @@ class SignUpBackParent extends StatelessWidget {
           borderColor: mainColor,
           textColor: Colors.white,
           onPressed: () {
-            Provider.of<ProviderData>(context).openLogin(context);
+            Navigator.pop(context);
+
 
           },
         ));
