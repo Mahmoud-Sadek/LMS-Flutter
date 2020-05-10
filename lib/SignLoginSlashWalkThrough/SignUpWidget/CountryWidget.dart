@@ -17,7 +17,13 @@ class GetCountryData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var  provider = Provider.of<SignUpProvider>(context);
-    provider. Countrys.clear();
+
+//    if(countrylist.isEmpty ||countrylist == null)
+//      provider.currentCountry = null;
+
+//    provider. Countrys.clear();
+
+    if (provider.Countrys.isEmpty)
     provider.Countrys.addAll(countrylist);
     return    Container(
       width: MediaQuery.of(context).size.width / 1.5,

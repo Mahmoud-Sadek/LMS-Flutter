@@ -41,9 +41,11 @@ class SignUpProvider extends ChangeNotifier{
       currentCountry = selectedCountry;
 
       countryId = currentCountry.id;
-      globalAsyncLoaderCity.currentState.reloadState();
       print(countryId);
       notifyListeners();
+
+      if (globalAsyncLoaderCity.currentState!=null)
+      globalAsyncLoaderCity.currentState.reloadState();
   }
 
 

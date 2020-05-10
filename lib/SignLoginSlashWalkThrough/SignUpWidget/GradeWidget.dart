@@ -13,7 +13,9 @@ class GradeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var  provider = Provider.of<SignUpProvider>(context);
-    provider.Grade.clear();
+
+
+    if (provider.Grade.isEmpty)
     provider.Grade.addAll(gradelist);
     return  DropdownButton(
 

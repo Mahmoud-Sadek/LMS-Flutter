@@ -14,7 +14,12 @@ class CityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var  provider = Provider.of<SignUpProvider>(context);
-    provider.Cites.clear();
+
+//    if(cyteslist.isEmpty ||cyteslist == null)
+//      provider.currentCity = null;
+
+//    provider.Cites.clear();
+    if (provider.Cites.isEmpty)
     provider.Cites.addAll(cyteslist);
     return  DropdownButton(
 
