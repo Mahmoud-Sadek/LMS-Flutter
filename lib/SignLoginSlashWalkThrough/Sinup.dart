@@ -1,4 +1,5 @@
 import 'package:async_loader/async_loader.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -126,10 +127,24 @@ class _SecondSignUpState extends State<SecondSignUp> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Details About The Group",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
+
+                   Provider.of<SignUpProvider>(context).currentGroup == null?   Container(
+                        width: MediaQuery.of(context).size.width/1.7,
+                        child: Text(
+                          "Details About The Group",
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ): Container(
+                     width: MediaQuery.of(context).size.width/1.7,
+                     child:  AutoSizeText(
+                       '${Provider.of<SignUpProvider>(context).currentGroup.note}',
+                       style: TextStyle(fontSize: 12,color: Colors.white),
+                       minFontSize: 8,
+                       stepGranularity: 8,
+                       maxLines: 1,
+                       overflow: TextOverflow.ellipsis,
+                     )
+                   ),
                       Spacer(),
                       Icon(
                         Icons.location_on,
@@ -137,6 +152,8 @@ class _SecondSignUpState extends State<SecondSignUp> {
                       )
                     ],
                   ),
+                  SizedBox(height: 10,),
+
                 ],
               ),
             ),
@@ -235,13 +252,22 @@ class StudentGradeGroupWidget extends StatelessWidget {
 }
 
 
-class FirstSignUp extends StatelessWidget {
-  const FirstSignUp({
-    Key key,
-  }) : super(key: key);
+
+class FirstSignUp extends StatefulWidget {
+
+
+  @override
+  _FirstSignUpState createState() => _FirstSignUpState();
+}
+
+class _FirstSignUpState extends State<FirstSignUp> {
+
+  String gander = "";
+
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -352,11 +378,47 @@ class FirstSignUp extends StatelessWidget {
                   width: 1,
                 ),
               ),
+              Container(
+
+                height: 50,
+                width: MediaQuery.of(context).size.width/1.3,
+                child:Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        title: Text("Male",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
+                          leading: Radio(value: "Male", groupValue: gander, onChanged: (g){
+
+                             setState(() {
+                               gander =g;
+                               print(gander);
+                             });
+                          },activeColor: mainColor,),),
+                    ) ,
+
+
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        title: Text("Female",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
+                        leading: Radio(value: "Female", groupValue: gander, onChanged: (g){
+
+                          setState(() {
+                            gander =g;
+                            print(gander.toString());
+
+                          });
+                        },activeColor: mainColor,),),
+                    ) ,
+                  ],
+                ),
+              )
             ],
           ),
         ),
         SizedBox(
-          height: 30,
+          height: 15,
         ),
         Row(
           children: <Widget>[

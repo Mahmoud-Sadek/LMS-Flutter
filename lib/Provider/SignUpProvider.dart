@@ -160,6 +160,7 @@ class SignUpProvider extends ChangeNotifier{
 
   void changedDropDownItemGroup(GroupModel selectedGroup) {
     currentGroup = selectedGroup;
+    print(currentGroup.note);
     notifyListeners();
   }
 
@@ -172,6 +173,14 @@ class SignUpProvider extends ChangeNotifier{
     }
     return items;
   }
+
+
+
+
+
+
+
+
 
 
 }
