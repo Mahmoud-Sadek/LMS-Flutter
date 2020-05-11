@@ -339,11 +339,7 @@ openLogin(BuildContext context){
   signUpBack(BuildContext context){
     signUp = FirstSignUp();
     notifyListeners();
-    if (isDropdownOpened) {
-      floatingDropdown
-          .remove();
-      isDropdownOpened = false;
-    }
+
     notifyListeners();
   }
 
@@ -407,91 +403,6 @@ openNotification(BuildContext context){
 
 
 
-  GlobalKey actionKeyCountry = LabeledGlobalKey("Country");
-  GlobalKey actionKeyCity = LabeledGlobalKey("City");
-  GlobalKey actionKeyGrade = LabeledGlobalKey("Grade");
-  GlobalKey actionKeyGroup = LabeledGlobalKey("x");
-  GlobalKey actionKeySearch = LabeledGlobalKey("search");
-  bool isDropdownOpened = false;
-  double height ,width ,xPosition,yPosition;
-
-
-  OverlayEntry floatingDropdown ;
-  changeDropdownOpenedState(){
-    isDropdownOpened =! isDropdownOpened;
-    notifyListeners();
-
-  }
-  void findDropdownDataCountry(){
-    RenderBox renderBox = actionKeyCountry.currentContext.findRenderObject();
-    height = renderBox.size.height;
-    width =renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
-
-
-  }
-  void findDropdownDataCity(){
-    RenderBox renderBox = actionKeyCity.currentContext.findRenderObject();
-    height = renderBox.size.height;
-    width =renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
-
-
-  }
-  void findDropdownDataGrade(){
-    RenderBox renderBox = actionKeyGrade.currentContext.findRenderObject();
-    height = renderBox.size.height;
-    width =renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
-
-
-  }
-  void findDropdownDataGroup(){
-    RenderBox renderBox = actionKeyGroup.currentContext.findRenderObject();
-    height = renderBox.size.height;
-    width =renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
-
-
-  }
-  void findDropdownDataSearch(){
-    RenderBox renderBox = actionKeySearch.currentContext.findRenderObject();
-    height = renderBox.size.height;
-    width =renderBox.size.width;
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
-
-
-  }
 
 
 
@@ -501,24 +412,8 @@ openNotification(BuildContext context){
 
 
 
-  OverlayEntry createFloatingDropdownSearch(){
-
-    return OverlayEntry(builder: (context){
-      return Positioned(
-        left: xPosition-40,
-        width:2* width +31,
-        top: yPosition + 60-40,
-        height: 2* 60.0 +80,
 
 
-        child: SearchDropdownMenu(
-          itemHeight: 60.0,
-
-        ),
-      );
-    });
-
-  }
 
 ////////////////////////////////////////// NavigationBar
 

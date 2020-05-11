@@ -9,13 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:work/Model/SignUPModel/CityModle.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
+import 'package:work/Model/SignUPModel/GroupModel.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CityWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CountryWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GradeWidget.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GroupsWidget.dart';
 import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
 import 'package:work/services/SignUpService/GradeApi.dart';
+import 'package:work/services/SignUpService/GroupApi.dart';
 
 class SignUpProvider extends ChangeNotifier{
 
@@ -62,11 +65,11 @@ class SignUpProvider extends ChangeNotifier{
   /////////////////////////////////////////////////////////
 
 
+  static  var cityId ;
 
 
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderCity =
   new GlobalKey<AsyncLoaderState>();
- static  CountryModel countryModel;
   var asyncLoaderCity = new AsyncLoader(
     key: globalAsyncLoaderCity,
     initState: () async => await getCites(countryId.toString()),
@@ -80,7 +83,10 @@ class SignUpProvider extends ChangeNotifier{
 
   void changedDropDownItemCites(CityModel selectedCites) {
     currentCity = selectedCites;
+    cityId = currentCity.id;
     notifyListeners();
+    if(globalAsyncLoaderGroup.currentState !=null)
+      globalAsyncLoaderGroup.currentState.reloadState();
   }
 
 
@@ -94,7 +100,7 @@ class SignUpProvider extends ChangeNotifier{
   }
   //////////////////////////////////////////////////// Grade //////////////////////
 
-
+  static  var gradeId ;
 
 
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderGrade =
@@ -112,7 +118,13 @@ class SignUpProvider extends ChangeNotifier{
 
   void changedDropDownItemGrade(GradeModel selectedGrade) {
     currentGrade = selectedGrade;
+    gradeId = currentGrade.id;
+
     notifyListeners();
+
+//
+    if (globalAsyncLoaderGroup.currentState!=null)
+      globalAsyncLoaderGroup.currentState.reloadState();
   }
 
 
@@ -121,6 +133,42 @@ class SignUpProvider extends ChangeNotifier{
     List<DropdownMenuItem<GradeModel>> items = new List();
     for (GradeModel mGrade in Grade) {
       items.add(new DropdownMenuItem(value: mGrade, child: new Text(mGrade.name)));
+    }
+    return items;
+  }
+
+
+
+  /////////////////////////////////////////////////// Group ///////////////
+
+
+
+
+
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderGroup =
+  new GlobalKey<AsyncLoaderState>();
+  var asyncLoaderGroup = new AsyncLoader(
+    key: globalAsyncLoaderGroup,
+    initState: () async => await getGroup(cityId.toString(),gradeId.toString()),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(onPressed: () => globalAsyncLoaderGroup.currentState.reloadState(),),
+    renderSuccess: ({data}) => GroupWidget(groupList:    data,),
+  );
+  GroupModel currentGroup = null;
+
+  List<GroupModel>Group = [];
+
+  void changedDropDownItemGroup(GroupModel selectedGroup) {
+    currentGroup = selectedGroup;
+    notifyListeners();
+  }
+
+
+
+  List<DropdownMenuItem<GroupModel>> getDropDownMenuItemsGroup() {
+    List<DropdownMenuItem<GroupModel>> items = new List();
+    for (GroupModel mGroup in Group) {
+      items.add(new DropdownMenuItem(value: mGroup, child: new Text(mGroup.groupName )));
     }
     return items;
   }
