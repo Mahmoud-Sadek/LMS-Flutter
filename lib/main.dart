@@ -1,4 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/Provider/SignUpProvider.dart';
@@ -27,6 +29,7 @@ void main() => runApp(MyApp());
 //o
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return  MultiProvider(
@@ -59,7 +62,7 @@ class MyApp extends StatelessWidget {
 //       ChangeNotifierProvider(
 //        create: (context)=>ProviderData(),
         child: MaterialApp(
-          home:Login(),
+          home:SplashScreen(),
       ),
 //      ),
     );

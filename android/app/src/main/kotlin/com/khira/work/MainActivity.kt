@@ -1,4 +1,4 @@
-package com.khira.work
+package com.eagles.lms
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

@@ -1,6 +1,9 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Common {
 
   static final String BaseURL = "http://eaglez-001-site3.ftempurl.com/";
+  static final String TOKEN = "TOKEN";
 
   static getHeaders() async {
 //    SharedPreferences _prefs = await SharedPreferences.getInstance();
@@ -12,5 +15,13 @@ class Common {
       'lang':'ar'
     };
     return tokenData;
+  }
+
+
+  static getToken() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    String token = _prefs.getString(Common.TOKEN) ?? '';
+    return token;
   }
 }

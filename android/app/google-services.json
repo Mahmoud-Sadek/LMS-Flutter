@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "424173111478",
+    "firebase_url": "https://lms-app-e93d4.firebaseio.com",
+    "project_id": "lms-app-e93d4",
+    "storage_bucket": "lms-app-e93d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424173111478:android:26f92425c54983f1cafe17",
+        "android_client_info": {
+          "package_name": "com.eagles.lms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424173111478-jrc7iavosn3ef0s6d5632tbir71k4892.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjSj0pzvfB1F4hD8qiHhfjPtlTHJ1GKa0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424173111478-jrc7iavosn3ef0s6d5632tbir71k4892.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -74,7 +74,7 @@ class _SecondSignUpState extends State<SecondSignUp> {
   Widget build(BuildContext context) {
 
 
-    final bloc = Provider.of(context);
+//    final bloc = Provider.of(context);
 
 
     return Column(
