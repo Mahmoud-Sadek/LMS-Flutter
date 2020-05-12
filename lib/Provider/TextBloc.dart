@@ -11,7 +11,7 @@ class Bloc extends Object with Validators {
 
 
   final _fullName = BehaviorSubject<String>();
-  Stream<String> get fullNameStream => _fullName.stream;
+  Stream<String> get fullNameStream => _fullName.stream.transform(validators.validateName);
   Function(String) get fullNameChange => _fullName.sink.add;
 
   final _Phone= BehaviorSubject<int>();
@@ -60,6 +60,12 @@ class Bloc extends Object with Validators {
 
 
 
+  final _confirmPassword = BehaviorSubject<String>();
+  Stream<String> get confirmPasswordStream => _confirmPassword.stream.transform(validators.validatePassword);
+  Function(String) get confirmPasswordChange => _confirmPassword.sink.add;
+
+
+
 
 
 
@@ -104,6 +110,8 @@ class Bloc extends Object with Validators {
     email.close();
     await _password.drain();
     _password.close();
+
+    _confirmPassword.close();
 
   }
 

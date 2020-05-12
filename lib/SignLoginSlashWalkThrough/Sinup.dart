@@ -28,12 +28,12 @@ class SignUp extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            height: 1000,
+            height: 800,
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Container(
                 width: MediaQuery.of(context).size.width * .85,
-                height: 900,
+                height: 750,
                 child: Stack(
                   children: <Widget>[
                     SignUpBackGround1(),
@@ -43,7 +43,7 @@ class SignUp extends StatelessWidget {
                       left: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width * .85,
-                        height: 800,
+                        height: 690,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20),
@@ -274,7 +274,7 @@ class _FirstSignUpState extends State<FirstSignUp> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
           "SignUP",
@@ -282,7 +282,7 @@ class _FirstSignUpState extends State<FirstSignUp> {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
         ),
         Container(
-            height: 140,
+            height: 130,
             width: 200,
             child: Stack(
               children: <Widget>[
@@ -307,17 +307,18 @@ class _FirstSignUpState extends State<FirstSignUp> {
                 )
               ],
             )),
-        SizedBox(
-          height: 20,
-        ),
+
         Container(
+          height: 460,
           child: Column(
+
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               MainTextField(
                 bloc: bloc,
                 obscure: false,
-                textStream: bloc.userNameStream,
+                textStream: bloc.fullNameStream,
                 textChange: bloc.fullNameChange,
                 inputType: TextInputType.text,
                 hintText: "Full name",
@@ -326,7 +327,6 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
-              SizedBox(height: 10,),
               MainTextField(
                 obscure: false,
                 textStream: bloc.emailStream,
@@ -338,8 +338,6 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
-              SizedBox(height: 10,),
-
               MainTextField(
                 bloc: bloc,
                 obscure: false,
@@ -352,8 +350,6 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
-              SizedBox(height: 10,),
-
               MainTextField(
                 bloc: bloc,
                 obscure: false,
@@ -366,8 +362,6 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
-              SizedBox(height: 10,),
-
               MainTextField(
                 bloc: bloc,
                 obscure: true,
@@ -380,12 +374,10 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
-              SizedBox(height: 10,),
-
               MainTextField(
                 obscure: true,
-                textStream: bloc.passwordStream,
-                textChange:bloc.passwordChange,
+                textStream: bloc.confirmPasswordStream,
+                textChange:bloc.confirmPasswordChange,
                 inputType: TextInputType.text,
                 hintText: "Confirm Password",
                 widget: Container(
@@ -428,13 +420,11 @@ class _FirstSignUpState extends State<FirstSignUp> {
                     ) ,
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
-        SizedBox(
-          height: 15,
-        ),
+
         Row(
           children: <Widget>[
             Spacer(
@@ -473,7 +463,9 @@ class _FirstSignUpState extends State<FirstSignUp> {
               flex: 1,
             ),
           ],
-        )
+        ),
+        SizedBox(height: 10,)
+
       ],
     );
   }
