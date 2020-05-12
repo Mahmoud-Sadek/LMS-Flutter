@@ -15,7 +15,7 @@ class Bloc extends Object with Validators {
   Function(String) get fullNameChange => _fullName.sink.add;
 
   final _Phone= BehaviorSubject<int>();
-  Stream<int> get phoneStream => _Phone.stream;
+  Stream<int> get phoneStream => _Phone.stream.transform(validators.validatePhone);
   Function(int) get phoneChange => _Phone.sink.add;
 
 

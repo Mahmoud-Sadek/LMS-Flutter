@@ -10,7 +10,7 @@ static Bloc bloc = Bloc();
         RegExp hexColor = RegExp("^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*");
         bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
 
-        if(email.contains('@gmail.com')||email.contains('@yahoo.com') ){
+        if( emailValid == true){
           sink.add(email);
 
         }  else{
@@ -48,13 +48,29 @@ static Bloc bloc = Bloc();
       }
   );
   final validateName = StreamTransformer<String,String>.fromHandlers(
-
       handleData: ( name, sink){
+        bool nameValid = RegExp(r"/^[a-z ,.'-]+$/i").hasMatch(name);
 
-        if (name.length<=9 ||name.contains(RegExp(r'^[a-z-0-9_\-=@,\.;]+$'))!=true||  name.contains("-")== true || name.contains(";") ==true && name.contains(",")==true || name.contains("@")==true|| name.contains("=")==true || name.contains("_")== true) {
-          sink.addError("Un valid  characters ");
-        }  else{
+        if (      name.length<=9 ||name.contains(RegExp(r'^[a-z-0-9_\-=@,\.;]+$'))!=true||  name.contains("-")== true || name.contains(";") ==true && name.contains(",")==true || name.contains("@")==true|| name.contains("=")==true || name.contains("_")== true) {
           sink.add(name);
+
+        }  else{
+          sink.addError("Un valid  characters ");
+
+        }
+      }
+  );
+  final validatePhone = StreamTransformer<int,int>.fromHandlers(
+
+      handleData: ( phone, sink){
+        bool phoneValid = RegExp(r"(^1300\d{6}$)|(^1800|1900|1902\d{6}$)|(^0[2|3|7|8]{1}[0-9]{8}$)|(^13\d{4}$)|(^04\d{2,3}\d{6}$)").hasMatch(phone.toString());
+
+        if (phoneValid == true && phone.toString().length >=11) {
+          sink.add(phone);
+
+        }  else{
+          sink.addError("Un valid  characters ");
+
         }
       }
   );
