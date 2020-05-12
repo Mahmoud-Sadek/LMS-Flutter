@@ -4,10 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/Model/Login/LoginModel.dart';
+import 'package:work/utils/common.dart';
 
 class Login extends StatelessWidget {
+ String Token =Common.getToken().toString();
+  String email,password;
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -32,18 +38,23 @@ class Login extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  SignUpTextField(hintText: "User name",inputType: TextInputType.emailAddress,textChange: Provider.of<ProviderData>(context).emailChange,textStream: Provider.of<ProviderData>(context).emailStream,),
+                  SignUpTextField(hintText: "User name",inputType: TextInputType.emailAddress,textChange: (mail){
+                    email=mail.toString();
+                  },
+                    textStream: Provider.of<ProviderData>(context).emailStream,),
                   SizedBox(height: 15,),
-                  SignUpTextField(hintText: "Password",textChange: Provider.of<ProviderData>(context).passwordChange,textStream: Provider.of<ProviderData>(context).passwordStream,obscure: true,),
+                  SignUpTextField(hintText: "Password",textChange: (pass){
+                password=pass.toString();},
+                textStream: Provider.of<ProviderData>(context).passwordStream,obscure: true,),
                   SizedBox(height: 15,),
                   ResetAndSignUp(word: "Forget Password ?",onTap: (){},buttonText: "Reset",mainAxisAlignment: MainAxisAlignment.start,width: 40,),
                   SizedBox(height: 50,),
                   Container(
                     width: MediaQuery.of(context).size.width - 80,
 
-                    child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,onPressed: (){
-                      Provider.of<ProviderData>(context).login(context);
-                    },),
+                    child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
+                      onPressed:  (){DatabaseHelper().loginData(email, password,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAxMDIwNDg4MjQ1IiwibmFtZWlkIjoiNjQ0OCIsIkVtYWlsQWRkcmVzcyI6InNhZGVrQGtmay5jb20iLCJGdWxsTmFtZSI6ImFsaSBtb2hhbWVkIGtvcnRhbSIsIlVzZXJUeXBlIjoiU3R1ZG5ldCIsIm5iZiI6MTU4OTMxNTQ2MSwiZXhwIjoxNTk0NTg1ODYxLCJpYXQiOjE1ODkzMTU0NjEsImlzcyI6IioiLCJhdWQiOiIqIn0.z_ZWsF4RXCyN3uPKoijGni8zxVkxs1jHLAd1jFZjxdo");},
+                    ),
                   ),
                   SizedBox(height: 15,),
                   ResetAndSignUp(word: "Dont have an account ?",onTap: (){
