@@ -190,48 +190,6 @@ next(BuildContext context){
 
 
 
-
-  final _fullName = BehaviorSubject<String>();
-  Stream<String> get fullNameStream => _fullName.stream;
-  Function(String) get fullNameChange => _fullName.sink.add;
-
-  final _Phone= BehaviorSubject<int>();
-  Stream<int> get phoneStream => _Phone.stream;
-  Function(int) get phoneChange => _Phone.sink.add;
-
-
-  final _userName = BehaviorSubject<String>();
-  Stream<String> get userNameStream => _userName.stream;
-  Function(String) get userNameChange => _userName.sink.add;
-
-
-  final _country = BehaviorSubject<String>();
-  Stream<String> get countryStream => _country.stream;
-  Function(String) get countryChange => _country.sink.add;
-
-
-
-  final _city = BehaviorSubject<String>();
-  Stream<String> get cityStream => _city.stream;
-  Function(String) get cityChange => _city.sink.add;
-
-
-  final _grade = BehaviorSubject<String>();
-  Stream<String> get gradeStream => _grade.stream;
-  Function(String) get gradeChange => _grade.sink.add;
-
-
-  final _group = BehaviorSubject<String>();
-  Stream<String> get groupStream => _group.stream;
-  Function(String) get groupChange => _group.sink.add;
-
-
-  final _oldPassword = BehaviorSubject<String>();
-  Stream<String> get oldPasswordStream => _oldPassword.stream;
-  Function(String) get oldPasswordChange => _oldPassword.sink.add;
-
-
-
   login(BuildContext context){
 
     if( email.value == "1"){
@@ -545,29 +503,6 @@ openParentHomePage(BuildContext context){
     email.close();
     await _password.drain();
     _password.close();
-    await _fullName.drain();
-    _fullName.close();
-    await _userName.drain();
-    _userName.close();
-    _Phone.close();
-
-    await _country.drain();
-    _country.close();
-
-    await _city.drain();
-    _city.close();
-
-    await _group.drain();
-    _group.close();
-
-    await _grade.drain();
-    _grade.close();
-
-
-
-    await _oldPassword.drain();
-    _oldPassword.close();
-  parentPhone.close();
 
 
 

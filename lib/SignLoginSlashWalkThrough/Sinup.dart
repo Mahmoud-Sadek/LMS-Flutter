@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
+import 'package:work/Provider/TextBloc.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SharedWidget/MainTextFeild.dart';
@@ -27,12 +28,12 @@ class SignUp extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            height: 800,
+            height: 1000,
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Container(
                 width: MediaQuery.of(context).size.width * .85,
-                height: 750,
+                height: 900,
                 child: Stack(
                   children: <Widget>[
                     SignUpBackGround1(),
@@ -42,7 +43,7 @@ class SignUp extends StatelessWidget {
                       left: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width * .85,
-                        height: 690,
+                        height: 800,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20),
@@ -73,6 +74,7 @@ class _SecondSignUpState extends State<SecondSignUp> {
   Widget build(BuildContext context) {
 
 
+    final bloc = Provider.of(context);
 
 
     return Column(
@@ -268,6 +270,8 @@ class _FirstSignUpState extends State<FirstSignUp> {
   @override
   Widget build(BuildContext context) {
 
+    final bloc = Bloc();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -307,15 +311,14 @@ class _FirstSignUpState extends State<FirstSignUp> {
           height: 20,
         ),
         Container(
-          height: 400,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               MainTextField(
+                bloc: bloc,
                 obscure: false,
-                textStream: Provider.of<ProviderData>(context).fullNameStream,
-                textChange: Provider.of<ProviderData>(context).fullNameChange,
+                textStream: bloc.userNameStream,
+                textChange: bloc.fullNameChange,
                 inputType: TextInputType.text,
                 hintText: "Full name",
                 widget: Container(
@@ -323,10 +326,11 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+              SizedBox(height: 10,),
               MainTextField(
                 obscure: false,
-                textStream: Provider.of<ProviderData>(context).emailStream,
-                textChange: Provider.of<ProviderData>(context).emailChange,
+                textStream: bloc.emailStream,
+                textChange: bloc.emailChange,
                 inputType: TextInputType.emailAddress,
                 hintText: "Emai Address",
                 widget: Container(
@@ -334,10 +338,13 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+              SizedBox(height: 10,),
+
               MainTextField(
+                bloc: bloc,
                 obscure: false,
-                textStream: Provider.of<ProviderData>(context).phoneStream,
-                textChange: Provider.of<ProviderData>(context).phoneChange,
+                textStream: bloc.phoneStream,
+                textChange: bloc.phoneChange,
                 inputType: TextInputType.number,
                 hintText: "Phone",
                 widget: Container(
@@ -345,10 +352,13 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+              SizedBox(height: 10,),
+
               MainTextField(
+                bloc: bloc,
                 obscure: false,
-                textStream: Provider.of<ProviderData>(context).userNameStream,
-                textChange: Provider.of<ProviderData>(context).userNameChange,
+                textStream: bloc.userNameStream,
+                textChange: bloc.userNameChange,
                 inputType: TextInputType.text,
                 hintText: "Username",
                 widget: Container(
@@ -356,10 +366,13 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+              SizedBox(height: 10,),
+
               MainTextField(
+                bloc: bloc,
                 obscure: true,
-                textStream: Provider.of<ProviderData>(context).passwordStream,
-                textChange: Provider.of<ProviderData>(context).passwordChange,
+                textStream: bloc.passwordStream,
+                textChange: bloc.passwordChange,
                 inputType: TextInputType.text,
                 hintText: "Password",
                 widget: Container(
@@ -367,10 +380,12 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+              SizedBox(height: 10,),
+
               MainTextField(
                 obscure: true,
-                textStream: Provider.of<ProviderData>(context).passwordStream,
-                textChange: Provider.of<ProviderData>(context).passwordChange,
+                textStream: bloc.passwordStream,
+                textChange:bloc.passwordChange,
                 inputType: TextInputType.text,
                 hintText: "Confirm Password",
                 widget: Container(

@@ -4,15 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/TextBloc.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
-
+import '../Provider/SignUpProvider.dart';
 import '../SignLoginSlashWalkThrough/Login.dart';
 
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Bloc bloc = Provider.of(context);
     return SafeArea(
       child:Scaffold(
         appBar: AppBar(
@@ -264,8 +266,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "Old Password",
                                             inputType: TextInputType.text,
-                                            textChange: Provider.of<ProviderData>(context).oldPasswordChange,
-                                            textStream: Provider.of<ProviderData>(context).oldPasswordStream,
+                                            textChange: bloc.oldPasswordChange,
+                                            textStream: bloc.oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -275,8 +277,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "New Password",
                                             inputType: TextInputType.text,
-                                            textChange: Provider.of<ProviderData>(context).oldPasswordChange,
-                                            textStream: Provider.of<ProviderData>(context).oldPasswordStream,
+                                            textChange: bloc.oldPasswordChange,
+                                            textStream: bloc.oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -285,10 +287,11 @@ class Profile extends StatelessWidget {
                                         Container(
                                           width: MediaQuery.of(context).size.width/1.8,
                                           child: SignUpTextField(
+
                                             hintText: "Confirm Password",
                                             inputType: TextInputType.text,
-                                            textChange: Provider.of<ProviderData>(context).oldPasswordChange,
-                                            textStream: Provider.of<ProviderData>(context).oldPasswordStream,
+                                            textChange: bloc.oldPasswordChange,
+                                            textStream: bloc.oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -384,8 +387,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "Group one",
                                             inputType: TextInputType.text,
-                                            textChange: Provider.of<ProviderData>(context).groupChange,
-                                            textStream: Provider.of<ProviderData>(context).groupStream,
+                                            textChange: bloc.groupChange,
+                                            textStream: bloc.groupStream,
                                             obscure: false,
                                           ),
                                         ),
