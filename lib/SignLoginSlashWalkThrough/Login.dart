@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -47,7 +48,7 @@ class Login extends StatelessWidget {
                   ),
                   SizedBox(height: 15,),
                   ResetAndSignUp(word: "Dont have an account ?",onTap: (){
-                    Provider.of<ProviderData>(context).signUpShow(context);
+                    Provider.of<SignUpProvider>(context).signUpShow(context);
 
                   },buttonText: "Signup",mainAxisAlignment: MainAxisAlignment.center,width: 50,),
                   SizedBox(height: 50,),

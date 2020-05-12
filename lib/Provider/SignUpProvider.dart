@@ -6,24 +6,105 @@
 import 'package:async_loader/async_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/SignUPModel/CityModle.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
 import 'package:work/Model/SignUPModel/GroupModel.dart';
+import 'package:work/Model/SignUPModel/RigisterModel.dart';
+import 'package:work/Provider/provider.dart';
+import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CityWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CountryWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GradeWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GroupsWidget.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
+import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
 import 'package:work/services/SignUpService/GradeApi.dart';
 import 'package:work/services/SignUpService/GroupApi.dart';
+import 'package:work/services/SignUpService/RegisterApi.dart';
+import 'package:work/utils/common.dart';
+
+import 'TextValidator.dart';
 
 class SignUpProvider extends ChangeNotifier{
 
+//////////////////////////////////////////////
 
+
+
+
+
+
+
+  Widget signUp = FirstSignUp();
+
+  List<Widget> signUpWidget  =[FirstSignUp(),SecondSignUp()];
+
+  signUpShow(BuildContext context){
+
+    showDialog(context: context,
+        builder: (context){
+          return Dialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 4,
+            backgroundColor: Colors.transparent,
+            child:
+            SignUpDialog(),
+          );
+        }
+    );
+
+  }
+
+  Widget selectedSignUpDropButton = StudentGradeGroupWidget();
+  List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(),ParentJop()];
+  List<Widget> signUpBackWidgetList = [SignUpBackParent(),SignUpBackStudent()
+  ];
+  Widget signUpBackWidget = SignUpBackParent();
+  openStudentSignUp(BuildContext context){
+    signUp = FirstSignUp();
+
+    signUpBackWidget = signUpBackWidgetList[1];
+    selectedSignUpDropButton = signUpDropDwonList[0];
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
+    notifyListeners();
+
+  }
+  openParentSignUp(BuildContext context){
+    signUp = SecondSignUp();
+    signUpBackWidget =signUpBackWidgetList[0];
+    selectedSignUpDropButton = signUpDropDwonList[1];
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
+    notifyListeners();
+  }
+
+  openLogin(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return Login();
+    }));
+    notifyListeners();
+  }
+////////////////////////////////////////////////////////     Text Feilds ///////////////
+
+
+
+  signUpBack(BuildContext context){
+    signUp = FirstSignUp();
+    notifyListeners();
+
+    notifyListeners();
+  }
+
+
+
+///////////////////////////////////////////
 
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderCountry =
   new GlobalKey<AsyncLoaderState>();
@@ -179,6 +260,156 @@ class SignUpProvider extends ChangeNotifier{
 
 
 
+  Validators validators =Validators();
+
+
+
+  final _country = BehaviorSubject<String>();
+  Stream<String> get countryStream => _country.stream;
+  Function(String) get countryChange => _country.sink.add;
+
+
+
+  final _city = BehaviorSubject<String>();
+  Stream<String> get cityStream => _city.stream;
+  Function(String) get cityChange => _city.sink.add;
+
+
+  final _grade = BehaviorSubject<String>();
+  Stream<String> get gradeStream => _grade.stream;
+  Function(String) get gradeChange => _grade.sink.add;
+
+
+  final _group = BehaviorSubject<String>();
+  Stream<String> get groupStream => _group.stream;
+  Function(String) get groupChange => _group.sink.add;
+
+
+  final _oldPassword = BehaviorSubject<String>();
+  Stream<String> get oldPasswordStream => _oldPassword.stream;
+  Function(String) get oldPasswordChange => _oldPassword.sink.add;
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+  final emailRegister = BehaviorSubject<String>();
+  Stream<String> get emailRegisterStream => emailRegister.stream.transform(validators.validateEmail);
+  Function(String) get emailRegisterChange => emailRegister.sink.add;
+
+  final passwordRegister = BehaviorSubject<String>();
+  Stream<String> get passwordRegisterStream => passwordRegister.stream.transform(validators.validatePassword);
+  Function(String) get passwordRegisterChange => passwordRegister.sink.add;
+
+
+
+  final confirmPassword = BehaviorSubject<String>();
+  Stream<String> get confirmPasswordStream => confirmPassword.stream.transform(validators.validatePassword);
+  Function(String) get confirmPasswordChange => confirmPassword.sink.add;
+  final firstName = BehaviorSubject<String>();
+  Stream<String> get firstNameStream => firstName.stream.transform(validators.validateName);
+  Function(String) get firstNameChange => firstName.sink.add;
+
+  final phone= BehaviorSubject<String>();
+  Stream<String> get phoneStream => phone.stream.transform(validators.validatePhone);
+  Function(String) get phoneChange => phone.sink.add;
+
+
+  final secondName = BehaviorSubject<String>();
+  Stream<String> get secondNameStream => secondName.stream;
+  Function(String) get secondNameChange => secondName.sink.add;
+
+
+  final lastName = BehaviorSubject<String>();
+  Stream<String> get lastNameStream => lastName.stream;
+  Function(String) get lastNameChange => lastName.sink.add;
+
+
+
+/////////////////////////////////////////////////////////////////////
+  Stream<bool> get submitValid => Observable.combineLatest6(firstNameStream,secondNameStream,lastNameStream,emailRegisterStream,phoneStream,passwordRegisterStream ,(f,s,l,e,ph,ps)=> true  );
+
+// chang data
+
+
+  String gander = "";
+
+
+  signUpNext(BuildContext context) {
+   signUp = SecondSignUp(phone: phone.value,emailAddres: emailRegister.value,firstName: firstName.value,lastName: lastName.value,password: passwordRegister.value,secondName: secondName.value,gander:gander, image: "",);
+
+    print(emailRegister.value);
+    print(phone.value.toString());
+    print(secondName.value);
+    print(firstName.value);
+    print(lastName.value);
+    print(passwordRegister.value);
+    print(gander);
+    notifyListeners();
+
+  }
+
+
+Future<RegisterModel> future;
+  Submit({
+    String mobile,
+    String emailAddress,
+    String gender,
+    String fullName,
+    String password,
+    String image,
+  }){
+
+
+    future =RegisterApi(emailAddress: emailAddress,cityId: currentCity.id.toString(),image: image,fireBaseToken: Common.getToken().toString(),fullName: fullName,gender: gender ,groupId: currentGroup.groupId.toString() ,mobile: mobile,password: password );
+//    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
+         print(password);
+         print(emailAddress);
+         print(currentCity.id);
+         print(Common.getToken());
+         print(currentGroup.groupId);
+
+
+    notifyListeners();
+  }
+
+  Future<void> dispose() async {
+    // TODO: implement dispose
+
+
+    await firstName.drain();
+    firstName.close();
+    await secondName.drain();
+    secondName.close();
+    phone.close();
+
+    await _country.drain();
+    _country.close();
+
+    await _city.drain();
+    _city.close();
+
+    await _group.drain();
+    _group.close();
+
+    await _grade.drain();
+    _grade.close();
+
+
+
+    await _oldPassword.drain();
+    _oldPassword.close();
+
+    await emailRegister.drain();
+    emailRegister.close();
+    await passwordRegister.drain();
+    passwordRegister.close();
+
+    confirmPassword.close();
+    lastName.cast();
+
+  }
 
 
 

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
 
@@ -43,7 +44,7 @@ class SignUpDialog extends StatelessWidget {
                 Spacer(flex: 1,),
                 GestureDetector(
                   onTap: (){
-                    Provider.of<ProviderData>(context).openStudentSignUp(context);
+                    Provider.of<SignUpProvider>(context).openStudentSignUp(context);
 
                   },
                   child: Container(
@@ -70,7 +71,7 @@ class SignUpDialog extends StatelessWidget {
                 SizedBox(width: 10,),
                 GestureDetector(
                   onTap: (){
-                     Provider.of<ProviderData>(context).openParentSignUp(context);
+                     Provider.of<SignUpProvider>(context).openParentSignUp(context);
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width/2.8,

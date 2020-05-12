@@ -60,7 +60,7 @@ static Bloc bloc = Bloc();
         }
       }
   );
-  final validatePhone = StreamTransformer<int,int>.fromHandlers(
+  final validatePhone = StreamTransformer<String,String>.fromHandlers(
 
       handleData: ( phone, sink){
         bool phoneValid = RegExp(r"(^1300\d{6}$)|(^1800|1900|1902\d{6}$)|(^0[2|3|7|8]{1}[0-9]{8}$)|(^13\d{4}$)|(^04\d{2,3}\d{6}$)").hasMatch(phone.toString());

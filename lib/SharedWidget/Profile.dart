@@ -266,8 +266,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "Old Password",
                                             inputType: TextInputType.text,
-                                            textChange: bloc.oldPasswordChange,
-                                            textStream: bloc.oldPasswordStream,
+                                            textChange: Provider.of<SignUpProvider>(context).oldPasswordChange,
+                                            textStream: Provider.of<SignUpProvider>(context).oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -277,8 +277,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "New Password",
                                             inputType: TextInputType.text,
-                                            textChange: bloc.oldPasswordChange,
-                                            textStream: bloc.oldPasswordStream,
+                                            textChange: Provider.of<SignUpProvider>(context).oldPasswordChange,
+                                            textStream: Provider.of<SignUpProvider>(context).oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -290,8 +290,8 @@ class Profile extends StatelessWidget {
 
                                             hintText: "Confirm Password",
                                             inputType: TextInputType.text,
-                                            textChange: bloc.oldPasswordChange,
-                                            textStream: bloc.oldPasswordStream,
+                                            textChange: Provider.of<SignUpProvider>(context).oldPasswordChange,
+                                            textStream: Provider.of<SignUpProvider>(context).oldPasswordStream,
                                             obscure: true,
                                           ),
                                         ),
@@ -387,8 +387,8 @@ class Profile extends StatelessWidget {
                                           child: SignUpTextField(
                                             hintText: "Group one",
                                             inputType: TextInputType.text,
-                                            textChange: bloc.groupChange,
-                                            textStream: bloc.groupStream,
+                                            textChange: Provider.of<SignUpProvider>(context).groupChange,
+                                            textStream: Provider.of<SignUpProvider>(context).groupStream,
                                             obscure: false,
                                           ),
                                         ),

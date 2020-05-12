@@ -12,6 +12,7 @@ import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
 import 'package:work/ParentScreens/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
+import 'package:work/Provider/TextBloc.dart';
 import 'package:work/SharedScreens/Notificatin.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -42,6 +43,7 @@ import '../TeacherScreens/TeacherHomePage.dart';
 import '../Model/message.dart';
 import '../Model/approve.dart';
 import '../SignLoginSlashWalkThrough/walkthrough.dart';
+import 'TextValidator.dart';
 class ProviderData extends ChangeNotifier{
 
 /////////////////////////////////// Comments start //////
@@ -236,70 +238,6 @@ visitorOpen(BuildContext context){
 
   ////////////////////////////////////////////////// Student Provider Start /////////////////////////////
 
-
-
-
-  Widget signUp = FirstSignUp();
-
-  List<Widget> signUpWidget  =[FirstSignUp(),SecondSignUp()];
-
-  signUpShow(BuildContext context){
-
-     showDialog(context: context,
-       builder: (context){
-       return Dialog(
-         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-         elevation: 4,
-         backgroundColor: Colors.transparent,
-          child:
-          SignUpDialog(),
-       );
-       }
-     );
-
-  }
-
-    Widget selectedSignUpDropButton = StudentGradeGroupWidget();
-    List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(),ParentJop()];
-    List<Widget> signUpBackWidgetList = [SignUpBackParent(),SignUpBackStudent()
-    ];
-     Widget signUpBackWidget = SignUpBackParent();
-  openStudentSignUp(BuildContext context){
-    signUp = FirstSignUp();
-
-    signUpBackWidget = signUpBackWidgetList[1];
-       selectedSignUpDropButton = signUpDropDwonList[0];
-    Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
-    notifyListeners();
-
-  }
-  openParentSignUp(BuildContext context){
-    signUp = SecondSignUp();
-    signUpBackWidget =signUpBackWidgetList[0];
-    selectedSignUpDropButton = signUpDropDwonList[1];
-    Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
-    notifyListeners();
-  }
-
-openLogin(BuildContext context){
-  Navigator.push(context, MaterialPageRoute(builder: (context){
-    return Login();
-  }));
-  notifyListeners();
-}
-  signUpNext(BuildContext context){
-    signUp = SecondSignUp();
-    notifyListeners();
-
-  }
-  signUpBack(BuildContext context){
-    signUp = FirstSignUp();
-    notifyListeners();
-
-    notifyListeners();
-  }
 
 ///////////////////////////////////////////
 
