@@ -13,7 +13,7 @@ class DatabaseHelper{
   var token ;
 
 
-   loginData(String email , String password,String token) async {
+ Future<bool>  loginData(String email , String password,String token) async {
     String myUrl = "$serverUrl/api/Account/Auth";
     final response = await http.post(myUrl,
         headers: {
@@ -30,6 +30,7 @@ class DatabaseHelper{
 
     if (status) {
       print('LOg in Error : ${data["message"]}');
+      return false;
     } else {
       print('token : ${data["Token"]}');
       print('UserTybe : ${data["UserTybe"]}');
@@ -47,7 +48,7 @@ class DatabaseHelper{
 
 print(sharedPreferences.getString(UserToken));
 
-
+return true;
 
 
     
