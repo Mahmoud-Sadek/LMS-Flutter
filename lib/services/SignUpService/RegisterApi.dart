@@ -31,7 +31,7 @@ Future<RegisterModel> RegisterApi(
   var response = await http.post(Common.BaseURL+"api/Studnets/Create",
 
     headers: headers,
-    body: jsonEncode(<String, String>{
+    body: jsonEncode(<String, dynamic>{
     'Mobile' : mobile,
    'EmailAddress' :emailAddress,
    'FireBaseToken': fireBaseToken,
