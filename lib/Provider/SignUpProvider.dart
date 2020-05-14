@@ -14,6 +14,7 @@ import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CountryWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GradeWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GroupsWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpErrorDailog.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
@@ -335,27 +336,47 @@ class SignUpProvider extends ChangeNotifier {
 // chang data
 
   String gander = "";
-
+ RegisterModel  regeiterModel = RegisterModel();
   signUpNext(BuildContext context) {
-    signUp = SecondSignUp(
-      phone: phone.value,
-      emailAddres: emailRegister.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      password: passwordRegister.value,
-      secondName: secondName.value,
-      gander: gander,
-      image: "",
-    );
+    if (passwordRegister.value == null || emailRegister.value == null ||
+        phone.value == null || firstName.value == null ||
+        secondName.value == null || lastName.value == null ||
+        regeiterModel.gender == "") {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              elevation: 4,
+              backgroundColor: Colors.transparent,
+              child: ErrorSignUpWidget(errorMessage: " Messing Data ",onpressed: (){
+                Navigator.pop(context);
 
-    print(emailRegister.value);
-    print(phone.value.toString());
-    print(secondName.value);
-    print(firstName.value);
-    print(lastName.value);
-    print(passwordRegister.value);
-    print(gander);
-    notifyListeners();
+              },),
+            );
+          });
+    } else {
+      signUp = SecondSignUp(
+        phone: phone.value,
+        emailAddres: emailRegister.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        password: passwordRegister.value,
+        secondName: secondName.value,
+        gander: gander,
+        image: "",
+      );
+
+      print(emailRegister.value);
+      print(phone.value.toString());
+      print(secondName.value);
+      print(firstName.value);
+      print(lastName.value);
+      print(passwordRegister.value);
+      print(gander);
+      notifyListeners();
+    }
   }
 
 /*Future<RegisterModel> future;
@@ -382,13 +403,13 @@ class SignUpProvider extends ChangeNotifier {
   }*/
   Future<String> future;
   //sadek
-  Submit(RegisterModel body) async {
+  Submit(RegisterModel body,BuildContext context) async {
     String token = await Common.getToken();
     body.cityId = currentCity.id.toString();
     body.groupId = currentGroup.groupId.toString();
     body.fireBaseToken = token;
 
-    future = RegisterApi(body);
+    future = RegisterApi(body,context);
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);

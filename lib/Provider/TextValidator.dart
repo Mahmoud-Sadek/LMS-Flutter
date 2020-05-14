@@ -28,7 +28,7 @@ static Bloc bloc = Bloc();
 
       handleData: ( password, sink){
 
-        if(password.length > 6){
+        if(password.length >= 6){
           sink.add(password);
         }  else{
           sink.addError("Password shuld be 6 or more ");
@@ -40,7 +40,7 @@ static Bloc bloc = Bloc();
 
       handleData: ( password, sink){
 
-        if(password.length > 6 ){
+        if(password.length >= 6 ){
           sink.add(password);
         }  else{
           sink.addError("Password shuld be 6 or more ");
@@ -65,7 +65,7 @@ static Bloc bloc = Bloc();
       handleData: ( phone, sink){
         bool phoneValid = RegExp(r"(^1300\d{6}$)|(^1800|1900|1902\d{6}$)|(^0[2|3|7|8]{1}[0-9]{8}$)|(^13\d{4}$)|(^04\d{2,3}\d{6}$)").hasMatch(phone.toString());
 
-        if (phoneValid == true && phone.toString().length >=11) {
+        if ( phone.length ==11) {
           sink.add(phone);
 
         }  else{

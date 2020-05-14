@@ -206,9 +206,8 @@ class SecondSignUp extends StatelessWidget{
 
                       try{
 
-                        Provider.of<SignUpProvider>(context).Submit(body);
+                        Provider.of<SignUpProvider>(context).Submit(body,context);
 
-                        Provider.of<ProviderData>(context).login(context);
                       }catch(e){
                         print("Error");
                       }
