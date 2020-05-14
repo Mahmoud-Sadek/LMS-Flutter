@@ -18,11 +18,11 @@ class Common {
   }
 
 
+
   static getToken() async {
 
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String token = _prefs.getString(Common.TOKEN) ?? '';
-
     return token;
 
   }
