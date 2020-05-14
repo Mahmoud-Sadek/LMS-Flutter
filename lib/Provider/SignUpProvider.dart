@@ -381,7 +381,7 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
   }*/
   Future<String> future;
-
+  //sadek
   Submit(RegisterModel body) async {
     String token = await Common.getToken();
     body.cityId = currentCity.id.toString();
