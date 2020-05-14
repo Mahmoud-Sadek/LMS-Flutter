@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
+import 'package:work/Model/SignUPModel/RigisterModel.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
 import 'package:work/Provider/TextBloc.dart';
@@ -195,9 +196,24 @@ class SecondSignUp extends StatelessWidget{
                     borderColor: mainColor,
                     textColor: Colors.white,
                     onPressed: () {
+                      RegisterModel body = RegisterModel();
+                      body.password = password;
+                      body.mobile = phone;
+                      body.gender = gander;
+                      body.fullName = "$firstName $secondName $lastName";
+                      body.image = image;
+                      body.emailAddress = emailAddres;
 
-                      Provider.of<SignUpProvider>(context).Submit(password: password,mobile: phone,gender: gander,fullName: "$firstName $secondName $lastName",image: image,emailAddress: emailAddres);
-                      Provider.of<ProviderData>(context).login(context);
+                      try{
+
+                        Provider.of<SignUpProvider>(context).Submit(body);
+
+                        Provider.of<ProviderData>(context).login(context);
+                      }catch(e){
+                        print("Error");
+                      }
+
+
                     },
                   )),
               SizedBox(
