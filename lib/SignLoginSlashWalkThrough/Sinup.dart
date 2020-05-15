@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
+import 'package:work/Model/SignUPModel/ParentRegisterModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/TeacherProvider.dart';
@@ -104,21 +105,70 @@ class SecondSignUp extends StatelessWidget{
         SizedBox(
           height: 20,
         ),
-        Container(
-          height: 350,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Provider.of<SignUpProvider>(context).asyncLoaderCountry,
 
+        Container(
+          height:  Provider.of<SignUpProvider>(context).parent == false ?500 :300,
+          child: Column(
+
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(width: 30,),
+              Provider.of<SignUpProvider>(context).asyncLoaderCountry,
+              SizedBox(width: 30,),
               Container(
                 width: MediaQuery.of(context).size.width / 1.5,
                 child:  Provider.of<SignUpProvider>(context).currentCountry == null ? Container() :     Provider.of<SignUpProvider>(context).asyncLoaderCity,
 
            ),
-            Provider.of<SignUpProvider>(context).selectedSignUpDropButton
+              SizedBox(width: 30,),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
+              ),
+              SizedBox(width: 30,),
+              Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                child:    (Provider.of<SignUpProvider>(context).currentGrade == null || Provider.of<SignUpProvider>(context).currentCity == null) ? Container() :   Provider.of<SignUpProvider>(context).asyncLoaderGroup,
 
+              ),
+              SizedBox(width: 30,),
+              Provider.of<SignUpProvider>(context).parent == true ? Container(height: 0,width: 0,) : Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                height: 150,
+                child: Column(
+
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: <Widget>[
+
+                    MainTextField(
+                      obscure: false,
+                      textStream: Provider.of<SignUpProvider>(context).sonPhoneStream,
+                      textChange: Provider.of<SignUpProvider>(context).sonPhoneChange,
+                      inputType: TextInputType.phone,
+                      hintText: "Enter Your Son Phone",
+                      widget: Container(
+                        height: 1,
+                        width: 1,
+                      ),
+                    ),
+                    MainTextField(
+                      obscure: false,
+                      textStream: Provider.of<SignUpProvider>(context).jopStream,
+                      textChange: Provider.of<SignUpProvider>(context).jopChange,
+                      inputType: TextInputType.text,
+                      hintText: "Enert Your Jop",
+                      widget: Container(
+                        height: 1,
+                        width: 1,
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
 
             ],
           ),
@@ -129,7 +179,7 @@ class SecondSignUp extends StatelessWidget{
         Material(
           elevation: 5,
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          child: Container(
+          child: Provider.of<SignUpProvider>(context).parent == false ? Container(height: 0,width: 0,) :Container(
             height: 150,
             width: MediaQuery.of(context).size.width * .70,
             decoration: BoxDecoration(
@@ -196,21 +246,38 @@ class SecondSignUp extends StatelessWidget{
                     borderColor: mainColor,
                     textColor: Colors.white,
                     onPressed: () {
-                      RegisterModel body = RegisterModel();
-                      body.password = password;
-                      body.mobile = phone;
-                      body.gender = gander;
-                      body.fullName = "$firstName $secondName $lastName";
-                      body.image = image;
-                      body.emailAddress = emailAddres;
 
-                      try{
+                        if(Provider.of<SignUpProvider>(context).student == false) {
+                          RegisterModel body = RegisterModel();
+                          body.password = password;
+                          body.mobile = phone;
+                          body.gender = gander;
+                          body.fullName = "$firstName $secondName $lastName";
+                          body.image = image;
+                          body.emailAddress = emailAddres;
 
-                        Provider.of<SignUpProvider>(context).Submit(body,context);
+                          Provider.of<SignUpProvider>(context).SubmitStudent(body, context);
+                          Provider.of<SignUpProvider>(context).changeParentState();
 
-                      }catch(e){
-                        print("Error");
-                      }
+                        }else if(Provider.of<SignUpProvider>(context).parent == false){
+
+                          ParentRegisterModel body = ParentRegisterModel();
+                          body.password = password;
+                          body.mobile = phone;
+                          body.gender = gander;
+                          body.fullName = "$firstName $secondName $lastName";
+                          body.image = image;
+                          body.emailAddress = emailAddres;
+                          body.jobName = Provider.of<SignUpProvider>(context).jop.value;
+                          body.sonNumbers = [Provider.of<SignUpProvider>(context).sonPhone.value];
+                          Provider.of<SignUpProvider>(context).SubmitParent(body, context);
+
+                          Provider.of<SignUpProvider>(context).changeStudentState();
+                          print(Provider.of<SignUpProvider>(context).parent);
+
+
+                        }
+
 
 
                     },
@@ -235,52 +302,137 @@ class SecondSignUp extends StatelessWidget{
 }
 
 
-class ParentJop extends StatelessWidget {
-  const ParentJop({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return
-      Container(
-      width: MediaQuery.of(context).size.width / 1.5,
-        height: 100,
-        color: Colors.red,
-
-    );
-  }
-}
-
-class StudentGradeGroupWidget extends StatelessWidget {
-  const StudentGradeGroupWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 175,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width / 1.5,
-              child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width / 1.5,
-            child:    (Provider.of<SignUpProvider>(context).currentGrade == null || Provider.of<SignUpProvider>(context).currentCity == null) ? Container() :   Provider.of<SignUpProvider>(context).asyncLoaderGroup,
-
-          ),
-        ],
-      ),
-    );
-  }
-}
-
+//class ParentJop extends StatelessWidget {
+//  const ParentJop({
+//    Key key,
+//  }) : super(key: key);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return
+//      Container(
+//      width: MediaQuery.of(context).size.width / 1.5,
+//        child: Column(
+//          children: <Widget>[
+//            MainTextField(
+//              obscure: false,
+//              textStream: Provider.of<SignUpProvider>(context).firstNameStream,
+//              textChange: Provider.of<SignUpProvider>(context).firstNameChange,
+//              inputType: TextInputType.text,
+//              hintText: "Full name",
+//              widget: Container(
+//                height: 1,
+//                width: 1,
+//              ),
+//
+//            ),
+//            MainTextField(
+//              obscure: false,
+//              textStream: Provider.of<SignUpProvider>(context).phoneStream,
+//              textChange: Provider.of<SignUpProvider>(context).phoneChange,
+//              inputType: TextInputType.phone,
+//              hintText: "Enter Your Phone",
+//              widget: Container(
+//                height: 1,
+//                width: 1,
+//              ),
+//            ),
+//            MainTextField(
+//              obscure: false,
+//              textStream: Provider.of<SignUpProvider>(context).jopStream,
+//              textChange: Provider.of<SignUpProvider>(context).jopChange,
+//              inputType: TextInputType.text,
+//              hintText: "Enert Your Jop",
+//              widget: Container(
+//                height: 1,
+//                width: 1,
+//              ),
+//            ),
+//          ],
+//        ),
+//
+//    );
+//  }
+//}
+//
+//class StudentGradeGroupWidget extends StatelessWidget {
+//  const StudentGradeGroupWidget({
+//    Key key,
+//  }) : super(key: key);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Container(
+//      height: 400,
+//      child: Column(
+//
+//        children: <Widget>[
+//          SizedBox(width: 10,),
+//          Container(
+//            width: MediaQuery.of(context).size.width / 1.5,
+//              child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
+//          ),
+//          SizedBox(width: 10,),
+//          Container(
+//            width: MediaQuery.of(context).size.width / 1.5,
+//            child:    (Provider.of<SignUpProvider>(context).currentGrade == null || Provider.of<SignUpProvider>(context).currentCity == null) ? Container() :   Provider.of<SignUpProvider>(context).asyncLoaderGroup,
+//
+//          ),
+//          SizedBox(width: 10,),
+//          Provider.of<SignUpProvider>(context).parent == true ? Container(height: 0,width: 0,) : Container(
+//             width: MediaQuery.of(context).size.width / 1.5,
+//              height: 200,
+//             child: Column(
+//
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//
+//               children: <Widget>[
+//
+//                 MainTextField(
+//                   obscure: false,
+//                   textStream: Provider.of<SignUpProvider>(context).firstNameStream,
+//                   textChange: Provider.of<SignUpProvider>(context).firstNameChange,
+//                   inputType: TextInputType.text,
+//                   hintText: "Full name",
+//                   widget: Container(
+//                     height: 1,
+//                     width: 1,
+//                   ),
+//
+//                 ),
+//                 MainTextField(
+//                   obscure: false,
+//                   textStream: Provider.of<SignUpProvider>(context).phoneStream,
+//                   textChange: Provider.of<SignUpProvider>(context).phoneChange,
+//                   inputType: TextInputType.phone,
+//                   hintText: "Enter Your Phone",
+//                   widget: Container(
+//                     height: 1,
+//                     width: 1,
+//                   ),
+//                 ),
+//                 MainTextField(
+//                   obscure: false,
+//                   textStream: Provider.of<SignUpProvider>(context).jopStream,
+//                   textChange: Provider.of<SignUpProvider>(context).jopChange,
+//                   inputType: TextInputType.text,
+//                   hintText: "Enert Your Jop",
+//                   widget: Container(
+//                     height: 1,
+//                     width: 1,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//          SizedBox(width: 10,),
+//        ],
+//      ),
+//    );
+//  }
+//}
+//
 
 
 class FirstSignUp extends StatefulWidget {

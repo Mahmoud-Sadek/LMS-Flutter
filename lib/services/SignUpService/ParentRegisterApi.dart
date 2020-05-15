@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http ;
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
 import 'package:work/Model/SignUPModel/GroupModel.dart';
+import 'package:work/Model/SignUPModel/ParentRegisterModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpErrorDailog.dart';
@@ -15,11 +16,11 @@ import 'package:work/utils/common.dart';
 
 
 
-Future<String> StudentRegisterApi(RegisterModel bodys,BuildContext context) async {
+Future<String> ParentRegisterApi(ParentRegisterModel bodys,BuildContext context) async {
   var headers= await Common.getHeaders();
   var body = json.encode(bodys.toJson());
 
-  var response = await http.post(Common.BaseURL+"api/Studnets/Create",
+  var response = await http.post(Common.BaseURL+"api/Parent/Create",
 
     headers: headers,
     body: body,

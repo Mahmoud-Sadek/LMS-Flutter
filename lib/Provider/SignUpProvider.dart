@@ -6,6 +6,7 @@ import 'package:work/Model/SignUPModel/CityModle.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
 import 'package:work/Model/SignUPModel/GroupModel.dart';
+import 'package:work/Model/SignUPModel/ParentRegisterModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CityWidget.dart';
@@ -20,6 +21,7 @@ import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
 import 'package:work/services/SignUpService/GradeApi.dart';
 import 'package:work/services/SignUpService/GroupApi.dart';
+import 'package:work/services/SignUpService/ParentRegisterApi.dart';
 import 'package:work/services/SignUpService/RegisterApi.dart';
 import 'package:work/utils/common.dart';
 
@@ -46,25 +48,35 @@ class SignUpProvider extends ChangeNotifier {
         });
   }
 
-  Widget selectedSignUpDropButton = StudentGradeGroupWidget();
-  List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(), ParentJop()];
+//  Widget selectedSignUpDropButton = StudentGradeGroupWidget();
+//  List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(), ParentJop()];
   List<Widget> signUpBackWidgetList = [SignUpBackParent(), SignUpBackStudent()];
   Widget signUpBackWidget = SignUpBackParent();
 
   openStudentSignUp(BuildContext context) {
+
+    parent =true;
+    student =false;
+
+    print(parent);
+    print(student);
     signUp = FirstSignUp();
 
     signUpBackWidget = signUpBackWidgetList[1];
-    selectedSignUpDropButton = signUpDropDwonList[0];
+//    selectedSignUpDropButton = signUpDropDwonList[0];
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => SignUp()));
     notifyListeners();
   }
 
   openParentSignUp(BuildContext context) {
-    signUp = SecondSignUp();
+    parent =false;
+    student =true;
+    print(parent);
+    print(student);
+    signUp = FirstSignUp();
     signUpBackWidget = signUpBackWidgetList[0];
-    selectedSignUpDropButton = signUpDropDwonList[1];
+//    selectedSignUpDropButton = signUpDropDwonList[0];
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => SignUp()));
     notifyListeners();
@@ -246,6 +258,15 @@ class SignUpProvider extends ChangeNotifier {
 
   Validators validators = Validators();
 
+
+
+
+  final jop = BehaviorSubject<String>();
+
+  Stream<String> get jopStream => jop.stream;
+
+  Function(String) get jopChange => jop.sink.add;
+
   final _country = BehaviorSubject<String>();
 
   Stream<String> get countryStream => _country.stream;
@@ -310,6 +331,13 @@ class SignUpProvider extends ChangeNotifier {
       phone.stream.transform(validators.validatePhone);
 
   Function(String) get phoneChange => phone.sink.add;
+
+  final sonPhone = BehaviorSubject<String>();
+
+  Stream<String> get sonPhoneStream =>
+      sonPhone.stream.transform(validators.validatePhone);
+
+  Function(String) get sonPhoneChange => sonPhone.sink.add;
 
   final secondName = BehaviorSubject<String>();
 
@@ -401,15 +429,46 @@ class SignUpProvider extends ChangeNotifier {
 
     notifyListeners();
   }*/
+
+
+   bool parent = false;
+  bool student = false;
+
+  void changeParentState(){
+     parent =! parent;
+   }
+
+  void changeStudentState(){
+    student =! student;
+  }
   Future<String> future;
   //sadek
-  Submit(RegisterModel body,BuildContext context) async {
+  SubmitStudent(RegisterModel body,BuildContext context) async {
     String token = await Common.getToken();
     body.cityId = currentCity.id.toString();
     body.groupId = currentGroup.groupId.toString();
     body.fireBaseToken = token;
 
-    future = RegisterApi(body,context);
+    future = StudentRegisterApi(body,context);
+//    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
+//         print(password);
+//         print(emailAddress);
+    print(currentCity.id);
+    print(Common.getToken());
+    print(currentGroup.groupId);
+
+    notifyListeners();
+  }
+
+  Future<String> parentFuture;
+
+  SubmitParent(ParentRegisterModel body,BuildContext context) async {
+    String token = await Common.getToken();
+    body.cityId = currentCity.id.toString();
+    body.groupId = currentGroup.groupId.toString();
+    body.fireBaseToken = token;
+
+    parentFuture = ParentRegisterApi(body,context);
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
@@ -422,7 +481,8 @@ class SignUpProvider extends ChangeNotifier {
 
   Future<void> dispose() async {
     // TODO: implement dispose
-
+       jop.close();
+       sonPhone.close();
     await firstName.drain();
     firstName.close();
     await secondName.drain();
