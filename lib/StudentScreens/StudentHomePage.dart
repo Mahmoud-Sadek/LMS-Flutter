@@ -61,7 +61,7 @@ class StudentHomePage extends StatelessWidget {
                  GNav(
                    gap: 8,
                    color: Colors.white,
-                   iconSize: 30,
+                   iconSize: 25,
                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                    duration: Duration(milliseconds: 800),
                    tabBackgroundColor: Colors.white,
@@ -70,6 +70,8 @@ class StudentHomePage extends StatelessWidget {
                      GButton(
                        icon: OMIcons.assignment,
                        text: 'Posts',
+                       margin: EdgeInsets.all(10),
+
                      ),
                      GButton(
                        icon: CommunityMaterialIcons.file,
@@ -78,10 +80,14 @@ class StudentHomePage extends StatelessWidget {
                      GButton(
                        icon: FontAwesomeIcons.tasks,
                        text: 'Quiz',
+
                      ),
                      GButton(
                        icon: OMIcons.questionAnswer,
                        text: 'Messages',
+                       margin: EdgeInsets.all(10),
+
+
                      ),
                    ],
 

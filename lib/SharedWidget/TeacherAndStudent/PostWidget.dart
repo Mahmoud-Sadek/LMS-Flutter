@@ -42,9 +42,10 @@ class SharedPostWidget extends StatelessWidget {
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-            width: MediaQuery.of(context).size.width - 20,
+            width: MediaQuery.of(context).size.width  /1.01,
             height: 230,
             decoration: BoxDecoration(
+
               borderRadius: BorderRadius.circular(20),
             ),
             child: Stack(
@@ -53,7 +54,8 @@ class SharedPostWidget extends StatelessWidget {
                   top: 5,
                   left: 0,
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 20,
+
+                    width: MediaQuery.of(context).size.width  /1.1,
                     child:
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,32 +212,33 @@ class SharedPostWidget extends StatelessWidget {
                         color: mainColor,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width - 20,
+                        width: MediaQuery.of(context).size.width /1.1,
                              height: 45,
                         child: Row(
 
                           children: <Widget>[
                             SizedBox(width: 10,),
                             Container(
-                                width: MediaQuery.of(context).size.width/3.3,
+                                width: MediaQuery.of(context).size.width/3.6,
                                 child:
                                 IconButton(onPressed: (){},icon:  Icon(Icons.favorite,size: 30,color: Colors.pinkAccent,),
                                   highlightColor:Colors.pinkAccent ,),
                             ),
                             Container(
-                              width: MediaQuery.of(context).size.width/3.3,
+                              width: MediaQuery.of(context).size.width/3.6,
                               child:
                               FlatButton(onPressed: (){},child:
                               Row(
                                 children: <Widget>[
-                                  Text("Comment",style: TextStyle(color: mainColor,fontWeight: FontWeight.bold,fontSize: 11),),
+                                  Text("Comment",style: TextStyle(color: mainColor,fontWeight: FontWeight.bold,fontSize: 10),),
                                   Icon(CommunityMaterialIcons.comment_outline,color: mainColor,)
                                 ],
                               ),
                               ),
                             ),
+                            SizedBox(width: 15,),
                             Container(
-                              width: MediaQuery.of(context).size.width/3.3,
+                              width: MediaQuery.of(context).size.width/3.6,
                               child:
                               FlatButton(onPressed: (){},child:
                               Row(

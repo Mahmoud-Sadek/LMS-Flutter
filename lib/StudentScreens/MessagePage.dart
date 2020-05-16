@@ -83,8 +83,8 @@ class MessageWidget extends StatelessWidget {
           ),
           SizedBox(width:10 ,),
           Container(
-            height: 40,
-            width: 40,
+            height: 35,
+            width: 35,
             decoration: BoxDecoration(
                shape: BoxShape.circle,
 //              color: Provider.of<ProviderData>(context).studentCountColor,
@@ -106,26 +106,32 @@ class StudentMessageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Consumer<StudentProvider>(
         builder: (context, messageList, child) {
-          return ListView.builder(
-              itemCount: messageList.studentMessageListCount,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final list = messageList.studentMessageList[index];
 
-                return Padding(
-                  padding: const EdgeInsets.only(left:10.0,right: 10),
-                  child: MessageWidget(
-                    image: list.image,name: list.name,
-                    count: list.count,
-                    message: list.message,
 
-                  ),
-                ) ;
-              });
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView.builder(
+                itemCount: messageList.studentMessageListCount,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final list = messageList.studentMessageList[index];
+
+                  return Padding(
+                    padding: const EdgeInsets.only(left:10.0,right: 10),
+                    child: MessageWidget(
+                      image: list.image,name: list.name,
+                      count: list.count,
+                      message: list.message,
+
+                    ),
+                  ) ;
+                }),
+          );
         },
       ),
     );
