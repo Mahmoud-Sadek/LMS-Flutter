@@ -45,21 +45,32 @@ import '../Model/message.dart';
 import '../Model/approve.dart';
 import '../SignLoginSlashWalkThrough/walkthrough.dart';
 import 'TextValidator.dart';
-class ProviderData extends ChangeNotifier{
+class ProviderData extends ChangeNotifier {
 
 /////////////////////////////////// Comments start //////
 
   final _comment = BehaviorSubject<String>();
+
   Stream<String> get commentStream => _comment.stream;
+
   Function(String) get commentChange => _comment.sink.add;
 
 
- static List<SupCommentModel> supCommentList1 =[
-    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList1",supImage:"assets/me.jpg" ),
+  static List<SupCommentModel> supCommentList1 = [
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList1",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList1",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList1",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList1",
+        supImage: "assets/me.jpg"),
   ];
+
   UnmodifiableListView<SupCommentModel> get supCommentList11 {
     return UnmodifiableListView(supCommentList1);
   }
@@ -69,12 +80,21 @@ class ProviderData extends ChangeNotifier{
   }
 
 
-  static List<SupCommentModel> supCommentList2 =[
-    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList2",supImage:"assets/me.jpg" ),
+  static List<SupCommentModel> supCommentList2 = [
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList2",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList2",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList2",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList2",
+        supImage: "assets/me.jpg"),
   ];
+
   UnmodifiableListView<SupCommentModel> get supCommentList22 {
     return UnmodifiableListView(supCommentList2);
   }
@@ -84,28 +104,44 @@ class ProviderData extends ChangeNotifier{
   }
 
 
-
-
- static List<SupCommentModel> supCommentList3 =[
-    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
-    SupCommentModel(name: "khira",supComment: "_supCommentList3",supImage:"assets/me.jpg" ),
+  static List<SupCommentModel> supCommentList3 = [
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList3",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList3",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList3",
+        supImage: "assets/me.jpg"),
+    SupCommentModel(name: "khira",
+        supComment: "_supCommentList3",
+        supImage: "assets/me.jpg"),
   ];
-  UnmodifiableListView<SupCommentModel> get  supCommentList33 {
+
+  UnmodifiableListView<SupCommentModel> get supCommentList33 {
     return UnmodifiableListView(supCommentList1);
   }
 
   int get supCommentListCount3 {
     return supCommentList3.length;
   }
-    List<MainCommentModel> _mainCommentList =[
-      MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",mainImage: "assets/me.jpg",name: "Mohamed Khlaed",supCommentMode:supCommentList1),
-      MainCommentModel(mainComment: "What we will have now hhhaah",mainImage: "assets/me.jpg",name: "Mohamed Khaled",supCommentMode: supCommentList2),
-      MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",mainImage: "assets/me.jpg",name: "Mohamed Khlaed",supCommentMode: supCommentList3),
 
-    ];
+  List<MainCommentModel> _mainCommentList = [
+    MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",
+        mainImage: "assets/me.jpg",
+        name: "Mohamed Khlaed",
+        supCommentMode: supCommentList1),
+    MainCommentModel(mainComment: "What we will have now hhhaah",
+        mainImage: "assets/me.jpg",
+        name: "Mohamed Khaled",
+        supCommentMode: supCommentList2),
+    MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",
+        mainImage: "assets/me.jpg",
+        name: "Mohamed Khlaed",
+        supCommentMode: supCommentList3),
 
+  ];
 
 
   UnmodifiableListView<MainCommentModel> get mainCommentList {
@@ -117,13 +153,48 @@ class ProviderData extends ChangeNotifier{
   }
 
   //////////////////////////////////// comments end ///////////////////////
-  List<postsModel> _postList =[
-    postsModel(name: "Mohamed Khira",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed khaled",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Aseem",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Amin",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-    postsModel(name: "Mohamed Osman",imageUrl: "assets/me.jpg",location: "Cairo-Egypt",content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",grade: "1st Secondry",group: "Group one",id: 123456,time: 1.54),
-     ];
+  List<postsModel> _postList = [
+    postsModel(name: "Mohamed Khira",
+        imageUrl: "assets/me.jpg",
+        location: "Cairo-Egypt",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        grade: "1st Secondry",
+        group: "Group one",
+        id: 123456,
+        time: 1.54),
+    postsModel(name: "Mohamed khaled",
+        imageUrl: "assets/me.jpg",
+        location: "Cairo-Egypt",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        grade: "1st Secondry",
+        group: "Group one",
+        id: 123456,
+        time: 1.54),
+    postsModel(name: "Mohamed Aseem",
+        imageUrl: "assets/me.jpg",
+        location: "Cairo-Egypt",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        grade: "1st Secondry",
+        group: "Group one",
+        id: 123456,
+        time: 1.54),
+    postsModel(name: "Mohamed Amin",
+        imageUrl: "assets/me.jpg",
+        location: "Cairo-Egypt",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        grade: "1st Secondry",
+        group: "Group one",
+        id: 123456,
+        time: 1.54),
+    postsModel(name: "Mohamed Osman",
+        imageUrl: "assets/me.jpg",
+        location: "Cairo-Egypt",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        grade: "1st Secondry",
+        group: "Group one",
+        id: 123456,
+        time: 1.54),
+  ];
 
 
   UnmodifiableListView<postsModel> get postList {
@@ -135,106 +206,118 @@ class ProviderData extends ChangeNotifier{
   }
 
 
-  openPost(BuildContext context ,String name ,String content ,int id , double time , String imgUrl,String grade ,String group , String location){
-    Navigator.push(context, MaterialPageRoute(builder: (context){
-      return SharedPostScreen(name: name,imageUrl: imgUrl,content: content,time: time,id: id,group: group,grade: grade,location: location,);
+  openPost(BuildContext context, String name, String content, int id,
+      double time, String imgUrl, String grade, String group, String location) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SharedPostScreen(name: name,
+        imageUrl: imgUrl,
+        content: content,
+        time: time,
+        id: id,
+        group: group,
+        grade: grade,
+        location: location,);
     }));
   }
 
 
-
-
-
-
-
-  List<String> splashScreen = ["assets/write.jpeg","assets/world.jpeg","assets/see.jpeg"];
+  List<String> splashScreen = [
+    "assets/write.jpeg",
+    "assets/world.jpeg",
+    "assets/see.jpeg"
+  ];
 
 
   int get splashScreenCount {
     return splashScreen.length;
   }
 
-  int x =-1;
-  Widget widgetWalkShow = WalkThroughWidget(text: " Knowledge is the key to your mind and fill your body with light",imageUrl: "assets/write.jpeg",);
-  List<Widget> widgetWalk  =[WalkThroughWidget(text: "Rasie Your Kids With Learn",imageUrl: "assets/father.jpeg",),WalkThroughWidget(text: "We allow you to connet us from any place",imageUrl: "assets/world.jpeg",),WalkThroughWidget(text: "Keep Learning and Never Stop Knowledge is the way to the top",imageUrl: "assets/stop.jpeg",)];
+  int x = -1;
+  Widget widgetWalkShow = WalkThroughWidget(
+    text: " Knowledge is the key to your mind and fill your body with light",
+    imageUrl: "assets/write.jpeg",);
+  List<Widget> widgetWalk = [
+    WalkThroughWidget(
+      text: "Rasie Your Kids With Learn", imageUrl: "assets/father.jpeg",),
+    WalkThroughWidget(text: "We allow you to connet us from any place",
+      imageUrl: "assets/world.jpeg",),
+    WalkThroughWidget(
+      text: "Keep Learning and Never Stop Knowledge is the way to the top",
+      imageUrl: "assets/stop.jpeg",)
+  ];
 
 
-next(BuildContext context){
-  x++;
+  next(BuildContext context) {
+    x++;
 
-  if(x ==0){
-    widgetWalkShow = widgetWalk [0];
-  }else if(x ==1){
-    widgetWalkShow = widgetWalk [1];
+    if (x == 0) {
+      widgetWalkShow = widgetWalk [0];
+    } else if (x == 1) {
+      widgetWalkShow = widgetWalk [1];
+    }
+    else if (x == 2) {
+      widgetWalkShow = widgetWalk [2];
+    } else if (x > 2) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => StudentHomePage()));
+    }
 
+    notifyListeners();
   }
-  else if(x ==2){
-    widgetWalkShow = widgetWalk [2];
-
-  }else if(x >2){
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => StudentHomePage()));
-  }
-
-  notifyListeners();
-}
 
 
 ////////////////////////////////////////////////// SignLogin Provider Start /////////////////////////////
 
 
   final email = BehaviorSubject<String>();
+
   Stream<String> get emailStream => email.stream;
+
   Function(String) get emailChange => email.sink.add;
 
   final _password = BehaviorSubject<String>();
+
   Stream<String> get passwordStream => _password.stream;
+
   Function(String) get passwordChange => _password.sink.add;
 
 
-
-  login(BuildContext context){
-
-    if( email.value == "1"){
+  login(BuildContext context) {
+    if (email.value == "1") {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => ParentPhone()));
-    }if(email.value == "2"){
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => StudentHomePage()));
-
     }
-    if( email.value == "3"){
+    if (email.value == "2") {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
-    }if(email.value == "4"){
+          MaterialPageRoute(
+              builder: (BuildContext context) => StudentHomePage()));
+    }
+    if (email.value == "3") {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => TeacherHomePage()));
+    }
+    if (email.value == "4") {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => WalkThrough()));
-
     }
-    if(email.value == null){
+    if (email.value == null) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => TeacherHomePage()));
-
+          MaterialPageRoute(
+              builder: (BuildContext context) => TeacherHomePage()));
     }
-
   }
 
 
-
-visitorOpen(BuildContext context){
-
-
-  Navigator.push(context,
-      MaterialPageRoute(builder: (BuildContext context) => VisitorNavigationBar()));
-
-}
-
-
+  visitorOpen(BuildContext context) {
+    Navigator.push(context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => VisitorNavigationBar()));
+  }
 
 
 ////////////////////////////////////////////////// SignLogin Provider end /////////////////////////////
-
-
 
 
   ////////////////////////////////////////////////// Student Provider Start /////////////////////////////
@@ -242,74 +325,63 @@ visitorOpen(BuildContext context){
 
 ///////////////////////////////////////////
 
-openNotification(BuildContext context){
-  Navigator.push(context, MaterialPageRoute(builder: (context){
-    return NotificationScreen();
-  }));
-  notifyListeners();
-}
+  openNotification(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return NotificationScreen();
+    }));
+    notifyListeners();
+  }
+
 //////////////
-  List<String> countries = ['Egypt', 'Usa' , ' Libia'];
+  List<String> countries = ['Egypt', 'Usa', ' Libia'];
   String selectedCountry = "Egypt";
-  changeCountry(String value){
+
+  changeCountry(String value) {
     selectedCountry = value;
     notifyListeners();
   }
 
 
-
-
-  List<String> cites = ['Menof', 'Elbagour' , ' Sirs',"Shipin"];
+  List<String> cites = ['Menof', 'Elbagour', ' Sirs', "Shipin"];
   String selectedCites = "Menof";
-  changeCity(String value){
+
+  changeCity(String value) {
     selectedCites = value;
     notifyListeners();
   }
 
-  List<String> grade = ['1ST Secondary', '2ST Secondary' , '3ST Secondary',"1ST primary"];
+  List<String> grade = [
+    '1ST Secondary',
+    '2ST Secondary',
+    '3ST Secondary',
+    "1ST primary"
+  ];
   String selectedGrade = "1ST Secondary";
-  changeGrade(String value){
+
+  changeGrade(String value) {
     selectedGrade = value;
     notifyListeners();
   }
 
-  List<String> group = ['Group One', 'Group Two' , ' Group Three',"Group Four"];
+  List<String> group = ['Group One', 'Group Two', ' Group Three', "Group Four"];
   String selectedGroup = "Group One";
-  changeGroup(String value){
+
+  changeGroup(String value) {
     selectedGroup = value;
     notifyListeners();
   }
 
 
-
-  List<String> jop = ['Dont Work', 'Teacher' , ' Doctor',"Engineer"];
+  List<String> jop = ['Dont Work', 'Teacher', ' Doctor', "Engineer"];
   String selectedJop = "Dont Work";
-  changeJop(String value){
+
+  changeJop(String value) {
     selectedJop = value;
     notifyListeners();
   }
 
 
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ////////////////////////////////////////// NavigationBar
@@ -318,15 +390,11 @@ openNotification(BuildContext context){
 ///////////////////////////PDF//////////////////////
 
 
-
-  openProfile(BuildContext context){
+  openProfile(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => Profile()));
     notifyListeners();
-
   }
-
-
 
 
 ////////////////////////////////////////////////////// Student Provider End ////////////////////////////////
@@ -335,13 +403,10 @@ openNotification(BuildContext context){
 //////////////////////////////////////////////parent Start /////////////////////////////////////////
 
 
-
-openParentHomePage(BuildContext context){
-  Navigator.push(context,
-      MaterialPageRoute(builder: (BuildContext context) => ParentHomePage()));
-
-}
-
+  openParentHomePage(BuildContext context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => ParentHomePage()));
+  }
 
 
   int selectedIndexParent = 0;
@@ -361,28 +426,58 @@ openParentHomePage(BuildContext context){
   ];
 
 
-  ChangeParentAppBar(int index){
+  ChangeParentAppBar(int index) {
     selectedIndexParent = index;
     notifyListeners();
   }
 
 
-  List<NewsModel> _newsList =[
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
-    NewsModel(content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",title: "fisrt"),
+  List<NewsModel> _newsList = [
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
+    NewsModel(
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        title: "fisrt"),
   ];
 
 
@@ -397,9 +492,8 @@ openParentHomePage(BuildContext context){
 //////////////////////////////////////////////////////// parent End ///////////////////
 
 
-
   @override
-  void dispose() async{
+  void dispose() async {
     super.dispose();
     await email.drain();
     email.close();
@@ -407,11 +501,7 @@ openParentHomePage(BuildContext context){
     _password.close();
 
 
-
     _comment.close();
   }
-
-
-
 }
 
