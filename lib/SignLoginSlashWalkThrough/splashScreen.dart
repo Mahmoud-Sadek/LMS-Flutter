@@ -72,7 +72,6 @@ class _SplashScreenState extends State<SplashScreen> {
           await SharedPreferences.getInstance();
       sharedPreferences.setString(Common.TOKEN, token);
 
-
     });
   }
 

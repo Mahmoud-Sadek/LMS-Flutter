@@ -24,14 +24,14 @@ class SharedPostsAppBar extends StatelessWidget {
           child:
           Container(
             height: 100,
-            width: MediaQuery.of(context).size.width-100,
+            width: MediaQuery.of(context).size.width/1.5,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child:
                 Container(
-                  width: MediaQuery.of(context).size.width - 20,
+                  width: MediaQuery.of(context).size.width /1.2,
                   child: Row(
                     children: <Widget>[
                       Spacer(flex: 1,),
@@ -52,8 +52,8 @@ class SharedPostsAppBar extends StatelessWidget {
 
                         child: Container(
                           margin: EdgeInsets.only(left: 5,right: 5),
-                          width: 120,
-                          height: 50,
+                          width: MediaQuery.of(context).size.width/4,
+                          height: 45,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
@@ -95,8 +95,8 @@ class SharedPostsAppBar extends StatelessWidget {
                             }),);
                         },
                         child: Container(
-                            height: 55,
-                            width: MediaQuery.of(context).size.width/3,
+                            height: 45,
+                            width: MediaQuery.of(context).size.width/4,
                             decoration: BoxDecoration(
 
                               borderRadius: BorderRadius.only(
