@@ -7,11 +7,11 @@ import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/services/LogIn/LogIn.dart';
+
 import 'package:work/utils/common.dart';
 
 class Login extends StatelessWidget {
-
-
+ String Token =Common.getToken().toString();
   String email,password;
 
   @override
@@ -57,29 +57,29 @@ class Login extends StatelessWidget {
 
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
                       onPressed:  ()async {
-                         if(await LogIn().loginData(email, password, Common.TOKEN)==1){
 
-                           Navigator.push(context,
-                             MaterialPageRoute(builder: (context) {
-                               return new StudentHomePage();
-                             }),);
+                        int x = await LogIn().loginData(
+                            email, password, await Common.getToken());
+                        if (x == 1) {
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return new StudentHomePage();
+                            }),);
+                        }
+                        else if (x == 2) {
 
-                         }else if(await LogIn().loginData(email, password, Common.TOKEN)==2){
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return new ParentHomePage();
+                            }),);
+                        }
+                      }
 
-                           Navigator.push(context,
-                             MaterialPageRoute(builder: (context) {
-                               return new ParentHomePage();
-                             }),);
-                         }
-
-
-
-                    }
                     ),
                   ),
                   SizedBox(height: 15,),
                   ResetAndSignUp(word: "Dont have an account ?",onTap: (){
-                    Provider.of<ProviderData>(context).signUpShow(context);
+                   // Provider.of<ProviderData>(context).signUpShow(context);
 
                   },buttonText: "Signup",mainAxisAlignment: MainAxisAlignment.center,width: 50,),
                   SizedBox(height: 50,),

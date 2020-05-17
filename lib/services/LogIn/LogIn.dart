@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work/utils/common.dart';
 
-class LogIn extends ChangeNotifier{
+class LogIn {
 
   int ut;
 
@@ -17,7 +17,7 @@ class LogIn extends ChangeNotifier{
 
 
 
-   loginData(String email,String password,String token) async {
+    loginData(String email,String password,String token) async {
     var headers= await Common.getHeaders();
     String myUrl = "$serverUrl/api/Account/Auth";
     final response = await http.post(myUrl,
@@ -43,8 +43,9 @@ class LogIn extends ChangeNotifier{
      sharedPreferences.setInt("GroupId",data["GroupId"] );
      sharedPreferences.setInt("GradeId",data["GradeId"] );
 
-     ut =sharedPreferences.getInt("UserTybe");
-     notifyListeners();
+ int  ut =sharedPreferences.getInt("UserTybe");
+
+
      print("osman$ut");
 
       return ut;
@@ -53,7 +54,7 @@ class LogIn extends ChangeNotifier{
    else{
 
      print( data["Message"]);
-
+     return 9;
 
      }
    // status = response.body.contains('message');
