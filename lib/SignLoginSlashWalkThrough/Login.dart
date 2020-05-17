@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
-import 'package:work/Model/Login/LoginModel.dart';
+import 'package:work/services/LogIn/LogIn.dart';
 import 'package:work/utils/common.dart';
 
 class Login extends StatelessWidget {
- String Token =Common.getToken().toString();
+
+
   String email,password;
 
   @override
@@ -54,17 +56,25 @@ class Login extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 80,
 
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
-                      onPressed:  (){DatabaseHelper().loginData(email, password,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAxMDIwNDg4MjQ1Ii"
-                          "wibmFtZWlkIjoiNjQ0OCIsIkVtYWlsQWRkcmVzcyI6InNhZGVrQGtmay5jb20iLCJGdWxsTmFtZSI6ImFsaSBtb2hhbWVkIGtvcnRhbSIsIlVzZXJ"
-                          "UeXBlIjoiU3R1ZG5ldCIsIm5iZiI6MTU4OTMxNTQ2MSwiZXhwIjoxNTk0NTg1ODYxLCJpYXQiOjE1ODkzMTU0NjEsImlzcyI6IioiLCJhdWQiOiIqIn0.z_Z"
-                          "WsF4RXCyN3uPKoijGni8zxVkxs1jHLAd1jFZjxdo").then((value) {
-                        if(value==true){
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return new StudentHomePage();
-                          }),);}
-                      });},
+                      onPressed:  ()async {
+                         if(await LogIn().loginData(email, password, Common.TOKEN)==1){
 
+                           Navigator.push(context,
+                             MaterialPageRoute(builder: (context) {
+                               return new StudentHomePage();
+                             }),);
+
+                         }else if(await LogIn().loginData(email, password, Common.TOKEN)==2){
+
+                           Navigator.push(context,
+                             MaterialPageRoute(builder: (context) {
+                               return new ParentHomePage();
+                             }),);
+                         }
+
+
+
+                    }
                     ),
                   ),
                   SizedBox(height: 15,),
