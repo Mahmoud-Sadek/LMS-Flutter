@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/SignUPModel/AppiomentsModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/TextBloc.dart';
@@ -111,7 +112,7 @@ class SecondSignUp extends StatelessWidget{
         ),
 
         Container(
-          height:  Provider.of<SignUpProvider>(context).parent == false ?350 :300,
+          height:  Provider.of<SignUpProvider>(context).parent == false ?300 :300,
           child: Column(
 
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,18 +146,20 @@ class SecondSignUp extends StatelessWidget{
         SizedBox(
           height: 20,
         ),
+
         Material(
           elevation: 5,
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          child: Provider.of<SignUpProvider>(context).currentGroup == null ? Container(height: 0,width: 0,) :Container(
-            height: 150,
+          child: Provider.of<SignUpProvider>(context).currentGroup == null ? Container(height: 0,width: 0,) : Container(
+            height: 200,
             width: MediaQuery.of(context).size.width * .70,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Color(0xff94D1CC)),
+                color: Color(0xff26a69a)),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -178,13 +181,17 @@ class SecondSignUp extends StatelessWidget{
                             overflow: TextOverflow.ellipsis,
                           )
                       ),
-                      Spacer(),
+                      Spacer(flex: 1,),
                       Icon(
                         Icons.location_on,
                         color: mainColor,
+                        size: 25,
                       )
                     ],
                   ),
+                  SizedBox(height: 5,),
+                   Provider.of<SignUpProvider>(context).asyncLoaderAppointment,
+
                   SizedBox(height: 10,),
 
                 ],
@@ -268,3 +275,56 @@ class SecondSignUp extends StatelessWidget{
 
 }
 
+class AppointmentWidget extends StatelessWidget {
+  final AppointmentModel appointmentModel;
+  const AppointmentWidget({
+    this.appointmentModel
+  }) ;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width/3.2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Day : ${appointmentModel.day}",style: TextStyle(fontSize: 12,color: Colors.white),),
+          Text("From : ${appointmentModel.from}",style: TextStyle(fontSize: 12,color: Colors.white),),
+          Text("To : ${appointmentModel.to}",style: TextStyle(fontSize: 12,color: Colors.white),),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+Widget GridAppointMent(List<AppointmentModel> appointment , ){
+
+  return
+        GridView.builder(
+
+          addAutomaticKeepAlives: true,
+         shrinkWrap: true,
+         physics: NeverScrollableScrollPhysics(),
+         itemCount: appointment.length,
+
+           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+             childAspectRatio: (100/54),
+                   crossAxisSpacing: 20,
+               crossAxisCount:  2,),
+
+  itemBuilder: ( context, int index) {
+             return Padding(
+               padding: const EdgeInsets.all(3.0),
+                 child: AppointmentWidget(
+                   appointmentModel: appointment[index],
+
+               ),
+             );
+  }
+     );
+
+
+}

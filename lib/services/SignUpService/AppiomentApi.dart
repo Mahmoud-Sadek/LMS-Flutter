@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http ;
 
 
-Future<List<AppiomentsModel>> getAppioments( String groupId ) async {
+Future<List<AppointmentModel>> getAppointments({ String groupId} ) async {
   var headers= await Common.getHeaders();
 
 //  var body = json.encode(aboutAppBody.toJson());
@@ -20,8 +20,8 @@ Future<List<AppiomentsModel>> getAppioments( String groupId ) async {
 
   if (response.statusCode == 200) {
 
-    List<AppiomentsModel> appiomentList = (json.decode(response.body) as List)
-        .map((data) => new AppiomentsModel.fromJson(data))
+    List<AppointmentModel> appiomentList = (json.decode(response.body) as List)
+        .map((data) => new AppointmentModel.fromJson(data))
         .toList();
     return appiomentList;
   } else {

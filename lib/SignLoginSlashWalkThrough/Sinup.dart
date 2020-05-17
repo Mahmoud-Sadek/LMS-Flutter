@@ -116,8 +116,14 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   left: 40,
 
 
-                  child:  Material(
-                    shape: CircleBorder(),
+                  child:  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: mainColor,
+
+                  ),
+                    height: 120,
+                    width: 120,
                     child: ClipRRect(
 
                        borderRadius: BorderRadius.all(Radius.circular(120)),

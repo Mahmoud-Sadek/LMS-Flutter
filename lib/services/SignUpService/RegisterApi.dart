@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http ;
 import 'package:provider/provider.dart';
@@ -13,11 +14,41 @@ import 'dart:convert'show json, jsonDecode, jsonEncode;
 import 'dart:async';
 
 import 'package:work/utils/common.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 
 
 
 Future<String> StudentRegisterApi(RegisterModel bodys,BuildContext context) async {
+
+
+  ProgressDialog progressDialog = ProgressDialog(context,
+      type: ProgressDialogType.Normal,
+    isDismissible: true,
+    customBody: LinearProgressIndicator(
+      valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+      backgroundColor: Colors.white,
+    ),
+
+  );
+
+  progressDialog.style(
+    message: "Please Wait",
+    borderRadius: 10.0,
+    backgroundColor: Colors.white,
+    elevation: 10.0,
+    insetAnimCurve: Curves.easeInOut,
+    progress: 0.0,
+    progressWidgetAlignment: Alignment.center,
+    maxProgress: 100.0,
+    progressTextStyle: TextStyle(
+        color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+    messageTextStyle: TextStyle(
+        color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
+
+  );
+
+  
   var headers= await Common.getHeaders();
   var body = json.encode(bodys.toJson());
 
@@ -26,6 +57,12 @@ Future<String> StudentRegisterApi(RegisterModel bodys,BuildContext context) asyn
     headers: headers,
     body: body,
   );
+
+  if(response.statusCode !=200 || response.statusCode !=400 || response.statusCode !=500){
+   progressDialog.update(message: "Wait");
+    print("ffffffffffff");
+  }
+
   if (response.statusCode == 200) {
     // If the server did return a 200 CREATED response,
     // then parse the JSON.
@@ -96,5 +133,6 @@ Future<String> StudentRegisterApi(RegisterModel bodys,BuildContext context) asyn
               Navigator.pop(context);
             },),
           );
-        });  }
+        });
+  }
 }

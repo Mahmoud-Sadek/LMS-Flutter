@@ -29,6 +29,7 @@ import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpErrorDailog.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
 import 'package:work/Style/style.dart';
+import 'package:work/services/SignUpService/AppiomentApi.dart';
 import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
 import 'package:work/services/SignUpService/GradeApi.dart';
@@ -105,6 +106,33 @@ class SignUpProvider extends ChangeNotifier {
   }
 
 ///////////////////////////////////////////
+
+
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderAppointment=
+  new GlobalKey<AsyncLoaderState>();
+
+  var asyncLoaderAppointment = new AsyncLoader(
+    key: globalAsyncLoaderAppointment,
+    initState: () async => await getAppointments(groupId: groupId.toString()),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderAppointment.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => GridAppointMent(data)
+  );
+
+  CountryModel currentAppointment = null;
+
+  List<CountryModel> appointments = [];
+
+
+
+
+
+
+
+
+
 
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderCountry =
       new GlobalKey<AsyncLoaderState>();
@@ -250,6 +278,10 @@ class SignUpProvider extends ChangeNotifier {
     groupId=currentGroup.groupId;
     print(currentGroup.note);
     notifyListeners();
+
+    if (globalAsyncLoaderAppointment.currentState != null)
+      globalAsyncLoaderAppointment.currentState.reloadState();
+
   }
 
   List<DropdownMenuItem<GroupModel>> getDropDownMenuItemsGroup() {
