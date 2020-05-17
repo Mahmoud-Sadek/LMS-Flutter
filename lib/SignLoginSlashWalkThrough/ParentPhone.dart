@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/PhoneModel.dart';
+import 'package:work/Model/SignUPModel/ParentRegisterModel.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -9,6 +14,18 @@ import 'package:work/SharedWidget/MainTextFeild.dart';
 
 
 class ParentPhone extends StatelessWidget {
+  final String firstName;
+  final String secondName;
+  final String lastName;
+  final String jop;
+  final String emailAddres;
+  final String phone;
+  final String password;
+  final String gander;
+
+
+  ParentPhone({this.phone,this.password,this.emailAddres,this.firstName,this.lastName,this.secondName,this.gander,this.jop});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
@@ -43,8 +60,8 @@ class ParentPhone extends StatelessWidget {
                         child: Center(
                           child: MainTextField(
                             obscure: false,
-                            textStream: Provider.of<ProviderData>(context).parentPhoneStream,
-                            textChange:Provider.of<ProviderData>(context).parentPhoneChange ,
+                            textStream: Provider.of<SignUpProvider>(context).parentPhoneStream,
+                            textChange:Provider.of<SignUpProvider>(context).parentPhoneChange ,
                             inputType: TextInputType.phone,
                             hintText: "Enter Your son Phone",
 
@@ -58,7 +75,7 @@ class ParentPhone extends StatelessWidget {
 
             Container(
               width: MediaQuery.of(context).size.width/1.4,
-              child: Consumer<ProviderData>(
+              child: Consumer<SignUpProvider>(
                 builder: (context,phoneData,child){
                   return ListView.builder(
                       shrinkWrap: true,
@@ -87,7 +104,7 @@ class ParentPhone extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width/1.4,
                   child: ButtonWidget(height: 60,color: mainColor ,onPressed: (){
-                    Provider.of<ProviderData>(context).addPhone(Provider.of<ProviderData>(context).parentPhone.value);
+                    Provider.of<SignUpProvider>(context).addPhone(Provider.of<SignUpProvider>(context).childPhone.value);
                   },textColor: Colors.white,borderColor: mainColor,text: "ADD Phone",),
 
                 ),
@@ -105,7 +122,37 @@ class ParentPhone extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width/2.5,
                         child: ButtonWidget(text: "Done",borderColor: mainColor,textColor:Colors.white ,onPressed: (){
-                          Provider.of<ProviderData>(context).openParentHomePage(context);
+                          if(Provider.of<SignUpProvider>(context).parent == false){
+
+                          ParentRegisterModel body = ParentRegisterModel();
+                          PhoneModel phonem = PhoneModel();
+                          body.password = password;
+                          body.mobile = phone;
+                          body.gender = gander;
+                          body.fullName = "$firstName $secondName $lastName";
+                          body.emailAddress = emailAddres;
+                          body.jobName = Provider.of<SignUpProvider>(context).jop.value;
+                          body.sonNumbers =Provider.of<SignUpProvider>(context).x;
+                          List<int> cd =  Provider.of<SignUpProvider>(context).imagefile.readAsBytesSync();
+                          String base64Image = base64Encode(cd);
+                          body.image = base64Image;
+                          print(body.image);
+                          print(body.password);
+                          print(body.sonNumbers);
+                          print(body.mobile);
+                          print(body.gender);
+                          print(body.fullName);
+                          print(body.image);
+                          print(body.emailAddress);
+                          print(body.jobName);
+
+                          Provider.of<SignUpProvider>(context).SubmitParent(body, context);
+
+//                          Provider.of<SignUpProvider>(context).changeStudentState();
+//                          print(Provider.of<SignUpProvider>(context).changeParentState);
+
+
+                          }
 
                         },height: 60,color: mainColor,),
                       ),

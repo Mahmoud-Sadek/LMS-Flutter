@@ -8,8 +8,6 @@ class ParentRegisterModel {
   String fullName;
   String password;
   String jobName;
-  String cityId;
-  String groupId;
   List<String> sonNumbers;
   String image;
 
@@ -21,8 +19,6 @@ class ParentRegisterModel {
         this.fullName,
         this.password,
         this.jobName,
-        this.cityId,
-        this.groupId,
         this.sonNumbers,
         this.image});
 
@@ -34,8 +30,6 @@ class ParentRegisterModel {
     fullName = json['FullName'];
     password = json['Password'];
     jobName = json['JobName'];
-    cityId = json['CityId'];
-    groupId = json['GroupId'];
     sonNumbers = json['SonNumbers'].cast<String>();
     image = json['Image'];
   }
@@ -49,8 +43,6 @@ class ParentRegisterModel {
     data['FullName'] = this.fullName;
     data['Password'] = this.password;
     data['JobName'] = this.jobName;
-    data['CityId'] = this.cityId;
-    data['GroupId'] = this.groupId;
     data['SonNumbers'] = this.sonNumbers;
     data['Image'] = this.image;
     return data;

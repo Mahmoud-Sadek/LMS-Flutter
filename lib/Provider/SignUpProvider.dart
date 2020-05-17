@@ -1,14 +1,25 @@
+import 'dart:collection';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:async_loader/async_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/SignUPModel/CityModle.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
 import 'package:work/Model/SignUPModel/GroupModel.dart';
 import 'package:work/Model/SignUPModel/ParentRegisterModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
+import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUp2.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ChosseImage.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CityWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/CountryWidget.dart';
@@ -17,6 +28,7 @@ import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GroupsWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpErrorDailog.dart';
 import 'package:work/SignLoginSlashWalkThrough/Sinup.dart';
+import 'package:work/Style/style.dart';
 import 'package:work/services/SignUpService/CityApi.dart';
 import 'package:work/services/SignUpService/CountryApi.dart';
 import 'package:work/services/SignUpService/GradeApi.dart';
@@ -50,8 +62,6 @@ class SignUpProvider extends ChangeNotifier {
 
 //  Widget selectedSignUpDropButton = StudentGradeGroupWidget();
 //  List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(), ParentJop()];
-  List<Widget> signUpBackWidgetList = [SignUpBackParent(), SignUpBackStudent()];
-  Widget signUpBackWidget = SignUpBackParent();
 
   openStudentSignUp(BuildContext context) {
 
@@ -62,10 +72,8 @@ class SignUpProvider extends ChangeNotifier {
     print(student);
     signUp = FirstSignUp();
 
-    signUpBackWidget = signUpBackWidgetList[1];
-//    selectedSignUpDropButton = signUpDropDwonList[0];
     Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
+        MaterialPageRoute(builder: (BuildContext context) => SignUp1()));
     notifyListeners();
   }
 
@@ -75,10 +83,8 @@ class SignUpProvider extends ChangeNotifier {
     print(parent);
     print(student);
     signUp = FirstSignUp();
-    signUpBackWidget = signUpBackWidgetList[0];
-//    selectedSignUpDropButton = signUpDropDwonList[0];
     Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) => SignUp()));
+        MaterialPageRoute(builder: (BuildContext context) => SignUp1()));
     notifyListeners();
   }
 
@@ -385,17 +391,32 @@ class SignUpProvider extends ChangeNotifier {
             );
           });
     } else {
-      signUp = SecondSignUp(
-        phone: phone.value,
-        emailAddres: emailRegister.value,
-        firstName: firstName.value,
-        lastName: lastName.value,
-        password: passwordRegister.value,
-        secondName: secondName.value,
-        gander: gander,
-        image: "",
-      );
+     parent == false  ? Navigator.push(context, MaterialPageRoute(builder: (context){
+       return     ParentPhone(  phone: phone.value,
+         emailAddres: emailRegister.value,
+         firstName: firstName.value,
+         lastName: lastName.value,
+         password: passwordRegister.value,
+         secondName: secondName.value,
+         gander: gander,
+         jop:jop.value ,
 
+       );
+
+     })):
+
+     Navigator.push(context, MaterialPageRoute(builder: (context){
+           return           SignUp2(
+             phone: phone.value,
+             emailAddres: emailRegister.value,
+             firstName: firstName.value,
+             lastName: lastName.value,
+             password: passwordRegister.value,
+             secondName: secondName.value,
+             gander: gander,
+           );
+
+         }));
       print(emailRegister.value);
       print(phone.value.toString());
       print(secondName.value);
@@ -434,8 +455,105 @@ class SignUpProvider extends ChangeNotifier {
    bool parent = false;
   bool student = false;
 
+
+
+   File imagefile;
+
+
+  Future<void> openGallary(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    imagefile = picture;
+    print(imagefile);
+    notifyListeners();
+
+  }
+
+
+
+  Future<void> openCamera(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.camera);
+      imagefile = picture;
+      print(imagefile.toString());
+
+  }
+
+
+  onChoseImage(context){
+    showModalBottomSheet(context: context, builder: (context){
+
+      return
+        ChosseImage()
+      ;
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  List<PhoneModel> childphonelist = [
+  ];
+
+  UnmodifiableListView<PhoneModel> get phones {
+    return UnmodifiableListView(childphonelist);
+  }
+
+  int get phoneCount {
+    return childphonelist.length;
+  }
+
+
+
+
+
+  final childPhone= BehaviorSubject<String>();
+  Stream<String> get parentPhoneStream => childPhone.stream.transform(validators.validatePhone);
+  Function(String) get parentPhoneChange => childPhone.sink.add;
+
+   List<String> x =[];
+
+  void addPhone(String newPhone) {
+    final phone = PhoneModel(phone: newPhone);
+    childphonelist.add(phone);
+    x.add(phone.phone);
+    childPhone.value ="";
+    notifyListeners();
+  }
+
+
+  void deletePhone(PhoneModel phoneModel) {
+
+    childphonelist.remove(phoneModel);
+    x.remove(phoneModel);
+    notifyListeners();
+
+  }
+
+
+
+
+
+
+
+
   void changeParentState(){
      parent =! parent;
+   }
+
+   ApiLogin(BuildContext context){
+     Navigator.pushReplacement(context,
+         MaterialPageRoute(builder: (BuildContext context) => Login()));
+           notifyListeners();
    }
 
   void changeStudentState(){
@@ -444,12 +562,18 @@ class SignUpProvider extends ChangeNotifier {
   Future<String> future;
   //sadek
   SubmitStudent(RegisterModel body,BuildContext context) async {
-    String token = await Common.getToken();
+    try{String token = await Common.getToken();
     body.cityId = currentCity.id.toString();
     body.groupId = currentGroup.groupId.toString();
     body.fireBaseToken = token;
+    List<int> cd =  imagefile.readAsBytesSync();
+    String base64Image = base64Encode(cd);
+    body.image = base64Image;
+
 
     future = StudentRegisterApi(body,context);
+    notifyListeners();
+    }catch(e){}
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
@@ -463,18 +587,21 @@ class SignUpProvider extends ChangeNotifier {
   Future<String> parentFuture;
 
   SubmitParent(ParentRegisterModel body,BuildContext context) async {
-    String token = await Common.getToken();
-    body.cityId = currentCity.id.toString();
-    body.groupId = currentGroup.groupId.toString();
-    body.fireBaseToken = token;
+               try{
+                 String token = await Common.getToken();
+                 body.fireBaseToken = token;
+                 List<int> cd =  imagefile.readAsBytesSync();
+                 String base64Image = base64Encode(cd);
+                 body.image = base64Image;
+                 print(body.image);
 
-    parentFuture = ParentRegisterApi(body,context);
+                 parentFuture = ParentRegisterApi(body,context);
+                 notifyListeners();
+
+               }catch(e){}
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
-    print(currentCity.id);
-    print(Common.getToken());
-    print(currentGroup.groupId);
 
     notifyListeners();
   }
@@ -513,5 +640,6 @@ class SignUpProvider extends ChangeNotifier {
     lastName.cast();
   }
 }
+
 
 //() => asyncLoaderCountry.currentState.reloadState()

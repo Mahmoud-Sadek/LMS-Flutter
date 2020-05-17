@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/Style/style.dart';
 
-import 'ParentPhone.dart';
+import '../SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'ParentWidget/ParentAppBar.dart';
 
 
@@ -43,9 +43,9 @@ class ChildrenParent extends StatelessWidget {
               color: mainColor,
               height: 40,
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ParentPhone();
-                }));
+//                Navigator.push(context, MaterialPageRoute(builder: (context){
+//                  return ParentPhone();
+//                }));
               },
               textColor: Colors.white,
               borderColor: Colors.white,

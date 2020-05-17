@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http ;
+import 'package:provider/provider.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
 import 'package:work/Model/SignUPModel/GroupModel.dart';
 import 'package:work/Model/SignUPModel/RigisterModel.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpErrorDailog.dart';
 import 'dart:convert'show json, jsonDecode, jsonEncode;
@@ -38,9 +40,7 @@ Future<String> StudentRegisterApi(RegisterModel bodys,BuildContext context) asyn
             backgroundColor: Colors.transparent,
             child: ErrorSignUpWidget(errorMessage: " Your Form Is Under Pending Now It Will Activate In Less Than 24-hr. ",image: "assets/see.jpeg",onpressed: (){
 
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (BuildContext context) => Login()));
-
+              Provider.of<SignUpProvider>(context).ApiLogin(context);
             },),
 
           );

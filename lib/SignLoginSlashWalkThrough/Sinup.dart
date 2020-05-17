@@ -25,20 +25,27 @@ import 'package:work/services/SignUpService/CountryApi.dart';
 
 import 'SignUpWidget/GradeWidget.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Bloc bloc = Bloc();
     return SafeArea(
       child: Scaffold(
+
+
         body: SingleChildScrollView(
           child: Container(
-            height: 800,
+            height: 900,
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Container(
                 width: MediaQuery.of(context).size.width * .85,
-                height: 750,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
+                ),
+                height: 833,
                 child: Stack(
                   children: <Widget>[
                     SignUpBackGround1(),
@@ -46,15 +53,16 @@ class SignUp extends StatelessWidget {
                     Positioned(
                       top: 60,
                       left: 0,
+                      bottom: 10,
                       child: Container(
                         width: MediaQuery.of(context).size.width * .85,
-                        height: 690,
+                        height: 815,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20),
                               bottomRight: Radius.circular(20)),
                         ),
-                        child: Provider.of<SignUpProvider>(context).signUp,
+                        child: FirstSignUp(),
                       ),
                     ),
                   ],
@@ -68,371 +76,8 @@ class SignUp extends StatelessWidget {
   }
 }
 
-class SecondSignUp extends StatelessWidget{
-
-  final String firstName;
-  final String secondName;
-  final String lastName;
-  final String emailAddres;
-  final String phone;
-  final String password;
-  final String gander;
-  final String image;
 
 
-  SecondSignUp({this.phone,this.password,this.emailAddres,this.firstName,this.lastName,this.secondName,this.gander,this.image});
-
-
-
-  @override
-  Widget build(BuildContext context) {
-
-
-
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          "SignUP",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-
-        Container(
-          height:  Provider.of<SignUpProvider>(context).parent == false ?500 :300,
-          child: Column(
-
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(width: 30,),
-              Provider.of<SignUpProvider>(context).asyncLoaderCountry,
-              SizedBox(width: 30,),
-              Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                child:  Provider.of<SignUpProvider>(context).currentCountry == null ? Container() :     Provider.of<SignUpProvider>(context).asyncLoaderCity,
-
-           ),
-              SizedBox(width: 30,),
-              Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
-              ),
-              SizedBox(width: 30,),
-              Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                child:    (Provider.of<SignUpProvider>(context).currentGrade == null || Provider.of<SignUpProvider>(context).currentCity == null) ? Container() :   Provider.of<SignUpProvider>(context).asyncLoaderGroup,
-
-              ),
-              SizedBox(width: 30,),
-              Provider.of<SignUpProvider>(context).parent == true ? Container(height: 0,width: 0,) : Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                height: 150,
-                child: Column(
-
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-
-                  children: <Widget>[
-
-                    MainTextField(
-                      obscure: false,
-                      textStream: Provider.of<SignUpProvider>(context).sonPhoneStream,
-                      textChange: Provider.of<SignUpProvider>(context).sonPhoneChange,
-                      inputType: TextInputType.phone,
-                      hintText: "Enter Your Son Phone",
-                      widget: Container(
-                        height: 1,
-                        width: 1,
-                      ),
-                    ),
-                    MainTextField(
-                      obscure: false,
-                      textStream: Provider.of<SignUpProvider>(context).jopStream,
-                      textChange: Provider.of<SignUpProvider>(context).jopChange,
-                      inputType: TextInputType.text,
-                      hintText: "Enert Your Jop",
-                      widget: Container(
-                        height: 1,
-                        width: 1,
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Material(
-          elevation: 5,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          child: Provider.of<SignUpProvider>(context).parent == false ? Container(height: 0,width: 0,) :Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width * .70,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Color(0xff94D1CC)),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-
-                   Provider.of<SignUpProvider>(context).currentGroup == null?   Container(
-                        width: MediaQuery.of(context).size.width/1.7,
-                        child: Text(
-                          "Details About The Group",
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        ),
-                      ): Container(
-                     width: MediaQuery.of(context).size.width/1.7,
-                     child:  AutoSizeText(
-                       '${Provider.of<SignUpProvider>(context).currentGroup.note}',
-                       style: TextStyle(fontSize: 12,color: Colors.white),
-                       minFontSize: 8,
-                       stepGranularity: 8,
-                       maxLines: 1,
-                       overflow: TextOverflow.ellipsis,
-                     )
-                   ),
-                      Spacer(),
-                      Icon(
-                        Icons.location_on,
-                        color: mainColor,
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-
-                ],
-              ),
-            ),
-          ),
-        ),
-        Spacer(
-          flex: 1,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * .70,
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: 10,
-              ),
-               Provider.of<SignUpProvider>(context).signUpBackWidget,
-              Spacer(
-                flex: 1,
-              ),
-              Container(
-                  width: 100,
-                  child: ButtonWidget(
-                    color: mainColor,
-                    height: 50,
-                    text: "Supmit",
-                    borderColor: mainColor,
-                    textColor: Colors.white,
-                    onPressed: () {
-
-                        if(Provider.of<SignUpProvider>(context).student == false) {
-                          RegisterModel body = RegisterModel();
-                          body.password = password;
-                          body.mobile = phone;
-                          body.gender = gander;
-                          body.fullName = "$firstName $secondName $lastName";
-                          body.image = image;
-                          body.emailAddress = emailAddres;
-
-                          Provider.of<SignUpProvider>(context).SubmitStudent(body, context);
-                          Provider.of<SignUpProvider>(context).changeParentState();
-
-                        }else if(Provider.of<SignUpProvider>(context).parent == false){
-
-                          ParentRegisterModel body = ParentRegisterModel();
-                          body.password = password;
-                          body.mobile = phone;
-                          body.gender = gander;
-                          body.fullName = "$firstName $secondName $lastName";
-                          body.image = image;
-                          body.emailAddress = emailAddres;
-                          body.jobName = Provider.of<SignUpProvider>(context).jop.value;
-                          body.sonNumbers = [Provider.of<SignUpProvider>(context).sonPhone.value];
-                          Provider.of<SignUpProvider>(context).SubmitParent(body, context);
-
-                          Provider.of<SignUpProvider>(context).changeStudentState();
-                          print(Provider.of<SignUpProvider>(context).parent);
-
-
-                        }
-
-
-
-                    },
-                  )),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
-        ),
-        Spacer(
-          flex: 1,
-        ),
-      ],
-    );
-  }
-
-
-
-
-
-}
-
-
-//class ParentJop extends StatelessWidget {
-//  const ParentJop({
-//    Key key,
-//  }) : super(key: key);
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return
-//      Container(
-//      width: MediaQuery.of(context).size.width / 1.5,
-//        child: Column(
-//          children: <Widget>[
-//            MainTextField(
-//              obscure: false,
-//              textStream: Provider.of<SignUpProvider>(context).firstNameStream,
-//              textChange: Provider.of<SignUpProvider>(context).firstNameChange,
-//              inputType: TextInputType.text,
-//              hintText: "Full name",
-//              widget: Container(
-//                height: 1,
-//                width: 1,
-//              ),
-//
-//            ),
-//            MainTextField(
-//              obscure: false,
-//              textStream: Provider.of<SignUpProvider>(context).phoneStream,
-//              textChange: Provider.of<SignUpProvider>(context).phoneChange,
-//              inputType: TextInputType.phone,
-//              hintText: "Enter Your Phone",
-//              widget: Container(
-//                height: 1,
-//                width: 1,
-//              ),
-//            ),
-//            MainTextField(
-//              obscure: false,
-//              textStream: Provider.of<SignUpProvider>(context).jopStream,
-//              textChange: Provider.of<SignUpProvider>(context).jopChange,
-//              inputType: TextInputType.text,
-//              hintText: "Enert Your Jop",
-//              widget: Container(
-//                height: 1,
-//                width: 1,
-//              ),
-//            ),
-//          ],
-//        ),
-//
-//    );
-//  }
-//}
-//
-//class StudentGradeGroupWidget extends StatelessWidget {
-//  const StudentGradeGroupWidget({
-//    Key key,
-//  }) : super(key: key);
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Container(
-//      height: 400,
-//      child: Column(
-//
-//        children: <Widget>[
-//          SizedBox(width: 10,),
-//          Container(
-//            width: MediaQuery.of(context).size.width / 1.5,
-//              child: Provider.of<SignUpProvider>(context).asyncLoaderGrade,
-//          ),
-//          SizedBox(width: 10,),
-//          Container(
-//            width: MediaQuery.of(context).size.width / 1.5,
-//            child:    (Provider.of<SignUpProvider>(context).currentGrade == null || Provider.of<SignUpProvider>(context).currentCity == null) ? Container() :   Provider.of<SignUpProvider>(context).asyncLoaderGroup,
-//
-//          ),
-//          SizedBox(width: 10,),
-//          Provider.of<SignUpProvider>(context).parent == true ? Container(height: 0,width: 0,) : Container(
-//             width: MediaQuery.of(context).size.width / 1.5,
-//              height: 200,
-//             child: Column(
-//
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//
-//               children: <Widget>[
-//
-//                 MainTextField(
-//                   obscure: false,
-//                   textStream: Provider.of<SignUpProvider>(context).firstNameStream,
-//                   textChange: Provider.of<SignUpProvider>(context).firstNameChange,
-//                   inputType: TextInputType.text,
-//                   hintText: "Full name",
-//                   widget: Container(
-//                     height: 1,
-//                     width: 1,
-//                   ),
-//
-//                 ),
-//                 MainTextField(
-//                   obscure: false,
-//                   textStream: Provider.of<SignUpProvider>(context).phoneStream,
-//                   textChange: Provider.of<SignUpProvider>(context).phoneChange,
-//                   inputType: TextInputType.phone,
-//                   hintText: "Enter Your Phone",
-//                   widget: Container(
-//                     height: 1,
-//                     width: 1,
-//                   ),
-//                 ),
-//                 MainTextField(
-//                   obscure: false,
-//                   textStream: Provider.of<SignUpProvider>(context).jopStream,
-//                   textChange: Provider.of<SignUpProvider>(context).jopChange,
-//                   inputType: TextInputType.text,
-//                   hintText: "Enert Your Jop",
-//                   widget: Container(
-//                     height: 1,
-//                     width: 1,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//          SizedBox(width: 10,),
-//        ],
-//      ),
-//    );
-//  }
-//}
-//
 
 
 class FirstSignUp extends StatefulWidget {
@@ -451,6 +96,7 @@ class _FirstSignUpState extends State<FirstSignUp> {
 
     final bloc = Bloc();
 
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -468,11 +114,21 @@ class _FirstSignUpState extends State<FirstSignUp> {
                 Positioned(
                   top: 10,
                   left: 40,
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.teal,
+
+
+                  child:  Material(
+                    shape: CircleBorder(),
+                    child: ClipRRect(
+
+                       borderRadius: BorderRadius.all(Radius.circular(120)),
+                      child: Provider.of<SignUpProvider>(context).imagefile == null ? Container(height: 0,width: 0,): Image.file(Provider.of<SignUpProvider>(context).imagefile,height: 120,width: 120,),
+                      ),
                   ),
                 ),
+
+
+
+
                 Positioned(
                   bottom: 15,
                   right: 25,
@@ -482,13 +138,15 @@ class _FirstSignUpState extends State<FirstSignUp> {
                         size: 35,
                         color: Colors.white,
                       ),
-                      onPressed: null),
+                      onPressed: (){
+                        Provider.of<SignUpProvider>(context).onChoseImage(context);
+                      }),
                 )
               ],
             )),
 
         Container(
-          height: 460,
+          height: 540,
           child: Column(
 
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -500,7 +158,7 @@ class _FirstSignUpState extends State<FirstSignUp> {
                 textStream: Provider.of<SignUpProvider>(context).firstNameStream,
                 textChange: Provider.of<SignUpProvider>(context).firstNameChange,
                 inputType: TextInputType.text,
-                hintText: "Full name",
+                hintText: "First name",
                 widget: Container(
                   height: 1,
                   width: 1,
@@ -537,7 +195,7 @@ class _FirstSignUpState extends State<FirstSignUp> {
                 textStream: Provider.of<SignUpProvider>(context).emailRegisterStream,
                 textChange: Provider.of<SignUpProvider>(context).emailRegisterChange,
                 inputType: TextInputType.emailAddress,
-                hintText: "Emai Address",
+                hintText: "Email Address",
                 widget: Container(
                   height: 1,
                   width: 1,
@@ -555,6 +213,17 @@ class _FirstSignUpState extends State<FirstSignUp> {
                   width: 1,
                 ),
               ),
+             Provider.of<SignUpProvider>(context).parent == false ?   MainTextField(
+                obscure: false,
+                textStream: Provider.of<SignUpProvider>(context).jopStream,
+                textChange: Provider.of<SignUpProvider>(context).jopChange,
+                inputType: TextInputType.text,
+                hintText: "Enert Your Jop",
+                widget: Container(
+                  height: 1,
+                  width: 1,
+                ),
+              ) : Container(height: 0,width: 0,),
               MainTextField(
                 bloc: bloc,
                 obscure: true,
@@ -673,43 +342,6 @@ class _FirstSignUpState extends State<FirstSignUp> {
 
 
 
-class SignUpBackParent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 100,
-        child: ButtonWidget(
-          color: mainColor,
-          height: 50,
-          text: "Back",
-          borderColor: mainColor,
-          textColor: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-
-
-          },
-        ));
-  }
-}
-class SignUpBackStudent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 100,
-        child: ButtonWidget(
-          color: mainColor,
-          height: 50,
-          text: "Back",
-          borderColor: mainColor,
-          textColor: Colors.white,
-          onPressed: () {
-            Provider.of<SignUpProvider>(context).signUpBack(context);
-
-          },
-        ));
-  }
-}
 
 
 

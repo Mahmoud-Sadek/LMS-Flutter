@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/LiveModel.dart';
@@ -10,7 +11,7 @@ import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
 import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
-import 'package:work/ParentScreens/ParentPhone.dart';
+import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/Provider/TextBloc.dart';
 import 'package:work/SharedScreens/Notificatin.dart';
@@ -334,43 +335,6 @@ openNotification(BuildContext context){
 //////////////////////////////////////////////parent Start /////////////////////////////////////////
 
 
-
-  List<PhoneModel> _phone = [
-  ];
-
-  UnmodifiableListView<PhoneModel> get phones {
-    return UnmodifiableListView(_phone);
-  }
-
-  int get phoneCount {
-    return _phone.length;
-  }
-
-
-
-
-
-  final parentPhone= BehaviorSubject<String>();
-  Stream<String> get parentPhoneStream => parentPhone.stream;
-  Function(String) get parentPhoneChange => parentPhone.sink.add;
-
-
-
-  void addPhone(String newPhone) {
-    final phone = PhoneModel(phone: newPhone);
-
-    _phone.add(phone);
-    parentPhone.value ="";
-    notifyListeners();
-  }
-
-
-  void deletePhone(PhoneModel phoneModel) {
-
-    _phone.remove(phoneModel);
-    notifyListeners();
-
-  }
 
 openParentHomePage(BuildContext context){
   Navigator.push(context,

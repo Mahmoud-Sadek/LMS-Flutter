@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:work/ParentScreens/ParentPhone.dart';
+import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/Style/style.dart';

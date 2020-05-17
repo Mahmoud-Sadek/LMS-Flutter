@@ -38,7 +38,7 @@ Future<String> ParentRegisterApi(ParentRegisterModel bodys,BuildContext context)
             elevation: 4,
             backgroundColor: Colors.transparent,
             child: ErrorSignUpWidget(errorMessage: " Your Form Is Under Pending Now It Will Activate In Less Than 24-hr. ",image: "assets/see.jpeg",onpressed: (){
-
+              Navigator.pop(context);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) => Login()));
 
