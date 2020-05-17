@@ -226,7 +226,7 @@ class SignUpProvider extends ChangeNotifier {
   }
 
   /////////////////////////////////////////////////// Group ///////////////
-
+  static var groupId;
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderGroup =
       new GlobalKey<AsyncLoaderState>();
   var asyncLoaderGroup = new AsyncLoader(
@@ -247,6 +247,7 @@ class SignUpProvider extends ChangeNotifier {
 
   void changedDropDownItemGroup(GroupModel selectedGroup) {
     currentGroup = selectedGroup;
+    groupId=currentGroup.groupId;
     print(currentGroup.note);
     notifyListeners();
   }
