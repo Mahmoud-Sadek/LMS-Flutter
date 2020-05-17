@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:work/Model/Login/LoginModel.dart';
+
 class Common {
 
   static final String BaseURL = "http://eaglez-001-site3.ftempurl.com/";
@@ -18,11 +18,11 @@ class Common {
   }
 
 
-
   static getToken() async {
 
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String token = _prefs.getString(Common.TOKEN) ?? '';
+
     return token;
 
   }
