@@ -10,9 +10,15 @@ import 'package:work/services/LogIn/LogIn.dart';
 
 import 'package:work/utils/common.dart';
 
+import 'SignUpWidget/SignUpErrorDailog.dart';
+
 class Login extends StatelessWidget {
  String Token =Common.getToken().toString();
+
   String email,password;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,7 @@ class Login extends StatelessWidget {
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
                       onPressed:  ()async {
 
-                        int x = await LogIn().loginData(
+                        var x = await LogIn().loginData(
                             email, password, await Common.getToken());
                         if (x == 1) {
                           Navigator.push(context,
@@ -72,6 +78,22 @@ class Login extends StatelessWidget {
                             MaterialPageRoute(builder: (context) {
                               return new ParentHomePage();
                             }),);
+                        }else{
+                          print("osman$x");
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                  elevation: 4,
+                                  backgroundColor: Colors.transparent,
+                                  child: ErrorSignUpWidget(errorMessage: x,onpressed: (){
+                                    Navigator.pop(context);
+
+                                  },),
+                                );
+                              });
                         }
                       }
 
