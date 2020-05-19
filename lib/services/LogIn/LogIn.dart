@@ -16,7 +16,6 @@ class LogIn {
 
 
 
-
     loginData(String email,String password,String token) async {
     var headers= await Common.getHeaders();
     String myUrl = "$serverUrl/api/Account/Auth";
