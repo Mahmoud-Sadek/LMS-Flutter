@@ -18,8 +18,9 @@ class SignUpBackGround2 extends StatelessWidget {
         clipper: SecondCurve(),
         child: Container(
           width: MediaQuery.of(context).size.width * .85,
-          height: 713,
+          height: 800,
           decoration: BoxDecoration(
+
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomCenter,
@@ -45,8 +46,9 @@ class SignUpBackGround1 extends StatelessWidget {
         clipper: FirstCurve(),
         child: Container(
           width: MediaQuery.of(context).size.width * .85,
-          height: 750,
+          height: 850,
           decoration: BoxDecoration(
+
             color: Color(0xff006158),
             borderRadius: BorderRadius.circular(20),
           ),

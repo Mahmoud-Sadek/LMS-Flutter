@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:work/ParentScreens/ParentQuizResult.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/Style/style.dart';
 
-import 'ParentPhone.dart';
+import '../SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'ParentWidget/ParentAppBar.dart';
 
 
@@ -43,9 +44,9 @@ class ChildrenParent extends StatelessWidget {
               color: mainColor,
               height: 40,
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ParentPhone();
-                }));
+//                Navigator.push(context, MaterialPageRoute(builder: (context){
+//                  return ParentPhone();
+//                }));
               },
               textColor: Colors.white,
               borderColor: Colors.white,
@@ -248,7 +249,9 @@ class ChildCard extends StatelessWidget {
                     child: Container(
 
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> ParentQuizResult()));
+                        },
                         child: Text(
                           'quzies',
                           style: TextStyle(color: Colors.white),
