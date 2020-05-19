@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:work/Model/LoginModel.dart';
 import 'package:work/utils/common.dart';
 
 class LogIn {
@@ -17,16 +18,18 @@ class LogIn {
 
 
 
-    loginData(String email,String password,String token) async {
+
+
+    loginData(LoginModel l) async {
+      var body = json.encode(l.toJson());
     var headers= await Common.getHeaders();
     String myUrl = "$serverUrl/api/Account/Auth";
     final response = await http.post(myUrl,
-       headers: {  'Accept': 'application/json'},
-        body: await{
-          "LoginName": "$email",
-          "FireBaseToken":"$token",
-          "Password": "$password"
-        });
+       headers: headers,
+
+        body: body
+    );
+
     var data = json.decode(response.body);
    if (response.statusCode==200){
      print('token : ${data["Token"]}');

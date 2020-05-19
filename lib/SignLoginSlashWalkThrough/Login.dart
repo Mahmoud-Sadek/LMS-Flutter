@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/LoginModel.dart';
 import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
-import 'package:work/services/LogIn/LogIn.dart';
+import 'package:work/services/LogIn/LoginService.dart';
 
 import 'package:work/utils/common.dart';
 
@@ -64,9 +65,11 @@ class Login extends StatelessWidget {
 
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
                       onPressed:  ()async {
-
-                        var x = await LogIn().loginData(
-                            email, password, await Common.getToken());
+                     LoginModel body = new LoginModel();
+                     body.loginName=email;
+                     body.password=password;
+                     body.fireBaseToken=Token;
+                        var x = await LogIn().loginData(body);
                         if (x == 1) {
                           Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
