@@ -26,4 +26,53 @@ class Common {
     return token;
 
   }
+
+  static getUserId() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int UserId = _prefs.getInt("UserTybe") ?? 0 ;
+
+    return UserId;
+
+  }
+  static getUserToken() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    String UserToken = _prefs.getString("token") ?? "null" ;
+
+    return UserToken;
+
+  }
+
+  static getStudentId() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int StudentId = _prefs.getInt("StudentId") ?? 0 ;
+
+    return StudentId;
+
+  }
+  static GetGroupId() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int GroupId = _prefs.getInt("GroupId") ?? 0 ;
+
+    return GroupId;
+
+  }
+  static GetGradeId() async {
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int GradeId = _prefs.getInt("GradeId") ?? 0 ;
+
+    return GradeId;
+
+  }
+
+
+
+
+
+
+
 }

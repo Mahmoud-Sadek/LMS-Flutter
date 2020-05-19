@@ -65,6 +65,7 @@ class Login extends StatelessWidget {
 
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
                       onPressed:  ()async {
+
                      LoginModel body = new LoginModel();
                      body.loginName=email;
                      body.password=password;
