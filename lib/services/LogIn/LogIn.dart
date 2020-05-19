@@ -52,9 +52,10 @@ class LogIn {
 
    }
    else{
-
-     print( data["Message"]);
-     return 9;
+String m =
+      data["Message"];
+print(m);
+     return m;
 
      }
    // status = response.body.contains('message');
