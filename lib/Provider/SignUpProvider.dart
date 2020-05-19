@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/SignUPModel/CityModle.dart';
@@ -595,7 +596,12 @@ class SignUpProvider extends ChangeNotifier {
   Future<String> future;
   //sadek
   SubmitStudent(RegisterModel body,BuildContext context) async {
-    try{String token = await Common.getToken();
+    ProgressDialog pr = new ProgressDialog(context);
+    pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);
+    pr.show();
+    try{
+      String token = await Common.getToken();
     body.cityId = currentCity.id.toString();
     body.groupId = currentGroup.groupId.toString();
     body.fireBaseToken = token;
@@ -605,8 +611,25 @@ class SignUpProvider extends ChangeNotifier {
 
 
     future = StudentRegisterApi(body,context);
+      pr.hide();
     notifyListeners();
-    }catch(e){}
+
+    }catch(e){
+      pr.hide();
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              elevation: 4,
+              backgroundColor: Colors.transparent,
+              child: ErrorSignUpWidget(errorMessage: " Please Check You Connection",onpressed: (){
+                Navigator.pop(context);
+              },),
+            );
+          });
+    }
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
@@ -631,7 +654,8 @@ class SignUpProvider extends ChangeNotifier {
                  parentFuture = ParentRegisterApi(body,context);
                  notifyListeners();
 
-               }catch(e){}
+               }catch(e){
+               }
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
