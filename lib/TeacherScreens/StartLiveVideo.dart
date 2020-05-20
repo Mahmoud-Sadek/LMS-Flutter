@@ -82,7 +82,8 @@ controller: controller,
                              height: 60,
                              width: MediaQuery.of(context).size.width / 2.5,
                              child: Center(
-                               child: SharedDropDown(
+                               child:
+                               SharedDropDown(
                                  underline:  Container(
                                    height:0,
                                    color: mainColor,
@@ -111,7 +112,8 @@ controller: controller,
                  Material(
                           elevation: 4,
                           borderRadius: BorderRadius.circular(15),
-                          child:           Container(
+                          child:
+                          Container(
                             margin: EdgeInsets.only(left: 10,right: 10),
                             height: 60,
                             width: MediaQuery.of(context).size.width / 2.5,

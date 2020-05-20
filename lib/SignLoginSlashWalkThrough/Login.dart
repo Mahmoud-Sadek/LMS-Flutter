@@ -75,6 +75,14 @@ class Login extends StatelessWidget {
                      body.password=password;
                      body.fireBaseToken=Token;
                         var x = await LogIn().loginData(body);
+
+
+                       int hh = await Common.GetGroupId();
+                     int hv = await Common.GetGradeId();
+                     int hg = await Common.getUserId();
+                       print("gggg"+hh.toString());
+                       print("gggg"+hv.toString());
+                       print("gggg"+hg.toString());
                         if (x == 1) {
                           Navigator.push(context,
                             MaterialPageRoute(builder: (context) {

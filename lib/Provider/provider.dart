@@ -1,3 +1,4 @@
+import 'package:async_loader/async_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,11 +7,15 @@ import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/LiveModel.dart';
 import 'package:work/Model/MainCommentModel.dart';
 import 'package:work/Model/NewsModel.dart';
+import 'package:work/Model/SignUPModel/GradeModel.dart';
+import 'package:work/Model/SignUPModel/GroupModel.dart';
 import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
+import 'package:work/Model/StudentTeacherSharedModel/AddPostModel.dart';
 import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
+import 'package:work/SharedWidget/TeacherAndStudent/CreatePost.dart';
 import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/Provider/TextBloc.dart';
@@ -18,6 +23,7 @@ import 'package:work/SharedScreens/Notificatin.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
@@ -34,6 +40,9 @@ import 'package:work/StudentScreens/WidgetStudent/StudentPosts.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherApprove.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
+import 'package:work/services/SignUpService/GradeApi.dart';
+import 'package:work/services/SignUpService/GroupApi.dart';
+import 'package:work/services/StudentTeacherSharedService/AddPostService.dart';
 import 'package:work/visitor/screens/ContactUs.dart';
 import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'dart:collection';
@@ -45,7 +54,175 @@ import '../Model/message.dart';
 import '../Model/approve.dart';
 import '../SignLoginSlashWalkThrough/walkthrough.dart';
 import 'TextValidator.dart';
+import '../utils/common.dart';
 class ProviderData extends ChangeNotifier {
+
+
+
+
+  final addPostText = BehaviorSubject<String>();
+
+  Stream<String> get addPostTextStream => addPostText.stream;
+
+  Function(String) get addPostTextChange => addPostText.sink.add;
+
+
+
+
+
+
+
+
+  List<bool> isSelected= [true, false];
+   bool gradePost = true;
+   bool groupPost = false;
+
+SelectMethod(int index){
+
+  for (int i = 0; i < isSelected.length; i++) {
+    isSelected[i] = i == index;
+  }
+
+  if(isSelected[0]){
+    groupPost = false;
+    gradePost = true;
+    print(gradePost);
+
+    print(groupPost);
+  }else if(isSelected[1]){
+    groupPost = true;
+    gradePost = false;
+
+
+    print(gradePost);
+
+    print(groupPost);
+  }
+
+  notifyListeners();
+
+  }
+
+
+
+
+
+  static var gradeId;
+
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderGrade =
+  new GlobalKey<AsyncLoaderState>();
+  var asyncLoaderGrade = new AsyncLoader(
+    key: globalAsyncLoaderGrade,
+    initState: () async => await getGrade(),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderGrade.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => AddPostGradeWidget(
+      gradeList: data,
+    ),
+  );
+  GradeModel currentGrade = null;
+
+  List<GradeModel> Grade = [];
+
+  void changedDropDownItemGrade(GradeModel selectedGrade) {
+    currentGrade = selectedGrade;
+    gradeId = currentGrade.id;
+
+    notifyListeners();
+//
+//
+    if (globalAsyncLoaderGroup.currentState != null)
+      globalAsyncLoaderGroup.currentState.reloadState();
+  }
+
+  List<DropdownMenuItem<GradeModel>> getDropDownMenuItemsGrade() {
+    List<DropdownMenuItem<GradeModel>> items = new List();
+    for (GradeModel mGrade in Grade) {
+      items.add(
+          new DropdownMenuItem(value: mGrade, child: new Text(mGrade.name)));
+    }
+    return items;
+  }
+
+
+
+
+  static var groupId;
+  static int cityId = 5;
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderGroup =
+  new GlobalKey<AsyncLoaderState>();
+  var asyncLoaderGroup = new AsyncLoader(
+    key: globalAsyncLoaderGroup,
+    initState: () async =>
+    await getGroup(cityId.toString(), gradeId.toString()),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderGroup.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => AddPostGroupWidget(
+      groupList: data,
+    ),
+  );
+  GroupModel currentGroup = null;
+
+  List<GroupModel> Group = [];
+
+  void changedDropDownItemGroup(GroupModel selectedGroup) {
+    currentGroup = selectedGroup;
+    groupId=currentGroup.groupId;
+    print(currentGroup.note);
+    notifyListeners();
+//
+//    if (globalAsyncLoaderAppointment.currentState != null)
+//      globalAsyncLoaderAppointment.currentState.reloadState();
+
+  }
+
+  List<DropdownMenuItem<GroupModel>> getDropDownMenuItemsGroup() {
+    List<DropdownMenuItem<GroupModel>> items = new List();
+    for (GroupModel mGroup in Group) {
+      items.add(new DropdownMenuItem(
+          value: mGroup, child: new Text(mGroup.groupName)));
+    }
+    return items;
+  }
+
+
+
+
+
+
+
+
+
+
+  Future<String> future;
+  //sadek
+  AddPost(AddPostModel body,) async {
+
+
+    try{String token = await Common.getToken();
+
+    body.post = addPostText.value;
+    body.onGrade = gradePost;
+    body.onGroup = groupPost;
+    body.groups=[2];
+
+        future = AddPostApi(body);
+    notifyListeners();
+    }catch(e){}
+//    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
+//         print(password);
+//         print(emailAddress);
+    print(Common.getToken());
+
+    notifyListeners();
+  }
+
+
+
 
 /////////////////////////////////// Comments start //////
 
@@ -366,7 +543,7 @@ class ProviderData extends ChangeNotifier {
   List<String> group = ['Group One', 'Group Two', ' Group Three', "Group Four"];
   String selectedGroup = "Group One";
 
-  changeGroup(String value) {
+void  changeGroup(String value) {
     selectedGroup = value;
     notifyListeners();
   }
@@ -379,6 +556,11 @@ class ProviderData extends ChangeNotifier {
     selectedJop = value;
     notifyListeners();
   }
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -499,7 +681,7 @@ class ProviderData extends ChangeNotifier {
     email.close();
     await _password.drain();
     _password.close();
-
+    addPostText.close();
 
     _comment.close();
   }
