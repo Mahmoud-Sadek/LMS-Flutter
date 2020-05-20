@@ -61,7 +61,7 @@ class ErrorSignUpWidget extends StatelessWidget {
                 Text("Message",style: TextStyle(fontWeight: FontWeight.bold,color: mainColor),),
                 SizedBox(height: 15,),
 
-                Text("$errorMessage",style: TextStyle(color: mainColor,fontSize: 10),)
+                Text("$errorMessage",style: TextStyle(color: mainColor,fontSize: 20),)
               ],
             ),
           ),
