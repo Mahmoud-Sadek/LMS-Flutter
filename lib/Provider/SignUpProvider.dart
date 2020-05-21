@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/PhoneModel.dart';
+import 'package:work/Model/SignUPModel/AppiomentsModel.dart';
 import 'package:work/Model/SignUPModel/CityModle.dart';
 import 'package:work/Model/SignUPModel/CountryModel.dart';
 import 'package:work/Model/SignUPModel/GradeModel.dart';
@@ -121,9 +122,9 @@ class SignUpProvider extends ChangeNotifier {
     renderSuccess: ({data}) => GridAppointMent(data)
   );
 
-  CountryModel currentAppointment = null;
+  AppointmentModel currentAppointment = null;
 
-  List<CountryModel> appointments = [];
+  List<AppointmentModel> appointments = [];
 
 
 

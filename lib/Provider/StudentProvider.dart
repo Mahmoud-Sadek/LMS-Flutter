@@ -3,10 +3,14 @@
 
 import 'dart:collection';
 
+import 'package:async_loader/async_loader.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
 import 'package:work/Model/StudentModel/YoutubeModel.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/StudentScreens/Pdf.dart';
@@ -14,6 +18,8 @@ import 'package:work/StudentScreens/QuizPage.dart';
 import 'package:work/StudentScreens/WidgetStudent/StudentPosts.dart';
 import 'package:work/StudentScreens/Youtube.dart';
 import 'package:work/Style/style.dart';
+import 'package:work/services/StudentServices/FileApi.dart';
+import 'package:work/services/StudentServices/UnitApi.dart';
 
 class StudentProvider extends ChangeNotifier{
 
@@ -189,6 +195,44 @@ class StudentProvider extends ChangeNotifier{
         MaterialPageRoute(builder: (BuildContext context) => Pdf()));
 
   }
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderPdf =
+  new GlobalKey<AsyncLoaderState>();
+
+  var asyncLoaderPdf = new AsyncLoader(
+    key: globalAsyncLoaderPdf,
+    initState: () async => await getPdf(),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderPdf.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => PdfBuilder(
+      pdfList: data,
+    ),
+  );
+
+  static var pdfId;
+   void showPdf(){
+     print(pdfId);
+     if (globalAsyncLoaderFile.currentState != null)
+       globalAsyncLoaderFile.currentState.reloadState();
+   }
+
+
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderFile =
+  new GlobalKey<AsyncLoaderState>();
+
+  var asyncLoaderFile = new AsyncLoader(
+    key: globalAsyncLoaderFile,
+    initState: () async => await getFiles(pdfId),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderPdf.currentState.reloadState(),
+    ),
+
+
+  );
+
+
 
 
 
