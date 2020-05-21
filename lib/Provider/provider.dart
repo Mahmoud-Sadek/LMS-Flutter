@@ -1,3 +1,4 @@
+import 'package:async_loader/async_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,11 +7,15 @@ import 'package:rxdart/rxdart.dart';
 import 'package:work/Model/LiveModel.dart';
 import 'package:work/Model/MainCommentModel.dart';
 import 'package:work/Model/NewsModel.dart';
+import 'package:work/Model/SignUPModel/GradeModel.dart';
+import 'package:work/Model/SignUPModel/GroupModel.dart';
 import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/PhoneModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
+import 'package:work/Model/StudentTeacherSharedModel/AddPostModel.dart';
 import 'package:work/Model/SupCommentModel.dart';
 import 'package:work/ParentScreens/ParentChildren.dart';
+import 'package:work/SharedWidget/TeacherAndStudent/CreatePost.dart';
 import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/Provider/TextBloc.dart';
@@ -18,6 +23,7 @@ import 'package:work/SharedScreens/Notificatin.dart';
 import 'package:work/SharedScreens/SharedPostScreen.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/SignUpDialog.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
@@ -34,6 +40,9 @@ import 'package:work/StudentScreens/WidgetStudent/StudentPosts.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherApprove.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherMessage.dart';
 import 'package:work/TeacherScreens/WidgetTeacher/TeacherPosts.dart';
+import 'package:work/services/SignUpService/GradeApi.dart';
+import 'package:work/services/SignUpService/GroupApi.dart';
+import 'package:work/services/StudentTeacherSharedService/AddPostService.dart';
 import 'package:work/visitor/screens/ContactUs.dart';
 import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'dart:collection';
@@ -45,8 +54,177 @@ import '../Model/message.dart';
 import '../Model/approve.dart';
 import '../SignLoginSlashWalkThrough/walkthrough.dart';
 import 'TextValidator.dart';
-
+import '../utils/common.dart';
 class ProviderData extends ChangeNotifier {
+
+
+
+
+  final addPostText = BehaviorSubject<String>();
+
+  Stream<String> get addPostTextStream => addPostText.stream;
+
+  Function(String) get addPostTextChange => addPostText.sink.add;
+
+
+
+
+
+
+
+
+  List<bool> isSelected= [true, false];
+   bool gradePost = true;
+   bool groupPost = false;
+
+SelectMethod(int index){
+
+  for (int i = 0; i < isSelected.length; i++) {
+    isSelected[i] = i == index;
+  }
+
+  if(isSelected[0]){
+    groupPost = false;
+    gradePost = true;
+    print(gradePost);
+
+    print(groupPost);
+  }else if(isSelected[1]){
+    groupPost = true;
+    gradePost = false;
+
+
+    print(gradePost);
+
+    print(groupPost);
+  }
+
+  notifyListeners();
+
+  }
+
+
+
+
+
+  static var gradeId;
+
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderGrade =
+  new GlobalKey<AsyncLoaderState>();
+  var asyncLoaderGrade = new AsyncLoader(
+    key: globalAsyncLoaderGrade,
+    initState: () async => await getGrade(),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderGrade.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => AddPostGradeWidget(
+      gradeList: data,
+    ),
+  );
+  GradeModel currentGrade = null;
+
+  List<GradeModel> Grade = [];
+
+  void changedDropDownItemGrade(GradeModel selectedGrade) {
+    currentGrade = selectedGrade;
+    gradeId = currentGrade.id;
+
+    notifyListeners();
+//
+////
+//    if (globalAsyncLoaderGroup.currentState != null)
+//      globalAsyncLoaderGroup.currentState.reloadState();
+  }
+
+  List<DropdownMenuItem<GradeModel>> getDropDownMenuItemsGrade() {
+    List<DropdownMenuItem<GradeModel>> items = new List();
+    for (GradeModel mGrade in Grade) {
+      items.add(
+          new DropdownMenuItem(value: mGrade, child: new Text(mGrade.name)));
+    }
+    return items;
+  }
+
+
+
+
+//  static var groupId;
+//  static int cityId = 5;
+//  static GlobalKey<AsyncLoaderState> globalAsyncLoaderGroup =
+//  new GlobalKey<AsyncLoaderState>();
+//  var asyncLoaderGroup = new AsyncLoader(
+//    key: globalAsyncLoaderGroup,
+//    initState: () async =>
+//    await getGroup(cityId.toString(), gradeId.toString()),
+//    renderLoad: () => Center(child: new CircularProgressIndicator()),
+//    renderError: ([error]) => GetNoConnectionWidget(
+//      onPressed: () => globalAsyncLoaderGroup.currentState.reloadState(),
+//    ),
+//    renderSuccess: ({data}) => AddPostGroupWidget(
+//      groupList: data,
+//    ),
+//  );
+//  GroupModel currentGroup = null;
+//
+//  List<GroupModel> Group = [];
+//
+//  void changedDropDownItemGroup(GroupModel selectedGroup) {
+//    currentGroup = selectedGroup;
+//    groupId=currentGroup.groupId;
+//    print(currentGroup.note);
+//    notifyListeners();
+////
+////    if (globalAsyncLoaderAppointment.currentState != null)
+////      globalAsyncLoaderAppointment.currentState.reloadState();
+//
+//  }
+//
+//  List<DropdownMenuItem<GroupModel>> getDropDownMenuItemsGroup() {
+//    List<DropdownMenuItem<GroupModel>> items = new List();
+//    for (GroupModel mGroup in Group) {
+//      items.add(new DropdownMenuItem(
+//          value: mGroup, child: new Text(mGroup.groupName)));
+//    }
+//    return items;
+//  }
+//
+
+
+
+
+
+
+
+
+
+  Future<String> future;
+  //sadek
+  AddPost(AddPostModel body,) async {
+
+
+    try{String token = await Common.getToken();
+
+    body.post = addPostText.value;
+    body.onGrade = gradePost;
+    body.onGroup = groupPost;
+    body.groups=[2];
+    body.fireBaseToken = token;
+        future = AddPostApi(body);
+    notifyListeners();
+    }catch(e){}
+//    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
+//         print(password);
+//         print(emailAddress);
+    print( await Common.getToken());
+    print(currentGrade.id.toString());
+
+    notifyListeners();
+  }
+
+
+
+
 /////////////////////////////////// Comments start //////
 
   final _comment = BehaviorSubject<String>();
@@ -55,21 +233,18 @@ class ProviderData extends ChangeNotifier {
 
   Function(String) get commentChange => _comment.sink.add;
 
+
   static List<SupCommentModel> supCommentList1 = [
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList1",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList1",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList1",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList1",
         supImage: "assets/me.jpg"),
   ];
@@ -82,21 +257,18 @@ class ProviderData extends ChangeNotifier {
     return supCommentList1.length;
   }
 
+
   static List<SupCommentModel> supCommentList2 = [
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList2",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList2",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList2",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList2",
         supImage: "assets/me.jpg"),
   ];
@@ -109,21 +281,18 @@ class ProviderData extends ChangeNotifier {
     return supCommentList2.length;
   }
 
+
   static List<SupCommentModel> supCommentList3 = [
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList3",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList3",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList3",
         supImage: "assets/me.jpg"),
-    SupCommentModel(
-        name: "khira",
+    SupCommentModel(name: "khira",
         supComment: "_supCommentList3",
         supImage: "assets/me.jpg"),
   ];
@@ -137,22 +306,21 @@ class ProviderData extends ChangeNotifier {
   }
 
   List<MainCommentModel> _mainCommentList = [
-    MainCommentModel(
-        mainComment: "اهو الدرس الساعه كام يا مستر ",
+    MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",
         mainImage: "assets/me.jpg",
         name: "Mohamed Khlaed",
         supCommentMode: supCommentList1),
-    MainCommentModel(
-        mainComment: "What we will have now hhhaah",
+    MainCommentModel(mainComment: "What we will have now hhhaah",
         mainImage: "assets/me.jpg",
         name: "Mohamed Khaled",
         supCommentMode: supCommentList2),
-    MainCommentModel(
-        mainComment: "اهو الدرس الساعه كام يا مستر ",
+    MainCommentModel(mainComment: "اهو الدرس الساعه كام يا مستر ",
         mainImage: "assets/me.jpg",
         name: "Mohamed Khlaed",
         supCommentMode: supCommentList3),
+
   ];
+
 
   UnmodifiableListView<MainCommentModel> get mainCommentList {
     return UnmodifiableListView(_mainCommentList);
@@ -164,57 +332,48 @@ class ProviderData extends ChangeNotifier {
 
   //////////////////////////////////// comments end ///////////////////////
   List<postsModel> _postList = [
-    postsModel(
-        name: "Mohamed Khira",
+    postsModel(name: "Mohamed Khira",
         imageUrl: "assets/me.jpg",
         location: "Cairo-Egypt",
-        content:
-            "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
         grade: "1st Secondry",
         group: "Group one",
         id: 123456,
         time: 1.54),
-    postsModel(
-        name: "Mohamed khaled",
+    postsModel(name: "Mohamed khaled",
         imageUrl: "assets/me.jpg",
         location: "Cairo-Egypt",
-        content:
-            "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
         grade: "1st Secondry",
         group: "Group one",
         id: 123456,
         time: 1.54),
-    postsModel(
-        name: "Mohamed Aseem",
+    postsModel(name: "Mohamed Aseem",
         imageUrl: "assets/me.jpg",
         location: "Cairo-Egypt",
-        content:
-            "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
         grade: "1st Secondry",
         group: "Group one",
         id: 123456,
         time: 1.54),
-    postsModel(
-        name: "Mohamed Amin",
+    postsModel(name: "Mohamed Amin",
         imageUrl: "assets/me.jpg",
         location: "Cairo-Egypt",
-        content:
-            "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
         grade: "1st Secondry",
         group: "Group one",
         id: 123456,
         time: 1.54),
-    postsModel(
-        name: "Mohamed Osman",
+    postsModel(name: "Mohamed Osman",
         imageUrl: "assets/me.jpg",
         location: "Cairo-Egypt",
-        content:
-            "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
+        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
         grade: "1st Secondry",
         group: "Group one",
         id: 123456,
         time: 1.54),
   ];
+
 
   UnmodifiableListView<postsModel> get postList {
     return UnmodifiableListView(_postList);
@@ -224,27 +383,28 @@ class ProviderData extends ChangeNotifier {
     return _postList.length;
   }
 
+
   openPost(BuildContext context, String name, String content, int id,
       double time, String imgUrl, String grade, String group, String location) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return SharedPostScreen(
-        name: name,
+      return SharedPostScreen(name: name,
         imageUrl: imgUrl,
         content: content,
         time: time,
         id: id,
         group: group,
         grade: grade,
-        location: location,
-      );
+        location: location,);
     }));
   }
+
 
   List<String> splashScreen = [
     "assets/write.jpeg",
     "assets/world.jpeg",
     "assets/see.jpeg"
   ];
+
 
   int get splashScreenCount {
     return splashScreen.length;
@@ -253,35 +413,30 @@ class ProviderData extends ChangeNotifier {
   int x = -1;
   Widget widgetWalkShow = WalkThroughWidget(
     text: " Knowledge is the key to your mind and fill your body with light",
-    imageUrl: "assets/write.jpeg",
-  );
+    imageUrl: "assets/write.jpeg",);
   List<Widget> widgetWalk = [
     WalkThroughWidget(
-      text: "Rasie Your Kids With Learn",
-      imageUrl: "assets/father.jpeg",
-    ),
-    WalkThroughWidget(
-      text: "We allow you to connet us from any place",
-      imageUrl: "assets/world.jpeg",
-    ),
+      text: "Rasie Your Kids With Learn", imageUrl: "assets/father.jpeg",),
+    WalkThroughWidget(text: "We allow you to connet us from any place",
+      imageUrl: "assets/world.jpeg",),
     WalkThroughWidget(
       text: "Keep Learning and Never Stop Knowledge is the way to the top",
-      imageUrl: "assets/stop.jpeg",
-    )
+      imageUrl: "assets/stop.jpeg",)
   ];
+
 
   next(BuildContext context) {
     x++;
 
     if (x == 0) {
-      widgetWalkShow = widgetWalk[0];
+      widgetWalkShow = widgetWalk [0];
     } else if (x == 1) {
-      widgetWalkShow = widgetWalk[1];
-    } else if (x == 2) {
-      widgetWalkShow = widgetWalk[2];
+      widgetWalkShow = widgetWalk [1];
+    }
+    else if (x == 2) {
+      widgetWalkShow = widgetWalk [2];
     } else if (x > 2) {
-      Navigator.pushReplacement(
-          context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(
               builder: (BuildContext context) => StudentHomePage()));
     }
@@ -289,7 +444,9 @@ class ProviderData extends ChangeNotifier {
     notifyListeners();
   }
 
+
 ////////////////////////////////////////////////// SignLogin Provider Start /////////////////////////////
+
 
   final email = BehaviorSubject<String>();
 
@@ -303,20 +460,19 @@ class ProviderData extends ChangeNotifier {
 
   Function(String) get passwordChange => _password.sink.add;
 
+
   login(BuildContext context) {
     if (email.value == "1") {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => ParentPhone()));
     }
     if (email.value == "2") {
-      Navigator.pushReplacement(
-          context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(
               builder: (BuildContext context) => StudentHomePage()));
     }
     if (email.value == "3") {
-      Navigator.pushReplacement(
-          context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(
               builder: (BuildContext context) => TeacherHomePage()));
     }
@@ -325,23 +481,25 @@ class ProviderData extends ChangeNotifier {
           MaterialPageRoute(builder: (BuildContext context) => WalkThrough()));
     }
     if (email.value == null) {
-      Navigator.pushReplacement(
-          context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(
               builder: (BuildContext context) => TeacherHomePage()));
     }
   }
 
+
   visitorOpen(BuildContext context) {
-    Navigator.push(
-        context,
+    Navigator.push(context,
         MaterialPageRoute(
             builder: (BuildContext context) => VisitorNavigationBar()));
   }
 
+
 ////////////////////////////////////////////////// SignLogin Provider end /////////////////////////////
 
+
   ////////////////////////////////////////////////// Student Provider Start /////////////////////////////
+
 
 ///////////////////////////////////////////
 
@@ -360,6 +518,7 @@ class ProviderData extends ChangeNotifier {
     selectedCountry = value;
     notifyListeners();
   }
+
 
   List<String> cites = ['Menof', 'Elbagour', ' Sirs', "Shipin"];
   String selectedCites = "Menof";
@@ -385,10 +544,11 @@ class ProviderData extends ChangeNotifier {
   List<String> group = ['Group One', 'Group Two', ' Group Three', "Group Four"];
   String selectedGroup = "Group One";
 
-  changeGroup(String value) {
+void  changeGroup(String value) {
     selectedGroup = value;
     notifyListeners();
   }
+
 
   List<String> jop = ['Dont Work', 'Teacher', ' Doctor', "Engineer"];
   String selectedJop = "Dont Work";
@@ -398,11 +558,20 @@ class ProviderData extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ////////////////////////////////////////// NavigationBar
 
+
 ///////////////////////////PDF//////////////////////
+
 
   openProfile(BuildContext context) {
     Navigator.push(context,
@@ -410,87 +579,47 @@ class ProviderData extends ChangeNotifier {
     notifyListeners();
   }
 
+
 ////////////////////////////////////////////////////// Student Provider End ////////////////////////////////
 
+
 //////////////////////////////////////////////parent Start /////////////////////////////////////////
+
 
   openParentHomePage(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => ParentHomePage()));
   }
 
+
   int selectedIndexParent = 0;
+
 
   List<Widget> widgetParentOptions = <Widget>[
     News(),
     ChildrenParent(),
+
     SuggestionParent(),
   ];
 
-  List<Widget> visitorOptions = <Widget>[News(), MaterialPage(), ContactUS()];
+  List<Widget> visitorOptions = <Widget>[
+    News(),
+    MaterialPage(),
+    ContactUS()
+  ];
+
 
   ChangeParentAppBar(int index) {
     selectedIndexParent = index;
     notifyListeners();
   }
 
-  List<NewsModel> _newsList = [
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-//    NewsModel(
-//        content: "ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg ngfdsfghjkjhgfdsdfghjkj,hmgnfgdfsdfghjkljhgfdsdfghjkljhgfdsdfghjkjhgfdssdsfg",
-//        title: "fisrt"),
-  ];
 
-  UnmodifiableListView<NewsModel> get newsList {
-    return UnmodifiableListView(_newsList);
-  }
 
-  int get newsListCount {
-    return _newsList.length;
-  }
+
 
 //////////////////////////////////////////////////////// parent End ///////////////////
+
 
   @override
   void dispose() async {
@@ -499,7 +628,9 @@ class ProviderData extends ChangeNotifier {
     email.close();
     await _password.drain();
     _password.close();
+    addPostText.close();
 
     _comment.close();
   }
 }
+

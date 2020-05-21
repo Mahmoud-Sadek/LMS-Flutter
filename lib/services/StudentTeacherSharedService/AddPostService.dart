@@ -52,7 +52,7 @@ Future<String> AddPostApi(AddPostModel bodys ) async {
   }
 
   else {
-
+       print(response.statusCode);
       print("ggggggggggggggggg");
   }
 }

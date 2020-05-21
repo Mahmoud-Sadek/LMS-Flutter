@@ -247,35 +247,3 @@ class AddPostGradeWidget extends StatelessWidget {
   }
 }
 
-class AddPostGroupWidget extends StatelessWidget {
-  final List<GroupModel> groupList;
-  AddPostGroupWidget({this.groupList});
-
-  @override
-  Widget build(BuildContext context) {
-    var provider = Provider.of<ProviderData>(context);
-
-    if (provider.Group.isEmpty) provider.Group.addAll(groupList);
-
-    return Container(
-      margin: EdgeInsets.all(5),
-      width: MediaQuery.of(context).size.width / 3,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(width: 2, color: Color(0xff0A3E3A))),
-      child: DropdownButton(
-        underline: Container(
-          height: 0,
-          color: Colors.white,
-        ),
-        hint: Text(
-          'Grade',
-        ),
-        value: provider.currentGroup,
-        items: provider.getDropDownMenuItemsGroup(),
-        onChanged: provider.changedDropDownItemGroup,
-        isExpanded: true,
-      ),
-    );
-  }
-}
