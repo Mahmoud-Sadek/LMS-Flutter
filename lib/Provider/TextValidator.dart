@@ -51,7 +51,7 @@ static Bloc bloc = Bloc();
       handleData: ( name, sink){
         bool nameValid = RegExp(r"/^[a-z ,.'-]+$/i").hasMatch(name);
 
-        if (      name.contains(RegExp(r'^[a-z-0-9_\-=@,\.;]+$'))!=true||  name.contains("-")== true || name.contains(";") ==true && name.contains(",")==true || name.contains("@")==true|| name.contains("=")==true || name.contains("_")== true) {
+        if (      name.contains(RegExp(r'^[a-zA-Z0-9_\-=@,\.;]+$'))!=true||  name.contains("-")== true || name.contains(";") ==true && name.contains(",")==true || name.contains("@")==true|| name.contains("=")==true || name.contains("_")== true) {
           sink.add(name);
 
         }  else{

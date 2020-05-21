@@ -66,9 +66,8 @@ class SignUpProvider extends ChangeNotifier {
 //  List<Widget> signUpDropDwonList = [StudentGradeGroupWidget(), ParentJop()];
 
   openStudentSignUp(BuildContext context) {
-
-    parent =true;
-    student =false;
+    parent = true;
+    student = false;
 
     print(parent);
     print(student);
@@ -80,8 +79,8 @@ class SignUpProvider extends ChangeNotifier {
   }
 
   openParentSignUp(BuildContext context) {
-    parent =false;
-    student =true;
+    parent = false;
+    student = true;
     print(parent);
     print(student);
     signUp = FirstSignUp();
@@ -108,32 +107,22 @@ class SignUpProvider extends ChangeNotifier {
 
 ///////////////////////////////////////////
 
-
-  static GlobalKey<AsyncLoaderState> globalAsyncLoaderAppointment=
-  new GlobalKey<AsyncLoaderState>();
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderAppointment =
+      new GlobalKey<AsyncLoaderState>();
 
   var asyncLoaderAppointment = new AsyncLoader(
-    key: globalAsyncLoaderAppointment,
-    initState: () async => await getAppointments(groupId: groupId.toString()),
-    renderLoad: () => Center(child: new CircularProgressIndicator()),
-    renderError: ([error]) => GetNoConnectionWidget(
-      onPressed: () => globalAsyncLoaderAppointment.currentState.reloadState(),
-    ),
-    renderSuccess: ({data}) => GridAppointMent(data)
-  );
+      key: globalAsyncLoaderAppointment,
+      initState: () async => await getAppointments(groupId: groupId.toString()),
+      renderLoad: () => Center(child: new CircularProgressIndicator()),
+      renderError: ([error]) => GetNoConnectionWidget(
+            onPressed: () =>
+                globalAsyncLoaderAppointment.currentState.reloadState(),
+          ),
+      renderSuccess: ({data}) => GridAppointMent(data));
 
   AppointmentModel currentAppointment = null;
 
   List<AppointmentModel> appointments = [];
-
-
-
-
-
-
-
-
-
 
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderCountry =
       new GlobalKey<AsyncLoaderState>();
@@ -276,13 +265,12 @@ class SignUpProvider extends ChangeNotifier {
 
   void changedDropDownItemGroup(GroupModel selectedGroup) {
     currentGroup = selectedGroup;
-    groupId=currentGroup.groupId;
+    groupId = currentGroup.groupId;
     print(currentGroup.note);
     notifyListeners();
 
     if (globalAsyncLoaderAppointment.currentState != null)
       globalAsyncLoaderAppointment.currentState.reloadState();
-
   }
 
   List<DropdownMenuItem<GroupModel>> getDropDownMenuItemsGroup() {
@@ -297,9 +285,6 @@ class SignUpProvider extends ChangeNotifier {
 //////////////////////////////////////////
 
   Validators validators = Validators();
-
-
-
 
   final jop = BehaviorSubject<String>();
 
@@ -404,53 +389,57 @@ class SignUpProvider extends ChangeNotifier {
 // chang data
 
   String gander = "";
- RegisterModel  regeiterModel = RegisterModel();
+  RegisterModel regeiterModel = RegisterModel();
+
   signUpNext(BuildContext context) {
-    if (passwordRegister.value == null || emailRegister.value == null ||
-        phone.value == null || firstName.value == null ||
-        secondName.value == null || lastName.value == null ||
+    if (passwordRegister.value == null ||
+        emailRegister.value == null ||
+        phone.value == null ||
+        firstName.value == null ||
+        secondName.value == null ||
+        lastName.value == null ||
         regeiterModel.gender == "") {
       showDialog(
           context: context,
           builder: (context) {
             return Dialog(
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               elevation: 4,
               backgroundColor: Colors.transparent,
-              child: ErrorSignUpWidget(errorMessage: " Messing Data ",onpressed: (){
-                Navigator.pop(context);
-
-              },),
+              child: ErrorSignUpWidget(
+                errorMessage: " Messing Data ",
+                onpressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             );
           });
     } else {
-     parent == false  ? Navigator.push(context, MaterialPageRoute(builder: (context){
-       return     ParentPhone(  phone: phone.value,
-         emailAddres: emailRegister.value,
-         firstName: firstName.value,
-         lastName: lastName.value,
-         password: passwordRegister.value,
-         secondName: secondName.value,
-         gander: gander,
-         jop:jop.value ,
-
-       );
-
-     })):
-
-     Navigator.push(context, MaterialPageRoute(builder: (context){
-           return           SignUp2(
-             phone: phone.value,
-             emailAddres: emailRegister.value,
-             firstName: firstName.value,
-             lastName: lastName.value,
-             password: passwordRegister.value,
-             secondName: secondName.value,
-             gander: gander,
-           );
-
-         }));
+      parent == false
+          ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ParentPhone(
+                phone: phone.value,
+                emailAddres: emailRegister.value,
+                firstName: firstName.value,
+                lastName: lastName.value,
+                password: passwordRegister.value,
+                secondName: secondName.value,
+                gander: gander,
+                jop: jop.value,
+              );
+            }))
+          : Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SignUp2(
+                phone: phone.value,
+                emailAddres: emailRegister.value,
+                firstName: firstName.value,
+                lastName: lastName.value,
+                password: passwordRegister.value,
+                secondName: secondName.value,
+                gander: gander,
+              );
+            }));
       print(emailRegister.value);
       print(phone.value.toString());
       print(secondName.value);
@@ -485,14 +474,10 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
   }*/
 
-
-   bool parent = false;
+  bool parent = false;
   bool student = false;
 
-
-
-   File imagefile;
-
+  File imagefile;
 
   Future<void> openGallary(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -500,43 +485,23 @@ class SignUpProvider extends ChangeNotifier {
     imagefile = picture;
     print(imagefile);
     notifyListeners();
-
   }
-
-
 
   Future<void> openCamera(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
-      imagefile = picture;
-      print(imagefile.toString());
-
+    imagefile = picture;
+    print(imagefile.toString());
   }
 
-
-  onChoseImage(context){
-    showModalBottomSheet(context: context, builder: (context){
-
-      return
-        ChosseImage()
-      ;
-    });
+  onChoseImage(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return ChosseImage();
+        });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  List<PhoneModel> childphonelist = [
-  ];
+  List<PhoneModel> childphonelist = [];
 
   UnmodifiableListView<PhoneModel> get phones {
     return UnmodifiableListView(childphonelist);
@@ -546,68 +511,59 @@ class SignUpProvider extends ChangeNotifier {
     return childphonelist.length;
   }
 
+  final childPhone = BehaviorSubject<String>();
 
+  Stream<String> get parentPhoneStream =>
+      childPhone.stream.transform(validators.validatePhone);
 
-
-
-  final childPhone= BehaviorSubject<String>();
-  Stream<String> get parentPhoneStream => childPhone.stream.transform(validators.validatePhone);
   Function(String) get parentPhoneChange => childPhone.sink.add;
 
-   List<String> x =[];
+  List<String> x = [];
 
   void addPhone(String newPhone) {
     final phone = PhoneModel(phone: newPhone);
     childphonelist.add(phone);
     x.add(phone.phone);
-    childPhone.value ="";
+    childPhone.value = "";
     notifyListeners();
   }
 
-
   void deletePhone(PhoneModel phoneModel) {
-
     childphonelist.remove(phoneModel);
     x.remove(phoneModel);
     notifyListeners();
-
   }
 
-
-
-
-
-
-
-
-  void changeParentState(){
-     parent =! parent;
-   }
-
-   ApiLogin(BuildContext context){
-     Navigator.pushReplacement(context,
-         MaterialPageRoute(builder: (BuildContext context) => Login()));
-           notifyListeners();
-   }
-
-  void changeStudentState(){
-    student =! student;
+  void changeParentState() {
+    parent = !parent;
   }
-  Future<String> future;
-  //sadek
-  SubmitStudent(RegisterModel body,BuildContext context) async {
-    try{String token = await Common.getToken();
-    body.cityId = currentCity.id.toString();
-    body.groupId = currentGroup.groupId.toString();
-    body.fireBaseToken = token;
-    List<int> cd =  imagefile.readAsBytesSync();
-    String base64Image = base64Encode(cd);
-    body.image = base64Image;
 
-
-    future = StudentRegisterApi(body,context);
+  ApiLogin(BuildContext context) {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (BuildContext context) => Login()));
     notifyListeners();
-    }catch(e){}
+  }
+
+  void changeStudentState() {
+    student = !student;
+  }
+
+  Future<String> future;
+
+  //sadek
+  SubmitStudent(RegisterModel body, BuildContext context) async {
+    try {
+      String token = await Common.getToken();
+      body.cityId = currentCity.id.toString();
+      body.groupId = currentGroup.groupId.toString();
+      body.fireBaseToken = token;
+      List<int> cd = imagefile.readAsBytesSync();
+      String base64Image = base64Encode(cd);
+      body.image = base64Image;
+
+      future = StudentRegisterApi(body, context);
+      notifyListeners();
+    } catch (e) {}
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
@@ -620,19 +576,18 @@ class SignUpProvider extends ChangeNotifier {
 
   Future<String> parentFuture;
 
-  SubmitParent(ParentRegisterModel body,BuildContext context) async {
-               try{
-                 String token = await Common.getToken();
-                 body.fireBaseToken = token;
-                 List<int> cd =  imagefile.readAsBytesSync();
-                 String base64Image = base64Encode(cd);
-                 body.image = base64Image;
-                 print(body.image);
+  SubmitParent(ParentRegisterModel body, BuildContext context) async {
+    try {
+      String token = await Common.getToken();
+      body.fireBaseToken = token;
+      List<int> cd = imagefile.readAsBytesSync();
+      String base64Image = base64Encode(cd);
+      body.image = base64Image;
+      print(body.image);
 
-                 parentFuture = ParentRegisterApi(body,context);
-                 notifyListeners();
-
-               }catch(e){}
+      parentFuture = ParentRegisterApi(body, context);
+      notifyListeners();
+    } catch (e) {}
 //    future =RegisterApi(emailAddress: emailAddress,cityId: "1",image: image,fireBaseToken: "2",fullName: fullName,gender: gender ,groupId: "3" ,mobile: mobile,password: password );
 //         print(password);
 //         print(emailAddress);
@@ -642,8 +597,8 @@ class SignUpProvider extends ChangeNotifier {
 
   Future<void> dispose() async {
     // TODO: implement dispose
-       jop.close();
-       sonPhone.close();
+    jop.close();
+    sonPhone.close();
     await firstName.drain();
     firstName.close();
     await secondName.drain();
@@ -674,6 +629,5 @@ class SignUpProvider extends ChangeNotifier {
     lastName.cast();
   }
 }
-
 
 //() => asyncLoaderCountry.currentState.reloadState()
