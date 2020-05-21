@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
 //       ChangeNotifierProvider(
 //        create: (context)=>ProviderData(),
         child: MaterialApp(
-          home:Pdf(),
+          home:SplashScreen(),
       ),
 //      ),
     );

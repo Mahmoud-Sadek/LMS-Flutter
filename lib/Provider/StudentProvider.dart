@@ -4,12 +4,15 @@
 import 'dart:collection';
 
 import 'package:async_loader/async_loader.dart';
+import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Model/StudentModel/StudentMessageModel.dart';
 import 'package:work/Model/StudentModel/YoutubeModel.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ChosseImage.dart';
 import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/ConnctionWidget.dart';
 import 'package:work/StudentScreens/MaterialBage.dart';
 import 'package:work/StudentScreens/MessagePage.dart';
@@ -190,6 +193,50 @@ class StudentProvider extends ChangeNotifier{
   ////////////////////////Pdf Start ////////////////////////
 
 
+
+
+
+
+
+
+
+
+      static var pdfname;
+
+  PdfModel pdfModel ;
+  Future<void> downloadPdf(String path)async{
+    Dio dio=Dio();
+    try{
+      var dir= await getApplicationDocumentsDirectory();
+
+      await dio.download(path, "${dir.path}/$pdfname",onReceiveProgress: (rec,total){
+        print("${rec/total}");
+      });
+      notifyListeners();
+    }
+    catch(e){
+      print(e.toString());
+    }
+
+    notifyListeners();
+  }
+
+
+
+
+
+  openDownloadSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return DwonlodSheet();
+        });
+  }
+
+
+
+
+
   openPdf(BuildContext context){
     Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) => Pdf()));
@@ -228,6 +275,7 @@ class StudentProvider extends ChangeNotifier{
     renderError: ([error]) => GetNoConnectionWidget(
       onPressed: () => globalAsyncLoaderPdf.currentState.reloadState(),
     ),
+    renderSuccess: ({data})=> ShowSnackBar(data: data),
 
 
   );
@@ -236,34 +284,6 @@ class StudentProvider extends ChangeNotifier{
 
 
 
-  List<PdfModel> _pdfList=[
-    PdfModel(name: "Chapter 1"),
-    PdfModel(name: "Chapter 2"),
-    PdfModel(name: "Chapter 3"),
-    PdfModel(name: "Chapter 4"),
-    PdfModel(name: "Chapter 5"),
-    PdfModel(name: "Chapter 6"),
-    PdfModel(name: "Chapter 7"),
-    PdfModel(name: "Chapter 8"),
-    PdfModel(name: "Chapter 9"),
-    PdfModel(name: "Chapter 10"),
-    PdfModel(name: "Chapter 11"),
-    PdfModel(name: "Chapter 12"),
-    PdfModel(name: "Chapter 13"),
-    PdfModel(name: "Chapter 14"),
-    PdfModel(name: "Chapter 15"),
-    PdfModel(name: "Chapter 16"),
-    PdfModel(name: "Chapter 17"),
-    PdfModel(name: "Chapter 18"),
-  ];
-
-  UnmodifiableListView<PdfModel> get pdfList {
-    return UnmodifiableListView(_pdfList);
-  }
-
-  int get pdfListCount {
-    return _pdfList.length;
-  }
 
 
   //////////////////////// Pdf End /////////////////

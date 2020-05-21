@@ -74,6 +74,12 @@ class Login extends StatelessWidget {
                      body.loginName=email;
                      body.password=password;
                      body.fireBaseToken=Token;
+//
+//                       String token =await Common.getCurrwentUserToken();
+//                       String gradeiddd =await Common.getGradeId();
+//                         print(token);
+//                         print(gradeiddd);
+
                         var x = await LogIn().loginData(body);
 
 

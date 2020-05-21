@@ -32,20 +32,22 @@ class LogIn {
 
     var data = json.decode(response.body);
    if (response.statusCode==200){
-     print('token : ${data["Token"]}');
-     print('UserTybe : ${data["UserTybe"]}');
-     print('StudentId : ${data["StudentId"]}');
-     print('GroupId : ${data["GroupId"]}');
-     print('GradeId : ${data["GradeId"]}');
+//     print('token : ${data["Token"]}');
+//     print('UserTybe : ${data["UserTybe"]}');
+//     print('StudentId : ${data["StudentId"]}');
+//     print('GroupId : ${data["GroupId"]}');
+//     print('GradeId : ${data["GradeId"]}');
 
      SharedPreferences sharedPreferences =
      await SharedPreferences.getInstance();
+     
      sharedPreferences.setString("token", data["Token"]);
      sharedPreferences.setInt("UserTybe",data["UserTybe"] );
      sharedPreferences.setInt("StudentId",data["StudentId"] );
      sharedPreferences.setInt("GroupId",data["GroupId"] );
      sharedPreferences.setInt("GradeId",data["GradeId"] );
 
+      print(sharedPreferences.get("Token"));
  int  ut =sharedPreferences.getInt("UserTybe");
 
 
