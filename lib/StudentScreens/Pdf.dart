@@ -1,13 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/StudentModel/PdfModel.dart';
 import 'package:work/Provider/StudentProvider.dart';
-import 'package:work/Provider/provider.dart';
-import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
 import 'package:work/StudentScreens/WidgetStudent/StudentMainAppBar.dart';
 import 'package:work/StudentScreens/WidgetStudent/StudentSliverHeadre.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:work/Model/StudentModel/FileModel.dart';
+import 'package:dio/dio.dart';
+import 'package:work/Style/style.dart';
+import 'package:work/services/StudentServices/FileApi.dart';
 
 class Pdf extends StatelessWidget {
   @override
@@ -42,7 +47,23 @@ class Pdf extends StatelessWidget {
               delegate: StudentSliverHeadre(
                   maxxExtent: 101, minnExtent: 100, widget: PdfBar())),
           SliverList(
-            delegate: SliverChildListDelegate(<Widget>[PdfBuilder()]),
+            delegate: SliverChildListDelegate(<Widget>[
+
+
+
+              Container(
+                child:
+                ButtonWidget(height: 40,onPressed: (){
+
+//            String path = await file.path;
+                Provider.of<StudentProvider>(context).downloadPdf("https://unsplash.com/photos/iEJVyyevw-U/download?force=true");
+                },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+
+              ),
+              Provider.of<StudentProvider>(context).asyncLoaderPdf,
+
+
+            ]),
           ),
         ],
       ),
@@ -51,8 +72,11 @@ class Pdf extends StatelessWidget {
 }
 
 class PdfWidget extends StatelessWidget {
-  final String chapter;
-  const PdfWidget({this.chapter});
+ final PdfModel pdf;
+ final FileModel file;
+
+   PdfWidget({ this.pdf,this.file}) ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +94,18 @@ class PdfWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Spacer(
-                  flex: 2,
-                ),
-                Text(
-                  " $chapter",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+
+                Container(
+                  width: MediaQuery.of(context).size.width/1.5,
+                  child: AutoSizeText(
+                    " ${pdf.name}",
+                    maxLines: 3,
+                    minFontSize: 8,
+                    maxFontSize: 12,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Spacer(
                   flex: 5,
@@ -88,8 +116,20 @@ class PdfWidget extends StatelessWidget {
                       size: 30,
                       color: Colors.black,
                     ),
-                    onPressed: null),
-                SizedBox(
+                    onPressed: ()async{
+                      StudentProvider.pdfId=pdf.id;
+                      StudentProvider.pdfname= pdf.name;
+                      Provider.of<StudentProvider>(context).showPdf();
+//                      await getFiles(pdf.id);
+////                      StudentProvider.fileId=file.id;
+////                      Provider.of<StudentProvider>(context).showFile();
+//                      print(file.path);
+
+
+                    Provider.of<StudentProvider>(context).openDownloadSheet(context);
+                    }),
+
+          SizedBox(
                   width: 20,
                 )
               ],
@@ -108,8 +148,9 @@ class PdfBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isactive=true;
     return Center(
-      child: Container(
+      child:isactive? Container(
         color: Colors.white,
         height: 80,
         width: MediaQuery.of(context).size.width,
@@ -188,34 +229,95 @@ class PdfBar extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ):Container(),
     );
   }
 }
 
 class PdfBuilder extends StatelessWidget {
-  const PdfBuilder({
-    Key key,
-  }) : super(key: key);
+final List<PdfModel> pdfList;
+
+  PdfBuilder({ this.pdfList});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      child: ListView.builder(
+              itemCount: pdfList.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+
+                return PdfWidget(
+                  pdf: pdfList[index],
+                );
+              }));
+        }
+
+
+  }
+class xx extends StatelessWidget {
+  final FileModel file;
+  xx({this.file});
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Consumer<StudentProvider>(
-        builder: (context, pdfList, child) {
-          return ListView.builder(
-              itemCount: pdfList.pdfListCount,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final list = pdfList.pdfList[index];
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(width: 15,),
+          ButtonWidget(height: 40,onPressed: (){
 
-                return PdfWidget(
-                  chapter: list.name,
-                );
-              });
-        },
+//            String path = await file.path;
+          print(file.path);
+          print(file.id);
+            Provider.of<StudentProvider>(context).downloadPdf(file.path);
+
+            Navigator.pop(context);
+
+          },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+           Spacer(),
+          ButtonWidget(height: 40,onPressed: (){
+            Navigator.pop(context);
+          },text: "No Thanks",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+          SizedBox(width: 15,),
+
+        ],
       ),
     );
   }
 }
+
+
+Widget ShowSnackBar({BuildContext context,List<FileModel> data}){
+
+   return ListView.builder(
+       itemCount: data.length,
+       shrinkWrap: true,
+       physics: NeverScrollableScrollPhysics(),
+       itemBuilder: (context,index){
+     return xx(file: data[index],);
+   });
+
+}
+
+
+
+
+class DwonlodSheet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      child: Provider.of<StudentProvider>(context).asyncLoaderFile,
+    );
+  }
+}
+
+

@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/LoginModel.dart';
+import 'package:work/Osmansscreen/MessageDialog.dart';
 import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/provider.dart';
+import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
-import 'package:work/services/LogIn/LogIn.dart';
+import 'package:work/TeacherScreens/sendmessage.dart';
+import 'package:work/services/LogIn/LoginService.dart';
 
 import 'package:work/utils/common.dart';
+import 'package:work/visitor/screens/VisitorDialog.dart';
 
 import 'SignUpWidget/SignUpErrorDailog.dart';
 
@@ -65,8 +70,19 @@ class Login extends StatelessWidget {
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
                       onPressed:  ()async {
 
-                        var x = await LogIn().loginData(
-                            email, password, await Common.getToken());
+                     LoginModel body = new LoginModel();
+                     body.loginName=email;
+                     body.password=password;
+                     body.fireBaseToken=Token;
+//
+//                       String token =await Common.getCurrwentUserToken();
+//                       String gradeiddd =await Common.getGradeId();
+//                         print(token);
+//                         print(gradeiddd);
+
+                        var x = await LogIn().loginData(body);
+
+
                         if (x == 1) {
                           Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -109,8 +125,15 @@ class Login extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width - 80,
 
-                    child: ButtonWidget( height: 50,color: Colors.white,text: "Take a journy",borderColor: mainColor,textColor: mainColor,onPressed: (){
-                          Provider.of<ProviderData>(context).visitorOpen(context);
+                    child: ButtonWidget(
+                      height: 50,color: Colors.white,text: "Take a journy",borderColor: mainColor,textColor: mainColor,
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => VisitorDialog()
+                        );
+
+                      // Provider.of<ProviderData>(context).visitorOpen(context);
                     },),
 
 

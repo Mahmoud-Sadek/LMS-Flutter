@@ -1,18 +1,21 @@
-class LoginModel{
+class LoginModel {
+  String loginName;
+  String fireBaseToken;
+  String password;
 
-  String Loginname;
-  String Ftoken;
-  String pass;
+  LoginModel({this.loginName, this.fireBaseToken, this.password});
 
-  LoginModel({this.Loginname,this.pass,this.Ftoken});
+  LoginModel.fromJson(Map<String, dynamic> json) {
+    loginName = json['LoginName'];
+    fireBaseToken = json['FireBaseToken'];
+    password = json['Password'];
+  }
 
-
-  factory LoginModel.fromJson(Map<String, dynamic> json) {
-    return LoginModel(
-
-      Loginname: json['LoginName'],
-      pass:  json['Password'],
-     Ftoken: json['FireBaseToken']
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['LoginName'] = this.loginName;
+    data['FireBaseToken'] = this.fireBaseToken;
+    data['Password'] = this.password;
+    return data;
   }
 }

@@ -58,7 +58,10 @@ class VisitorNavigationBar extends StatelessWidget {
           ),
         ),
         body:  SafeArea(
+
           child: Provider.of<ProviderData>(context).visitorOptions.elementAt(Provider.of<ProviderData>(context).selectedIndexParent),
+
+
         )
 
     ));
