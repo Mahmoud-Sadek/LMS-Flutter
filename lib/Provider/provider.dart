@@ -208,8 +208,6 @@ SelectMethod(int index){
     body.post = addPostText.value;
     body.onGrade = gradePost;
     body.onGroup = groupPost;
-    body.groups=[2];
-    body.fireBaseToken = token;
         future = AddPostApi(body);
     notifyListeners();
     }catch(e){}

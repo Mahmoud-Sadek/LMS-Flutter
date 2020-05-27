@@ -539,8 +539,12 @@ class SignUpProvider extends ChangeNotifier {
   }
 
   ApiLogin(BuildContext context) {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (BuildContext context) => Login()));
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+//    Navigator.pushReplacement(
+//        context, MaterialPageRoute(builder: (BuildContext context) => Login()));
     notifyListeners();
   }
 

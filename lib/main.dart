@@ -16,6 +16,7 @@ import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/TeacherScreens/StartLiveVideo.dart';
 import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'Osmansscreen/message.dart';
+import 'Provider/visitor_provider.dart';
 import 'StudentScreens/QuizResult.dart';
 import 'TeacherScreens/sendmessage.dart';
 import 'ParentScreens/ParentChildren.dart';
@@ -55,6 +56,10 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
           create: (context)=>SignUpProvider(),
+
+        ),
+        ChangeNotifierProvider(
+          create: (context)=>VisitorProvider(),
 
         ),
       ],
