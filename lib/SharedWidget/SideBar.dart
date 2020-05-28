@@ -1,8 +1,10 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/Style/style.dart';
+import 'package:work/utils/common.dart';
 
 class SideBarDrawer extends StatefulWidget {
   @override
@@ -141,8 +143,15 @@ class _SideBarDrawerState extends State<SideBarDrawer> {
               ),
             ),
             InkWell(
-              onTap: () {
-                showAlertDialog(context);
+              onTap: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  pref.setInt(Common.UserTybe, null);
+
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Login()));
+
+
+
               },
               child: ListTile(
                 title: Text("Log out"),
@@ -172,9 +181,14 @@ class _SideBarDrawerState extends State<SideBarDrawer> {
                   child: Text("Cancel")),
               FlatButton(
                 child: Text("logout"),
-                onPressed: () {
+                onPressed: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                   pref.setInt(Common.UserTybe, null);
+
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Login()));
+
+
                 },
               )
             ],

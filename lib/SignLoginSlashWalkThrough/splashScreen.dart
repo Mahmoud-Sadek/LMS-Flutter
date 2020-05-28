@@ -12,6 +12,7 @@ import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
+import 'package:work/TeacherScreens/TeacherHomePage.dart';
 import 'package:work/utils/common.dart';
 
 import '../Style/style.dart';
@@ -203,18 +204,31 @@ class _SplashScreenState extends State<SplashScreen> {
     }else{
       int UserTybe = pref.getInt(Common.UserTybe);
       if (UserTybe == 1) {
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) {
             return new StudentHomePage();
           }),);
       }
       else if (UserTybe == 2) {
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) {
             return new ParentHomePage();
           }),);
+
     }
+      else if (UserTybe == 3) {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new TeacherHomePage();
+          }),);
   }
+      else  {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new Login();
+          }),);
+      }
+    }
 }
 }
 
