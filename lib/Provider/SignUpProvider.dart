@@ -205,7 +205,21 @@ class SignUpProvider extends ChangeNotifier {
   //////////////////////////////////////////////////// Grade //////////////////////
 
   static var gradeId;
+  static bool termSystem ;
 
+
+   void getTerm()async{
+     int gradeShared = await Common.getGradeId();
+
+     for(int x =0; x <= Grade.length ; x ++ ){
+       if(gradeShared == currentGrade.id){
+
+         termSystem = currentGrade.usedTermSystem;
+       }
+
+     }
+     notifyListeners();
+   }
   static GlobalKey<AsyncLoaderState> globalAsyncLoaderGrade =
       new GlobalKey<AsyncLoaderState>();
   var asyncLoaderGrade = new AsyncLoader(

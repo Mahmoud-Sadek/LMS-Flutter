@@ -24,7 +24,34 @@ import 'package:work/Style/style.dart';
 import 'package:work/services/StudentServices/FileApi.dart';
 import 'package:work/services/StudentServices/UnitApi.dart';
 
+
+
+
+
+
 class StudentProvider extends ChangeNotifier{
+
+
+  bool firstterm =true;
+  bool secondterm =false;
+
+
+       fisrt(){
+
+          firstterm =true;
+          secondterm =false;
+
+
+          notifyListeners();
+       }
+  second(){
+
+    firstterm =false;
+    secondterm =true;
+
+
+    notifyListeners();
+  }
 
 
 
@@ -249,6 +276,7 @@ class StudentProvider extends ChangeNotifier{
   );
 
   static var pdfId;
+  static var term;
    void showPdf(){
      print(pdfId);
      if (globalAsyncLoaderFile.currentState != null)
