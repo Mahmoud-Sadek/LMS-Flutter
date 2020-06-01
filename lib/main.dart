@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/visitor_provider.dart';
 import 'package:work/SharedWidget/DownLoadProgress.dart';
 import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/Provider/SignUpProvider.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
 //       ChangeNotifierProvider(
 //        create: (context)=>ProviderData(),
         child: MaterialApp(
-          home:SplashScreen(),
+          home:Youtube(),
       ),
 //      ),
     );

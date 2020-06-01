@@ -50,16 +50,16 @@ class Pdf extends StatelessWidget {
             delegate: SliverChildListDelegate(<Widget>[
 
 
-
-              Container(
-                child:
-                ButtonWidget(height: 40,onPressed: (){
-
-//            String path = await file.path;
-                Provider.of<StudentProvider>(context).downloadPdf("https://unsplash.com/photos/iEJVyyevw-U/download?force=true");
-                },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
-
-              ),
+//
+//              Container(
+//                child:
+////                ButtonWidget(height: 40,onPressed: (){
+////
+//////            String path = await file.path;
+////                Provider.of<StudentProvider>(context).downloadPdf("https://unsplash.com/photos/iEJVyyevw-U/download?force=true");
+////                },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+////
+////              ),
               Provider.of<StudentProvider>(context).asyncLoaderPdf,
 
 
@@ -257,34 +257,40 @@ final List<PdfModel> pdfList;
 
 
   }
-class xx extends StatelessWidget {
+class SnackBarContent extends StatelessWidget {
   final FileModel file;
-  xx({this.file});
-
+  SnackBarContent({this.file});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 12),
       width: MediaQuery.of(context).size.width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(width: 15,),
-          ButtonWidget(height: 40,onPressed: (){
+          Expanded(
+            flex:1,
+            child: ButtonWidget(height: 40,onPressed: (){
 
 //            String path = await file.path;
-          print(file.path);
-          print(file.id);
-            Provider.of<StudentProvider>(context).downloadPdf(file.path);
+            print(file.path);
+            print(file.id);
+              Provider.of<StudentProvider>(context).downloadPdf(file.path);
 
-            Navigator.pop(context);
+              Navigator.pop(context);
 
-          },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
-           Spacer(),
-          ButtonWidget(height: 40,onPressed: (){
-            Navigator.pop(context);
-          },text: "No Thanks",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+            },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+          ),
+           SizedBox(width: 40,),
+          Expanded(
+            flex:1,
+            child: ButtonWidget(height: 40,onPressed: (){
+              Navigator.pop(context);
+            },text: "No Thanks",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
+          ),
           SizedBox(width: 15,),
 
         ],
@@ -301,7 +307,7 @@ Widget ShowSnackBar({BuildContext context,List<FileModel> data}){
        shrinkWrap: true,
        physics: NeverScrollableScrollPhysics(),
        itemBuilder: (context,index){
-     return xx(file: data[index],);
+     return SnackBarContent(file: data[index],);
    });
 
 }
@@ -313,7 +319,7 @@ class DwonlodSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 80,
       width: MediaQuery.of(context).size.width,
       child: Provider.of<StudentProvider>(context).asyncLoaderFile,
     );
