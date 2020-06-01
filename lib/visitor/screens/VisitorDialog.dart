@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Model/VisitorModel.dart';
 import 'package:work/Provider/provider.dart';
@@ -56,13 +55,7 @@ class VisitorDialog extends StatelessWidget {
           FlatButton(color: mainColor,
 
             child: Text('Ok'),
-            onPressed:() async{try{
-              ProgressDialog pr = new ProgressDialog(context);
-              pr = new ProgressDialog(context,
-                  type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
-              pr.show();
-
-
+            onPressed:() async{
             VisitorModel body = new VisitorModel();
             body.fireBaseToken = await Common.getToken();
             body.fullName= name;
@@ -87,11 +80,7 @@ class VisitorDialog extends StatelessWidget {
                          );
                        });
                  }
-                 }catch(e){
-
-              print("erooor");
-            }
-            }
+                 },
           ),
           SizedBox(width: 120,)
         ],

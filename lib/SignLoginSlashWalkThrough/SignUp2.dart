@@ -248,7 +248,7 @@ class SecondSignUp extends StatelessWidget{
                           body.image = base64Image;
                              print(body.image);
                           Provider.of<SignUpProvider>(context).SubmitStudent(body, context);
-//                          Provider.of<SignUpProvider>(context).changeStudentState();
+                          Provider.of<SignUpProvider>(context).changeStudentState();
 
                         }
 
