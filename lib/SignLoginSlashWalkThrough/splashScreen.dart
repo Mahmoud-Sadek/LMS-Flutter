@@ -8,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:work/ParentScreens/ParentHomePage.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SignLoginSlashWalkThrough/Login.dart';
+import 'package:work/StudentScreens/StudentHomePage.dart';
+import 'package:work/TeacherScreens/TeacherHomePage.dart';
 import 'package:work/utils/common.dart';
 
 import '../Style/style.dart';
@@ -30,8 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 2),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => Login())));
+        () => CheckUser());
 
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('@drawable/ic_notification');
@@ -192,6 +194,42 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
+  CheckUser() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString(Common.curentUserToken);
+    if(token==null) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => Login()));
+    }else{
+      int UserTybe = pref.getInt(Common.UserTybe);
+      if (UserTybe == 1) {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new StudentHomePage();
+          }),);
+      }
+      else if (UserTybe == 2) {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new ParentHomePage();
+          }),);
+
+    }
+      else if (UserTybe == 3) {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new TeacherHomePage();
+          }),);
+  }
+      else  {
+        Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return new Login();
+          }),);
+      }
+    }
+}
 }
 
 class caruselBuilder extends StatelessWidget {

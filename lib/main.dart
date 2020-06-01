@@ -2,7 +2,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import 'package:work/Provider/visitor_provider.dart';
 import 'package:work/SharedWidget/DownLoadProgress.dart';
 import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/Provider/SignUpProvider.dart';
@@ -17,6 +16,7 @@ import 'package:work/ParentScreens/suggetstionParent.dart';
 import 'package:work/TeacherScreens/StartLiveVideo.dart';
 import 'package:work/visitor/screens/VisitorNavigation.dart';
 import 'Osmansscreen/message.dart';
+import 'Provider/visitor_provider.dart';
 import 'StudentScreens/QuizResult.dart';
 import 'TeacherScreens/sendmessage.dart';
 import 'ParentScreens/ParentChildren.dart';
@@ -27,44 +27,40 @@ import 'Provider/provider.dart';
 import 'SignLoginSlashWalkThrough/splashScreen.dart';
 import 'SignLoginSlashWalkThrough/walkthrough.dart';
 import 'StudentScreens/Youtube.dart';
+import 'package:work/Provider/contact.dart';
+
 void main() => runApp(MyApp());
 //o
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
+    return MultiProvider(
       providers: [
-
         ChangeNotifierProvider(
-          create: (context)=>ProviderData(),
-
+          create: (context) => ProviderData(),
         ),
-
-
         ChangeNotifierProvider(
-          create: (context)=>StudentProvider(),
-
+          create: (context) => StudentProvider(),
         ),
-
-
         ChangeNotifierProvider(
-          create: (context)=>TeacherProvider(),
-
+          create: (context) => TeacherProvider(),
         ),
-
         ChangeNotifierProvider(
-          create: (context)=>SignUpProvider(),
-
+          create: (context) => SignUpProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VisitorProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Contact(),
         ),
       ],
 
-
 //       ChangeNotifierProvider(
 //        create: (context)=>ProviderData(),
-        child: MaterialApp(
-          home:Youtube(),
+      child: MaterialApp(
+        home: VisitorNavigationBar(),
       ),
 //      ),
     );

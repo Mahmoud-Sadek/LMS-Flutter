@@ -16,31 +16,10 @@ import 'package:progress_dialog/progress_dialog.dart';
 
 Future<String> StudentRegisterApi(
     RegisterModel bodys, BuildContext context) async {
-  ProgressDialog progressDialog = ProgressDialog(
-    context,
-    type: ProgressDialogType.Normal,
-    isDismissible: true,
-    customBody: LinearProgressIndicator(
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
-      backgroundColor: Colors.white,
-    ),
-  );
-
-  progressDialog.style(
-    message: "Please Wait",
-    borderRadius: 10.0,
-    backgroundColor: Colors.white,
-    elevation: 10.0,
-    insetAnimCurve: Curves.easeInOut,
-    progress: 0.0,
-    progressWidgetAlignment: Alignment.center,
-    maxProgress: 100.0,
-    progressTextStyle: TextStyle(
-        color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-    messageTextStyle: TextStyle(
-        color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
-  );
-
+  ProgressDialog pr = new ProgressDialog(context);
+  pr = new ProgressDialog(context,
+      type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+  pr.show();
   var headers = await Common.getHeaders();
   var body = json.encode(bodys.toJson());
 
@@ -53,11 +32,12 @@ Future<String> StudentRegisterApi(
   if (response.statusCode != 200 ||
       response.statusCode != 400 ||
       response.statusCode != 500) {
-    progressDialog.update(message: "Wait");
+    pr.update(message: "Wait");
     print("ffffffffffff");
   }
 
   if (response.statusCode == 200) {
+    pr.hide();
     // If the server did return a 200 CREATED response,
     // then parse the JSON.
     print(response.body);
@@ -81,6 +61,7 @@ Future<String> StudentRegisterApi(
         });
     return response.body;
   } else if (response.statusCode == 400) {
+    pr.hide();
     showDialog(
         context: context,
         builder: (context) {
@@ -99,6 +80,7 @@ Future<String> StudentRegisterApi(
         });
     throw Exception('Failed to Submit Data');
   } else if (response.statusCode == 500) {
+    pr.hide();
     showDialog(
         context: context,
         builder: (context) {
@@ -118,6 +100,7 @@ Future<String> StudentRegisterApi(
         });
     throw Exception('Failed to Submit Data');
   } else {
+    pr.hide();
     showDialog(
         context: context,
         builder: (context) {

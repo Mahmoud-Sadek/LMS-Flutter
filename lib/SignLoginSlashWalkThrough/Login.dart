@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:work/Model/LoginModel.dart';
 import 'package:work/Osmansscreen/MessageDialog.dart';
@@ -10,6 +11,7 @@ import 'package:work/StudentScreens/MessagePage.dart';
 import 'package:work/StudentScreens/StudentHomePage.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
+import 'package:work/TeacherScreens/TeacherHomePage.dart';
 import 'package:work/TeacherScreens/sendmessage.dart';
 import 'package:work/services/LogIn/LoginService.dart';
 
@@ -68,7 +70,12 @@ class Login extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 80,
 
                     child: ButtonWidget( height: 50,color: mainColor,text: "Login",borderColor: mainColor,textColor: Colors.white,
-                      onPressed:  ()async {
+                      onPressed:  ()async  {try{
+
+                        ProgressDialog pr = new ProgressDialog(context);
+                        pr = new ProgressDialog(context,
+                            type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+                            pr.show();
 
                      LoginModel body = new LoginModel();
                      body.loginName=email;
@@ -84,7 +91,7 @@ class Login extends StatelessWidget {
 
 
                         if (x == 1) {
-                          Navigator.push(context,
+                          Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                               return new StudentHomePage();
                             }),);
@@ -95,7 +102,16 @@ class Login extends StatelessWidget {
                             MaterialPageRoute(builder: (context) {
                               return new ParentHomePage();
                             }),);
-                        }else{
+                        }
+                        else if (x == 3) {
+
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return new TeacherHomePage();
+                            }),);
+                        }
+
+                        else{
                           print("osman$x");
                           showDialog(
                               context: context,
@@ -107,11 +123,30 @@ class Login extends StatelessWidget {
                                   backgroundColor: Colors.transparent,
                                   child: ErrorSignUpWidget(errorMessage: x,onpressed: (){
                                     Navigator.pop(context);
+                                    Navigator.pop(context);
 
                                   },),
                                 );
                               });
-                        }
+                        }}catch(e){
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                shape:
+                                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                elevation: 4,
+                                backgroundColor: Colors.transparent,
+                                child: ErrorSignUpWidget(errorMessage: "No inter net connection",onpressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },),
+                              );
+                            });
+
+
+
+                      }
                       }
 
                     ),

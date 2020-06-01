@@ -10,22 +10,26 @@ import 'package:work/Style/style.dart';
 class VisitorNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
-    return SafeArea(child:
-    Scaffold(
-      key: _scaffoldKey,
-       appBar: PreferredSize(child: SahredParentVisitorAppBar(scaffoldKey: _scaffoldKey,), preferredSize: Size.fromHeight(80)),
-      drawer: SideBarDrawer(),
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: PreferredSize(
+            child: SahredParentVisitorAppBar(
+              scaffoldKey: _scaffoldKey,
+            ),
+            preferredSize: Size.fromHeight(80)),
+        drawer: SideBarDrawer(),
         backgroundColor: Colors.white,
-        bottomNavigationBar:           Container(
+        bottomNavigationBar: Container(
           height: 70,
           decoration: BoxDecoration(color: mainColor, boxShadow: [
             BoxShadow(blurRadius: 20, color: mainColor.withOpacity(.1))
           ]),
           child: SafeArea(
-            child:
-            GNav(
+            child: GNav(
                 gap: 8,
                 color: Colors.white,
                 iconSize: 30,
@@ -34,7 +38,6 @@ class VisitorNavigationBar extends StatelessWidget {
                 tabBackgroundColor: Colors.white,
                 activeColor: Colors.teal,
                 tabs: [
-
                   GButton(
                     icon: CommunityMaterialIcons.newspaper,
                     text: 'News',
@@ -47,23 +50,19 @@ class VisitorNavigationBar extends StatelessWidget {
                     icon: Icons.headset_mic,
                     text: 'Contact us',
                   ),
-
                 ],
-
-                selectedIndex: Provider.of<ProviderData>(context).selectedIndexParent,
+                selectedIndex:
+                    Provider.of<ProviderData>(context).selectedIndexParent,
                 onTabChange: (index) {
                   Provider.of<ProviderData>(context).ChangeParentAppBar(index);
-                }
-            ),
+                }),
           ),
         ),
-        body:  SafeArea(
-
-          child: Provider.of<ProviderData>(context).visitorOptions.elementAt(Provider.of<ProviderData>(context).selectedIndexParent),
-
-
-        )
-
-    ));
+        body: SafeArea(
+          child: Provider.of<ProviderData>(context).visitorOptions.elementAt(
+              Provider.of<ProviderData>(context).selectedIndexParent),
+        ),
+      ),
+    );
   }
 }

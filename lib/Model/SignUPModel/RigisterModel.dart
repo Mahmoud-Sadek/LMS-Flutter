@@ -18,7 +18,7 @@ class RegisterModel {
         this.password,
         this.cityId,
         this.groupId,
-        this.image});
+        this.image=""});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     mobile = json['Mobile'];

@@ -25,7 +25,34 @@ import 'package:work/services/StudentServices/FileApi.dart';
 import 'package:work/services/StudentServices/UnitApi.dart';
 import 'package:work/services/StudentServices/YoutubeApi.dart';
 
+
+
+
+
+
 class StudentProvider extends ChangeNotifier{
+
+
+  bool firstterm =true;
+  bool secondterm =false;
+
+
+       fisrt(){
+
+          firstterm =true;
+          secondterm =false;
+
+
+          notifyListeners();
+       }
+  second(){
+
+    firstterm =false;
+    secondterm =true;
+
+
+    notifyListeners();
+  }
 
 
 
@@ -194,23 +221,14 @@ class StudentProvider extends ChangeNotifier{
   ////////////////////////Pdf Start ////////////////////////
 
 
-
-
-
-
-
-
-
-
       static var pdfname;
-
   PdfModel pdfModel ;
   Future<void> downloadPdf(String path)async{
     Dio dio=Dio();
     try{
       var dir= await getApplicationDocumentsDirectory();
 
-      await dio.download(path, "${dir.path}/$pdfname",onReceiveProgress: (rec,total){
+      await dio.download("http://heshamallam4edu.com$path", "${dir.path}/$pdfname",onReceiveProgress: (rec,total){
         print("${rec/total}");
       });
       notifyListeners();
@@ -259,6 +277,7 @@ class StudentProvider extends ChangeNotifier{
   );
 
   static var pdfId;
+  static var term;
    void showPdf(){
      print(pdfId);
      if (globalAsyncLoaderFile.currentState != null)

@@ -129,6 +129,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   FlatButton(
+
                     child: ListTile(
                       leading: Icon(
                         CommunityMaterialIcons.logout,

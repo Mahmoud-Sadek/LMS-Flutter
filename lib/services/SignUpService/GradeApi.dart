@@ -18,6 +18,7 @@ Future<List<GradeModel>> getGrade() async {
   );
 
   if (response.statusCode == 200) {
+    print("done");
     List<GradeModel> gradeList = (json.decode(response.body) as List)
         .map((data) => new GradeModel.fromJson(data))
         .toList();
