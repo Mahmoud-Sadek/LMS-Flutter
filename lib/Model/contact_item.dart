@@ -9,12 +9,12 @@ class ContactUsModel {
   String contactUs;
 
   ContactUsModel(
-      {@required this.fullName,
-      @required this.phoneNumber,
-      @required this.message,
-      @required this.subject,
-      @required this.email,
-      @required this.contactUs});
+      { this.fullName,
+       this.phoneNumber,
+       this.message,
+       this.subject,
+       this.email,
+       this.contactUs});
 
   ContactUsModel.fromJson(Map<String, dynamic> json) {
     fullName = json['FullName'];

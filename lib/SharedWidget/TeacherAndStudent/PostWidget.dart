@@ -6,31 +6,18 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:work/Model/StudentTeacherSharedModel/PostFetchModel.dart';
 import 'package:work/Style/style.dart';
 
 class SharedPostWidget extends StatelessWidget {
-  final String name;
-  final String imageUrl;
-  final String grade;
-  final String group;
-  final String location;
-  final int id;
-  final double time;
-  final String content;
+ final PostFetchModel postFetchModel;
   final Function openPost;
   final Function openComment;
   final Function like;
   final Function share;
 
   SharedPostWidget(
-      {this.time,
-        this.id,
-        this.group,
-        this.content,
-        this.location,
-        this.imageUrl,
-        this.grade,
-        this.name,
+      {this.postFetchModel,
         this.like,this.openComment,this.openPost,this.share
 
       });
@@ -43,7 +30,7 @@ class SharedPostWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
             width: MediaQuery.of(context).size.width  /1.01,
-            height: 230,
+            height: 500,
             decoration: BoxDecoration(
 
               borderRadius: BorderRadius.circular(20),
@@ -66,7 +53,7 @@ class SharedPostWidget extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 17,
-                          backgroundImage: AssetImage("$imageUrl"),
+                          backgroundImage: NetworkImage('${postFetchModel.studentImage}'),
                         ),
                         SizedBox(
                           width: 5,
@@ -75,12 +62,12 @@ class SharedPostWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Text("$name", style: nameStyle2),
+                            Text("${postFetchModel.studentName}", style: nameStyle2),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              "$time Am",
+                              "15.5 Am",
                               style: nameStyle2,
                             ),
                           ],
@@ -94,7 +81,7 @@ class SharedPostWidget extends StatelessWidget {
                           color: mainColor,
                         ),
                         Text(
-                          " $grade",
+                          " ${postFetchModel.gradeId}",
                           style: TextStyle(fontSize: 8),
                         ),
                         Spacer(
@@ -109,7 +96,7 @@ class SharedPostWidget extends StatelessWidget {
                           color: mainColor,
                         ),
                         Text(
-                          " $group",
+                          " ${postFetchModel.groupId}",
                           style: TextStyle(fontSize: 8),
                         ),
                         Spacer(
@@ -124,7 +111,7 @@ class SharedPostWidget extends StatelessWidget {
                           color: mainColor,
                         ),
                         Text(
-                          "$location",
+                          "kkkkkk",
                           style: TextStyle(fontSize: 8),
                         ),
                         Spacer(
@@ -139,7 +126,7 @@ class SharedPostWidget extends StatelessWidget {
                           color: mainColor,
                         ),
                         Text(
-                          " $id",
+                          " ${postFetchModel.studentId}",
                           style: TextStyle(fontSize: 8),
                         ),
                         Spacer(
@@ -154,10 +141,23 @@ class SharedPostWidget extends StatelessWidget {
                   left: 40,
                   child: GestureDetector(
                     child: Container(
+
+                      width: MediaQuery.of(context).size.width / 1.25,
+                      height: 240,
+                    color: mainColor,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 90,
+                  left: 40,
+                  child: GestureDetector(
+                    child: Container(
+
                       width: MediaQuery.of(context).size.width / 1.25,
                       height: 120,
                       child: AutoSizeText(
-                        '$content',
+                        '${postFetchModel.post}',
                         style: TextStyle(fontSize: 30),
                         minFontSize: 9,
                         stepGranularity: 9,
