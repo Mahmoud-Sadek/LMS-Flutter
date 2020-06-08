@@ -23,8 +23,36 @@ import 'package:work/StudentScreens/Youtube.dart';
 import 'package:work/Style/style.dart';
 import 'package:work/services/StudentServices/FileApi.dart';
 import 'package:work/services/StudentServices/UnitApi.dart';
+import 'package:work/services/StudentServices/YoutubeApi.dart';
+
+
+
+
+
 
 class StudentProvider extends ChangeNotifier{
+
+
+  bool firstterm =true;
+  bool secondterm =false;
+
+
+       fisrt(){
+
+          firstterm =true;
+          secondterm =false;
+
+
+          notifyListeners();
+       }
+  second(){
+
+    firstterm =false;
+    secondterm =true;
+
+
+    notifyListeners();
+  }
 
 
 
@@ -249,6 +277,7 @@ class StudentProvider extends ChangeNotifier{
   );
 
   static var pdfId;
+  static var term;
    void showPdf(){
      print(pdfId);
      if (globalAsyncLoaderFile.currentState != null)
@@ -290,24 +319,28 @@ class StudentProvider extends ChangeNotifier{
 
   }
 
+  static GlobalKey<AsyncLoaderState> globalAsyncLoaderYoutube =
+  new GlobalKey<AsyncLoaderState>();
 
+  var asyncLoaderYoutube = new AsyncLoader(
+    key: globalAsyncLoaderYoutube,
+    initState: () async => await getYoutube(),
+    renderLoad: () => Center(child: new CircularProgressIndicator()),
+    renderError: ([error]) => GetNoConnectionWidget(
+      onPressed: () => globalAsyncLoaderYoutube.currentState.reloadState(),
+    ),
+    renderSuccess: ({data}) => YoutubeBuilder(
+      videosList: data,
+    ),
+  );
 
-  List<YoutubeModel> _youtubeList=[
-    YoutubeModel(name: "English Lision"),
-    YoutubeModel(name: "English Lision"),
-    YoutubeModel(name: "English Lision"),
-    YoutubeModel(name: "طه حسين "),
-    YoutubeModel(name: "English Lision"),
+  static var channelId;
+  void showChannel(){
+    print(channelId);
 
-      ];
-
-  UnmodifiableListView<YoutubeModel> get youtubeList {
-    return UnmodifiableListView(_youtubeList);
   }
 
-  int get youtubeListCount {
-    return _youtubeList.length;
-  }
+
 
 
 

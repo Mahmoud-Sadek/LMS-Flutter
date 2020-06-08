@@ -603,13 +603,14 @@ void  changeGroup(String value) {
   List<Widget> visitorOptions = <Widget>[
     News(),
     MaterialPage(),
-    ContactUS()
+    ContactUS(),
   ];
 
 
   ChangeParentAppBar(int index) {
     selectedIndexParent = index;
     notifyListeners();
+
   }
 
 

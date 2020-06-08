@@ -20,7 +20,7 @@ class ParentRegisterModel {
         this.password,
         this.jobName,
         this.sonNumbers,
-        this.image});
+        this.image=""});
 
   ParentRegisterModel.fromJson(Map<String, dynamic> json) {
     mobile = json['Mobile'];

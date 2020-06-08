@@ -51,15 +51,7 @@ class Pdf extends StatelessWidget {
 
 
 
-              Container(
-                child:
-                ButtonWidget(height: 40,onPressed: (){
 
-//            String path = await file.path;
-                Provider.of<StudentProvider>(context).downloadPdf("https://unsplash.com/photos/iEJVyyevw-U/download?force=true");
-                },text: "Download",borderColor: mainColor,textColor: Colors.white,color: mainColor,),
-
-              ),
               Provider.of<StudentProvider>(context).asyncLoaderPdf,
 
 
@@ -80,64 +72,128 @@ class PdfWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 5),
-      child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
+      if(Provider.of<StudentProvider>(context).firstterm == true && pdf.termSystem == "FirstTerm"){
+        return Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 5),
+          child: Material(
+            elevation: 5,
             borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
 
-                Container(
-                  width: MediaQuery.of(context).size.width/1.5,
-                  child: AutoSizeText(
-                    " ${pdf.name}",
-                    maxLines: 3,
-                    minFontSize: 8,
-                    maxFontSize: 12,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Spacer(
-                  flex: 5,
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.file_download,
-                      size: 30,
-                      color: Colors.black,
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.5,
+                      child: AutoSizeText(
+                        " ${pdf.name}",
+                        maxLines: 3,
+                        minFontSize: 8,
+                        maxFontSize: 12,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    onPressed: ()async{
-                      StudentProvider.pdfId=pdf.id;
-                      StudentProvider.pdfname= pdf.name;
-                      Provider.of<StudentProvider>(context).showPdf();
+                    Spacer(
+                      flex: 5,
+                    ),
+                    IconButton(
+                        icon: Icon(
+                          Icons.file_download,
+                          size: 30,
+                          color: Colors.black,
+                        ),
+                        onPressed: ()async{
+                          StudentProvider.pdfId=pdf.id;
+                          StudentProvider.pdfname= pdf.name;
+                          Provider.of<StudentProvider>(context).showPdf();
 //                      await getFiles(pdf.id);
 ////                      StudentProvider.fileId=file.id;
 ////                      Provider.of<StudentProvider>(context).showFile();
 //                      print(file.path);
 
 
-                    Provider.of<StudentProvider>(context).openDownloadSheet(context);
-                    }),
+                          Provider.of<StudentProvider>(context).openDownloadSheet(context);
+                        }),
 
-          SizedBox(
-                  width: 20,
-                )
-              ],
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+      }else if(Provider.of<StudentProvider>(context).secondterm == true && pdf.termSystem == "SecondTerm"){
+        return Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 5),
+          child: Material(
+            elevation: 5,
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.5,
+                      child: AutoSizeText(
+                        " ${pdf.name}",
+                        maxLines: 3,
+                        minFontSize: 8,
+                        maxFontSize: 12,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Spacer(
+                      flex: 5,
+                    ),
+                    IconButton(
+                        icon: Icon(
+                          Icons.file_download,
+                          size: 30,
+                          color: Colors.black,
+                        ),
+                        onPressed: ()async{
+                          StudentProvider.pdfId=pdf.id;
+                          StudentProvider.pdfname= pdf.name;
+                          Provider.of<StudentProvider>(context).showPdf();
+//                      await getFiles(pdf.id);
+////                      StudentProvider.fileId=file.id;
+////                      Provider.of<StudentProvider>(context).showFile();
+//                      print(file.path);
+
+
+                          Provider.of<StudentProvider>(context).openDownloadSheet(context);
+                        }),
+
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      } else{
+        return Container();
+      }
+
   }
 }
 
@@ -178,7 +234,9 @@ class PdfBar extends StatelessWidget {
                                 child: ButtonWidget(
                                   color: Colors.teal,
                                   height: 50,
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    Provider.of<StudentProvider>(context).fisrt();
+                                  },
                                   textColor: Colors.white,
                                   borderColor: Colors.teal,
                                   text: "First term  ",
@@ -191,7 +249,11 @@ class PdfBar extends StatelessWidget {
                                 child: ButtonWidget(
                                   color: mainColor,
                                   height: 50,
-                                  onPressed: (){},
+                                  onPressed: (){
+
+
+                                    Provider.of<StudentProvider>(context).second();
+                                  },
                                   textColor: Colors.white,
                                   borderColor: mainColor,
                                   text: "   Second term",

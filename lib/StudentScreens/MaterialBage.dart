@@ -1,14 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/SignUpProvider.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/Style/Style.dart';
 import 'package:work/SharedWidget/searchText.dart';
+import 'package:work/services/SignUpService/GradeApi.dart';
 
 
 
-class MaterialPage extends StatelessWidget {
+class MaterialPage extends StatefulWidget {
+
+
+  @override
+  _MaterialPageState createState() => _MaterialPageState();
+
+}
+
+class _MaterialPageState extends State<MaterialPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    getGrade();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -37,6 +54,8 @@ class MaterialPage extends StatelessWidget {
                   GestureDetector(
                     onTap: (){
                       Provider.of<StudentProvider>(context).openPdf(context);
+//                      Provider.of<SignUpProvider>(context).getTerm();
+
                     },
                     child: Material(
                       elevation: 5,

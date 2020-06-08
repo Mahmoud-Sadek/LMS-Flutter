@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Model/StudentModel/YoutubeModel.dart';
 import 'package:work/Provider/StudentProvider.dart';
 import 'package:work/Provider/provider.dart';
 import 'package:work/SharedWidget/ButtonWidget.dart';
@@ -45,7 +46,7 @@ class Youtube extends StatelessWidget {
 
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
-                YoutubeBuilder(),],),
+                Provider.of<StudentProvider>(context).asyncLoaderYoutube,],),
             ),
           ],
         ),
@@ -152,10 +153,10 @@ class YoutubeBar extends StatelessWidget {
 
 
 class YoutubeWidget extends StatelessWidget {
-  final String chapter;
-  const YoutubeWidget({
-    this.chapter
-  }) ;
+  final YoutubeModel youtubeModel;
+
+  YoutubeWidget({this.youtubeModel});
+
 
   @override
   Widget build(BuildContext context) {
@@ -177,10 +178,12 @@ class YoutubeWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Spacer(flex: 2,),
-                Text(" $chapter",style: TextStyle(fontWeight: FontWeight.bold),),
+                Text("${youtubeModel.chanalId}",style: TextStyle(fontWeight: FontWeight.bold),),
                 Spacer(flex: 5,),
-                IconButton(icon: Icon(Icons.play_circle_outline,size: 30,color: Colors.red ,), onPressed: null)
-                ,SizedBox(width: 20,)
+                IconButton(icon: Icon(Icons.play_circle_outline,size: 30,color: Colors.red ,), onPressed: (){
+                  print(youtubeModel.path);
+                }),
+                SizedBox(width: 20,)
               ],
             ),
           ),
@@ -191,26 +194,24 @@ class YoutubeWidget extends StatelessWidget {
 }
 
 class YoutubeBuilder extends StatelessWidget {
-  const YoutubeBuilder({
-    Key key,
-  }) : super(key: key);
+  final List<YoutubeModel> videosList ;
+
+  YoutubeBuilder({ this.videosList}) ;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Consumer<StudentProvider>(
-        builder: (context, youtubeList, child) {
-          return ListView.builder(
-              itemCount: youtubeList.youtubeListCount,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final list = youtubeList.youtubeList[index];
+        child: ListView.builder(
+            itemCount: videosList.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
 
-                return YoutubeWidget(chapter: list.name,);
-              });
-        },
-      ),
-    );
+              return YoutubeWidget(
+               youtubeModel : videosList [index],
+              );
+            }));
+
   }
 }

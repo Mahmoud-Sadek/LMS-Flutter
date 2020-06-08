@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:work/Provider/SharedProviderStudentAndTeavher.dart';
 import 'package:work/SharedWidget/DownLoadProgress.dart';
 import 'package:work/SignLoginSlashWalkThrough/ParentPhone.dart';
 import 'package:work/Provider/SignUpProvider.dart';
@@ -27,48 +28,43 @@ import 'Provider/provider.dart';
 import 'SignLoginSlashWalkThrough/splashScreen.dart';
 import 'SignLoginSlashWalkThrough/walkthrough.dart';
 import 'StudentScreens/Youtube.dart';
+import 'package:work/Provider/contact.dart';
+
 void main() => runApp(MyApp());
 //o
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider(
+    return MultiProvider(
       providers: [
-
         ChangeNotifierProvider(
-          create: (context)=>ProviderData(),
-
-        ),
-
-
-        ChangeNotifierProvider(
-          create: (context)=>StudentProvider(),
-
-        ),
-
-
-        ChangeNotifierProvider(
-          create: (context)=>TeacherProvider(),
-
-        ),
-
-        ChangeNotifierProvider(
-          create: (context)=>SignUpProvider(),
-
+          create: (context) => ProviderData(),
         ),
         ChangeNotifierProvider(
-          create: (context)=>VisitorProvider(),
-
+          create: (context) => StudentProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TeacherProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SignUpProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VisitorProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Contact(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SharedProviderStudentAndTeacher(),
         ),
       ],
 
-
 //       ChangeNotifierProvider(
 //        create: (context)=>ProviderData(),
-        child: MaterialApp(
-          home:SplashScreen(),
+      child: MaterialApp(
+        home: SplashScreen(),
       ),
 //      ),
     );
