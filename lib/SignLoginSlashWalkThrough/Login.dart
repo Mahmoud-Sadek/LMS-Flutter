@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work/Model/LoginModel.dart';
 import 'package:work/Osmansscreen/MessageDialog.dart';
 import 'package:work/ParentScreens/ParentHomePage.dart';
@@ -85,20 +86,22 @@ class Login extends StatelessWidget {
 //                       String token =await Common.getCurrwentUserToken();
 //                       String gradeiddd =await Common.getGradeId();
 //                         print(token);
-//                         print(gradeiddd);
 
-                        var x = await LogIn().loginData(body);
+//                         print(gradeiddd);
+                       var x = await LogIn().loginData(body);
 
 
                         if (x == 1) {
+                          Navigator.pop(context);
                           Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                               return new StudentHomePage();
+
                             }),);
                         }
                         else if (x == 2) {
 
-                          Navigator.push(context,
+                          Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                               return new ParentHomePage();
                             }),);

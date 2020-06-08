@@ -145,7 +145,7 @@ class _SideBarDrawerState extends State<SideBarDrawer> {
             InkWell(
               onTap: () async {
                   SharedPreferences pref = await SharedPreferences.getInstance();
-                  pref.setInt(Common.UserTybe, null);
+                  pref.setInt(Common.UserTybe, 0);
 
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Login()));

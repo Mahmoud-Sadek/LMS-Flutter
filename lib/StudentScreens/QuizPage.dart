@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:work/Model/StudentModel/QuizModel.dart';
+import 'package:work/Model/StudentModel/QuizModelRecive.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GetAllQuiz.dart';
+import 'package:work/SignLoginSlashWalkThrough/SignUpWidget/GetAllQuiz.dart';
 import 'package:work/StudentScreens/QuizResult.dart';
 import 'package:work/StudentScreens/Allert.dart';
 import 'package:work/Style/style.dart';
@@ -6,6 +10,7 @@ import 'package:work/Style/style.dart';
 class QuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Container(
         margin: EdgeInsets.all(15),
         child: Center(
@@ -20,7 +25,11 @@ class QuizPage extends StatelessWidget {
                       borderRadius: new BorderRadius.all(Radius.circular(15)),
                     ),
                     child: FlatButton(
-                      onPressed: (){
+
+                      onPressed: () async {
+
+
+
                         Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                             return Allert();

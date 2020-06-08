@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:work/StudentScreens/StudentQuizes.dart';
 import 'package:work/StudentScreens/quistion.dart';
 
 class Allert extends StatefulWidget {
@@ -20,7 +21,7 @@ class _AllertState extends State<Allert> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return Quistion();
+          return StudentQuizes();
         }),
       );
     });
